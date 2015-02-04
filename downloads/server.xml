@@ -1,0 +1,31 @@
+<server description="Kub Developer Configuration">
+    <!-- Enable features -->
+    <featureManager>
+        <feature>jsp-2.2</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>jaxws-2.2</feature>
+        <feature>wsSecurity-1.1</feature>
+        <feature>ssl-1.0</feature>
+    </featureManager>
+
+    <httpEndpoint host="localhost" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+    <applicationMonitor updateTrigger="mbean"/>
+    <wsSecurityClient ws-security.callback-handler="com.ibm.websphere.wssecurity.callbackhandler.UNTGenerateCallbackHandler" ws-security.password="some super secret" ws-security.username="some name here">
+    </wsSecurityClient>
+    <keyStore password="{xor}LDAyOi8+LCwoMC07"/>
+    <basicRegistry id="default" realm="basic">
+        <user name="dyl06248" password="{xor}Lz4sLCgwLTs="/>
+        <user name="fdlane" password="{xor}Lz4sLCgwLTs="/>
+        <user name="starbucks" password="{xor}Lz4sLCgwLTs="/>
+        <group name="KUBPortalUsers">
+            <member name="fdlane"/>
+            <member name="starbucks"/>
+        </group>
+
+        <group name="KUBUsers">
+            <member name="dyl06248"/>
+        </group>
+    </basicRegistry>
+    <logging consoleLogLevel="AUDIT" traceSpecification="org.kub.*=all"/>
+</server>
