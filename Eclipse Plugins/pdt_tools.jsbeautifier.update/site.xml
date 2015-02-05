@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/jp.sourceforge.pdt_tools.jsbeautifier.feature_0.6.0.v20130319.jar" id="jp.sourceforge.pdt_tools.jsbeautifier.feature" version="0.6.0.v20130319">
+      <category name="PDT Tools"/>
+   </feature>
+   <category-def name="PDT Tools" label="PDT Tools">
+      <description>
+         PDT Tools
+      </description>
+   </category-def>
+</site>
