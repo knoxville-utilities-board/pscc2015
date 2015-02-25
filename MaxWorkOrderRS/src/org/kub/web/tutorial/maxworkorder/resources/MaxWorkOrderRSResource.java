@@ -157,6 +157,10 @@ public class MaxWorkOrderRSResource {
     @Path("remove/{id}")
     public Response remove(@PathParam("id") String id)
             throws KUBGenericException {
+    	
+    	//just to demo PathParams
+    	System.out.println("deleted work order:  " + id);
+    	
         return Response.status(501).build();
     }
 }
