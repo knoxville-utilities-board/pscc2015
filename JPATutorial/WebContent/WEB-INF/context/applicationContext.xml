@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "../dtd/spring-beans.dtd">
+<beans>
+    <bean id="noteRSResource" class="org.kub.web.tutorial.claim.resource.NoteRSResource">   
+        <property name="noteRSDao" ref="noteRSDao"></property>
+    </bean>
+
+    <bean id="noteRSDao" class="org.kub.web.tutorial.claim.dao.impl.NoteRSDaoImpl">   
+    </bean>
+
+    <!-- Default View Resolver -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="cache" value="true"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Default Exception Handler Bean -->
+    <bean id="defaultExceptionHandlerTemplate"
+        class="org.kub.util.portal.spring.KUBSimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="defError" />
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+        <property name="messageRoot" value="JPATutorial" />
+    </bean> 
+</beans>
