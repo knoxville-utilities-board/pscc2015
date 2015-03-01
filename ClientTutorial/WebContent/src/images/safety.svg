@@ -1,0 +1,77 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="250 28 484 487" enable-background="new 250 28 484 487">
+	<style>
+		.orange {
+			fill: #e9b330;
+		}
+		.lightBlue {
+			fill: #40bbca;
+		}
+		.red {
+			fill: #dc6e65;
+		}
+		.green {
+			fill: #16a765;
+		}
+		.kubBlue {
+			fill: #063c6f;
+		}
+		.innerCircle {
+			fill: #fff;
+		}
+		.text {
+			fill: #fff;
+			font-size: 13.5pt;
+		}
+		.innerCircleText {
+			fill: #000;
+			font-size: 20pt;
+		}
+		.outerCircleText {
+			fill: #ddd;
+			font-size: 20pt;
+		}
+	</style>
+	<g>
+		<circle class="green" cx="492.3" cy="269.9" r="221"/>
+		<path class="red" d="M323,127.9c78.5-93.5,217.8-105.8,311.4-27.2L492.3,269.9L323,127.9z"/>
+		<path class="lightBlue" d="M661.7,412c-78.5,93.5-217.8,105.8-311.3,27.2l142-169.3L661.7,412z"/>
+		<path class="orange" d="M322.5,128.6c-78.1,93-65.9,232,27.2,310.1l141.5-168.6L322.5,128.6z"/>
+		<circle class="kubBlue" cx="492.7" cy="270.3" r="134.9"/>
+		<circle class="innerCircle" cx="492.6" cy="271.6" r="83.6"/>
+		<polygon class="orange" points="354.2,155.8 286.1,98.6 340.8,102.7 395.4,106.7 408.8,159.8 422.3,212.9 "/>
+		<polygon class="lightBlue" points="375.6,409.7 318.5,477.7 322.6,423.3 326.7,368.6 379.7,355.1 432.8,341.6"/>
+		<polygon class="red" points="607.4,132 664.6,64 660.6,118.5 656.5,173.2 603.5,186.7 550.3,200.1"/>
+		<polygon class="green" points="633,386.4 701,443.5 646.4,439.4 591.7,435.5 578.3,382.3 564.8,329.2"/>
+		<text y="90" class="text" transform="translate(50)">
+			<tspan x="445" text-anchor="middle">Safety</tspan>
+			<tspan x="445" text-anchor="middle" dy="20">Training</tspan>
+		</text>
+		<text y="385" class="outerCircleText" transform="translate(50)">
+			<tspan x="445" text-anchor="middle">Culture</tspan>
+		</text>
+		<text y="175" class="outerCircleText" transform="translate(50)">
+			<tspan x="445" text-anchor="middle">Safety</tspan>
+		</text>
+		<text y="430" class="text" transform="translate(50)">
+			<tspan x="445" text-anchor="middle">Ramirding</tspan>
+			<tspan x="445" text-anchor="middle" dy="20">Safe</tspan>
+			<tspan x="445" text-anchor="middle" dy="20">Behaviors</tspan>
+		</text>
+		<text y="255" class="innerCircleText" transform="translate(50)">
+			<tspan x="445" text-anchor="middle">Safety</tspan>
+			<tspan x="445" text-anchor="middle" dy="26">Core</tspan>
+			<tspan x="445" text-anchor="middle" dy="26">Value</tspan>
+		</text>
+		<text y="270" class="text" transform="translate(50)">
+			<tspan x="622" text-anchor="middle">Worksite</tspan>
+			<tspan x="622" text-anchor="middle" dy="23">Safety</tspan>
+		</text>
+		<text y="238" class="text" transform="translate(50)">
+			<tspan x="269" text-anchor="middle">Correcting</tspan>
+			<tspan x="269" text-anchor="middle" dy="18">Unsafe</tspan>
+			<tspan x="269" text-anchor="middle" dy="18">Behaviors</tspan>
+			<tspan x="269" text-anchor="middle" dy="18">and</tspan>
+			<tspan x="269" text-anchor="middle" dy="18">Conditions</tspan>
+		</text>
+	</g>
+</svg>

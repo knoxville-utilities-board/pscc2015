@@ -1,0 +1,29 @@
+Install all dependencies for this project:
+npm install -g grunt-cli
+cd C:\workspace\ClientTutorial && npm install
+
+Grunt tasks:
+grunt --gruntfile "C:/workspace/ClientTutorial/gruntfile.js" full-report
+	Runs amdcheck
+	Runs plato
+	Runs fast release build
+	Generates a report with the parsed output of the above tasks
+
+grunt --gruntfile "C:/workspace/ClientTutorial/gruntfile.js" watch
+	Runs full-report whenever a .js file changes (assuming one is not currently running)
+	
+grunt --gruntfile "C:/workspace/ClientTutorial/gruntfile.js" build
+	Runs a dev and release build
+
+Node build command
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\dev.profile.js --release 
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\test.profile.js --release 
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\release.profile.js --release 
+
+Copy this into your server configuration file (inside server structure) to allow support for svg files.
+<mimeTypes>
+	<type>svg=image/svg+xml</type>
+</mimeTypes>
+
+If your copy-paste is slow in eclipse:
+Uncheck: Preferences/JavaScript/Editor/Typing/{When pasting}Update imports

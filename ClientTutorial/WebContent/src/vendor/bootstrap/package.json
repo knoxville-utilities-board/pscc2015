@@ -1,0 +1,6 @@
+{
+	"name": "bootstrap",
+	"version": "3.3.0",	
+	"description": "http://getbootstrap.com",
+	"dojoBuild": "bootstrap.profile.js"
+}

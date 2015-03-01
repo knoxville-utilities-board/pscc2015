@@ -1,0 +1,155 @@
+.listItem {
+	overflow: visible;
+}
+
+.listItemLeftIcon {
+	padding-right: 0px;
+}
+
+.listItemLeftIcon>* {
+	margin-right: 15px;
+	font-size: 32px;
+}
+
+.listItemContent {
+	width: 100%;
+}
+
+.listItemLabelContent {
+	width: 100%;
+}
+
+.listItemLabelText {
+	font-size: 16px;
+	width: 100%;
+}
+
+.listItemRightText {
+	font-size: 12px;
+	margin: 2px;
+	white-space: nowrap;
+}
+
+.listItemBodyContent {
+	width: 100%;
+}
+
+.listItemBodyText {
+	font-size: 14px;
+	width: 100%;
+}
+
+.listItemRightIcon {
+	width: 100%;
+	padding-left: 0px;
+	text-align: center;
+}
+
+.listItemRightIcon>* {
+	margin-left: 15px;
+	font-size: 32px;
+}
+
+.listItemRightIcon>.badge {
+	font-size: 24px;
+}
+
+.list-group-item.active a {
+	color: #fff;
+}
+
+.listItemUpdate {
+	-webkit-animation: fadeUpdate 2s 1; /* Safari 4+ */
+	-moz-animation: fadeUpdate 2s 1; /* Fx 5+ */
+	-o-animation: fadeUpdate 2s 1; /* Opera 12+ */
+	animation: fadeUpdate 2s 1;
+}
+
+.listItemRemove {
+	-webkit-animation: fadeRemove 1.4s 1; /* Safari 4+ */
+	-moz-animation: fadeRemove 1.4s 1; /* Fx 5+ */
+	-o-animation: fadeRemove 1.4s 1; /* Opera 12+ */
+	animation: fadeRemove 1.4s 1;
+}
+
+@-webkit-keyframes fadeUpdate {
+  0% { 
+  	background-color: #82D5B2;
+  	border-color: #82D5B2;
+  }
+  100% { 
+  	background-color: #FFF; 
+  	border-color: initial;
+  }
+}
+@-moz-keyframes fadeUpdate {
+  0% { 
+  	background-color: #82D5B2;
+  	border-color: #82D5B2;
+  }
+  100% { 
+  	background-color: #FFF; 
+  	border-color: initial;
+  }
+}
+@-o-keyframes fadeUpdate {
+  0% { 
+  	background-color: #82D5B2;
+  	border-color: #82D5B2;
+  }
+  100% { 
+  	background-color: #FFF; 
+  	border-color: initial;
+  }
+}
+@keyframes fadeUpdate {
+  0% { 
+  	background-color: #82D5B2;
+  	border-color: #82D5B2;
+  }
+  100% { 
+  	background-color: #FFF; 
+  	border-color: initial;
+  }
+}
+
+@-webkit-keyframes fadeRemove {
+  0% { 
+  	background-color: #dc6e65;
+  	border-color: #dc6e65;
+  }
+  100% { 
+  	background-color: #FFF;
+  	border-color: #FFF;
+  }
+}
+@-moz-keyframes fadeRemove {
+  0% { 
+  	background-color: #dc6e65;
+  	border-color: #dc6e65;
+  }
+  100% { 
+  	background-color: #FFF;
+  	border-color: #FFF;
+  }
+}
+@-o-keyframes fadeRemove {
+  0% { 
+  	background-color: #dc6e65;
+  	border-color: #dc6e65;
+  }
+  100% { 
+  	background-color: #FFF;
+  	border-color: #FFF;
+  }
+}
+@keyframes fadeRemove {
+  0% { 
+  	background-color: #dc6e65;
+  	border-color: #dc6e65;
+  }
+  100% { 
+  	background-color: #FFF;
+  	border-color: #FFF;
+  }
+}

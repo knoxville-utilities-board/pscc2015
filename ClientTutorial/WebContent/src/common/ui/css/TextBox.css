@@ -1,0 +1,21 @@
+.textbox {
+	position: relative;
+}
+
+.textBoxPlaceholder.textBoxPlaceholder {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	padding-left: 1px;
+	white-space: nowrap;
+	font-size: 15px;
+}
+
+.textBoxPlaceholder {
+	color: #bbbbbb;
+}
+
+.navbar-inverse .textBoxPlaceholder, 
+.navigationDrawer-inverse .textBoxPlaceholder {
+	color: #d3e8fd;
+}

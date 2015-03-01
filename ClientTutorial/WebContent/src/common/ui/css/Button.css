@@ -1,0 +1,17 @@
+.buttonIconLeft {
+	display: inline-block;
+	margin-right: 6px;
+}
+
+.buttonIconRight {
+	display: inline-block;
+	margin-left: 6px;
+}
+
+.buttonLabel {
+	display: inline-block;
+}
+
+.form-group .btn-link{
+	padding-left: 0;
+}

@@ -1,0 +1,80 @@
+@import url('font-awesome.css');
+
+@import
+	url('../../vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')
+	;
+
+@import url('../../vendor/bootstrap-jasny/css/bootstrap-jasny.css');
+
+@import url('../../vendor/bootstrap/css/bootstrap.css');
+
+@import url('../../vendor/bootstrapmap/css/bootstrapmap.css');
+
+@import url('../../common/ui/css/common.css');
+
+@import url('clienttutorial.css');
+
+.logo {
+	background: url("../../images/logo.svg") no-repeat;
+	background-size: 115px 42px;
+	width: 115px;
+	display: inline-block;
+}
+
+/* for ie */
+.form-control::-ms-clear {
+	display: none;
+}
+
+body {
+	width: 100% !important;
+}
+
+body.modal-open {
+	position: fixed;
+}
+
+.modal-scroll {
+	height: 100%;
+	left: 0;
+	right: 0;
+	overflow-y: auto;
+	z-index: 1000;
+}
+
+/* Info Window Styling */
+label.infoWindowLabel {
+	margin-bottom: 0;
+	margin-right: 10px;
+}
+
+.sizer>.actionsPane {
+	margin-top: 10px;
+}
+
+.dgrid.dgrid {
+	width: 100% !important;
+	height: auto;
+}
+
+.dgrid .dgrid-scroller {
+	position: relative;
+	overflow: auto;
+}
+
+.dgrid-loading, .dgrid-no-data, .dgrid-error{
+	margin: 10px 30px;
+	position: relative;
+	font-size: 16px;
+}
+
+.dgrid-cell {
+	width: 80px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.dgrid-panel-body {
+	padding: 0;
+	min-height: 400px;
+}

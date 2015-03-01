@@ -1,0 +1,7 @@
+.growler {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 64px;
+	z-index: 1000;
+}

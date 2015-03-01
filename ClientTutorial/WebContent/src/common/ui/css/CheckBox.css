@@ -1,0 +1,10 @@
+.checkBox {
+	width: 16px;
+	height: 16px;
+}
+
+.checkBoxLabel {
+	position: relative;
+	top: -3px;
+	margin-left: 7px;
+}
