@@ -16,8 +16,11 @@ grunt --gruntfile "C:/workspace/ClientTutorial/gruntfile.js" build
 	Runs a dev and release build
 
 Node build command
+GIT devs
 node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\git\pscc2015\ClientTutorial\WebContent\src\dev.profile.js --release 
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\git\pscc2015\ClientTutorial\WebContent\src\release.profile.js --release 
 
+CVS devs
 node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\dev.profile.js --release 
 node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\test.profile.js --release 
 node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\ClientTutorial\WebContent\src\release.profile.js --release 
