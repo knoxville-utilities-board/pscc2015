@@ -27,6 +27,7 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             };
 
             this.store = lang.getObject("note.stores.notes", false, app);
+            console.log("the store", this.store);
            // var rolesStore = lang.getObject("user.stores.roles", false, app);
            /// this.role.setStore(rolesStore);
 
@@ -38,25 +39,16 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
         },
 
         onModelComplete: function(model) {
+        	console.log("model", model);
 
             this.form.clearValidation();
 
-            this.username.set("value", this.model.userName || "");
-
-            if (!model.userId) {
-                model.isAnonymous = false;
-                model.mobileAlias = null;
-                model.lastActivityDate = dateHandling.javaISOString(new Date());
-                model.roles = [];
-                model.applicationId = "063C2A70-AE08-43CD-8604-CE63A438A5F3";
-            }
-
-            if (model.roles.length) {
-                this.role.set("value", model.roles[0]);
-                this.role.set("label", model.roles[0].roleName);
-            } else {
-                this.role.set("value", "");
-                this.role.set("label", "Select One");
+            this.createdBy.set("value", this.model.createdBy || "");
+            this.note.set("value", this.model.note || "");
+            
+            if (!model.noteId) {
+            	//model defaults here
+                model.createdDate = dateHandling.javaISOString(new Date());
             }
         },
 

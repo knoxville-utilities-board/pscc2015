@@ -35,7 +35,7 @@ function(lang, domConstruct, JSON, notify, topic, pageViewTracker, router, envir
                 app.handle401();
             } else {
                 if (!loggerRegex.test(error.message)) {
-                    console.log(error.message);
+                    console.log("logger error to console " , error.message);
                     // loggerService.log("xhr error - Status: " + error.response.status, error.message);
                 }
             }

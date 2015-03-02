@@ -68,11 +68,16 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
 
     router.registerSecured(baseRoute + "/note", function(evt) {
         console.info("route " + baseRoute + "/note");
-
+        getNoteStore();
+        
         var routeEvent = {
-            targetView: toolId + "Note",
-            Widget: Note,
-            title: "Note",
+            targetView: toolId + "NoteListDetail",
+            Widget: NoteListDetail,
+            title: "NoteListDetail",
+            isList: true,
+            model: {
+                detailItem: false
+            },
             evt: evt
         };
 
@@ -105,9 +110,10 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
         	id = "Create";
         }
         if (item) {
+        	console.log("item is ", item);
 
             if (!titleName) {
-                titleName = item.userName;
+                titleName = item.noteId;
             }
             var routeEvent = {
                 targetView: toolId + "NoteListDetail",
