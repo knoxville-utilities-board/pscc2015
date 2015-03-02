@@ -4,9 +4,10 @@ define(["dojo/_base/declare",
     "common/ui/Button",
     "common/ui/StoreList",
     "common/ui/ListDetailView",
-    "app/ui/Note"],
+    "app/ui/Note",
+    "app/ui/NoteListItem"],
 
-function(declare, lang, router, Button, StoreList, ListDetailView, Note) {
+function(declare, lang, router, Button, StoreList, ListDetailView, Note, NoteListItem) {
 
     return declare([ListDetailView], {
         postCreate: function() {
@@ -18,6 +19,7 @@ function(declare, lang, router, Button, StoreList, ListDetailView, Note) {
                 store: store,
                 select: "single",
                 hasWidgetContainer: true,
+                itemRenderer: NoteListItem,
                 onSelect: function(evt) {
                     router.go("/note/" + this.item.noteId);
                 }
