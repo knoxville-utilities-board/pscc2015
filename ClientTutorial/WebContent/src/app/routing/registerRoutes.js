@@ -20,10 +20,11 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
     var baseRoute = "";
 
     function getNoteStore() {
+    	console.log("getNoteStore");
         if (!lang.getObject("note.stores.notes", false, app)) {
-            lang.setObject("note.stores.note", new Observable(new NoteStore()), app);
+            lang.setObject("note.stores.notes", new Observable(new NoteStore()), app);
         }
-        return lang.getObject("user.stores.users", false, app);
+        return lang.getObject("note.stores.notes", false, app);
     }
 
     router.registerBefore(/.*/, function(evt) {
@@ -79,9 +80,11 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
     });
 
     var route = baseRoute + "/note/:id";
-    pageViewTracker.registerPageView(route, function(match) {
-        return match !== "create" ? "note" : match;
-    });
+    
+//    pageViewTracker.registerPageView(route, function(match) {
+//        return match !== "create" ? "note" : match;
+//    });
+    
     router.register(route, function(evt) {
         console.info("route " + route);
 
@@ -97,9 +100,9 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
             item = store.get(evt.params.id);
         }
 
-        var userId = evt.params.id;
-        if (userId == "create") {
-            userId = "Create";
+        var id = evt.params.id;
+        if (id == "create") {
+        	id = "Create";
         }
         if (item) {
 

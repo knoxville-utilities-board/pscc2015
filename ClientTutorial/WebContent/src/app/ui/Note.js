@@ -72,14 +72,14 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
                     });
                 } else {
                     console.log(this.store.put(this.model));
-                    router.go("/user/create/success");
+                    router.go("/note/create/success");
                 }
             }
         },
 
         remove: function() {
             this.store.remove(this.item.userId);
-            router.go("/user");
+            router.go("/note");
         }
     });
 });
