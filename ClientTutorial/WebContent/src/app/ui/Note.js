@@ -8,12 +8,13 @@ define(["dojo/_base/declare",
     "common/ui/DropdownStoreList",
     "common/ui/Form",
     "common/ui/FormItem",
+    "common/ui/TextArea",
     "common/ui/TextBox",
     "common/ui/View",
     "util/dateHandling",
     "dojo/text!./templates/Note.html"],
 
-function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DropdownStoreList, Form, FormItem, TextBox, View, dateHandling, template) {
+function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DropdownStoreList, Form, FormItem, TextArea, TextBox, View, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
@@ -28,26 +29,26 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
             this.store = lang.getObject("note.stores.notes", false, app);
             console.log("the store", this.store);
-           // var rolesStore = lang.getObject("user.stores.roles", false, app);
-           /// this.role.setStore(rolesStore);
+            // var rolesStore = lang.getObject("user.stores.roles", false, app);
+            /// this.role.setStore(rolesStore);
 
             //this.username.validate = emptyValidate;
-           // this.role.validate = emptyValidate;
+            // this.role.validate = emptyValidate;
 
-        //    this.saveButton.on("click", lang.hitch(this, this.save));
-         //   this.deleteButton.on("click", lang.hitch(this, this.remove));
+            //    this.saveButton.on("click", lang.hitch(this, this.save));
+            //   this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
 
         onModelComplete: function(model) {
-        	console.log("model", model);
+            console.log("model", model);
 
             this.form.clearValidation();
 
             this.createdBy.set("value", this.model.createdBy || "");
             this.note.set("value", this.model.note || "");
-            
+
             if (!model.noteId) {
-            	//model defaults here
+                //model defaults here
                 model.createdDate = dateHandling.javaISOString(new Date());
             }
         },
