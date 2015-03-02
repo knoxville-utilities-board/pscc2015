@@ -35,7 +35,8 @@ function(lang, domConstruct, JSON, notify, topic, pageViewTracker, router, envir
                 app.handle401();
             } else {
                 if (!loggerRegex.test(error.message)) {
-                    loggerService.log("xhr error - Status: " + error.response.status, error.message);
+                    console.log(error.message);
+                    // loggerService.log("xhr error - Status: " + error.response.status, error.message);
                 }
             }
         }
@@ -50,16 +51,16 @@ function(lang, domConstruct, JSON, notify, topic, pageViewTracker, router, envir
         return false;
     };
 
-//    // get server side environment values
-//    environmentService.getPropertyBag().then(function(response) {
-//        appInit(response.data);
-//    }, function(err) {
-//        console.log("error", err);
-//        appInit();
-//    });
+    //    // get server side environment values
+    //    environmentService.getPropertyBag().then(function(response) {
+    //        appInit(response.data);
+    //    }, function(err) {
+    //        console.log("error", err);
+    //        appInit();
+    //    });
 
     appInit(mockUser.data)
-    
+
     function appInit(data) {
         console.info("appInit()");
 

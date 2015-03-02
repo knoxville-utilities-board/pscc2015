@@ -1,1 +1,33 @@
-<div>User View</div>
+<div class="panel panel-default engineeringInspectionDetail">
+	<div class="panel-heading" data-dojo-attach-point="panelHeadingNode">
+		<h3 class="panel-title modelEmptyShow">Please select a user.</h3>
+		<div class="modelLoadingShow">
+			<span class="fa fa-spinner fa-spin"></span> <span>Loading...</span>
+		</div>
+	</div>
+	<div class="modelCompleteShow">
+		<form class="panel-body" data-dojo-type="common/ui/Form"
+			data-dojo-attach-point="form">
+
+			<div data-dojo-type="common/ui/FormItem"
+				data-dojo-props="label: 'Username'">
+				<div data-dojo-type="common/ui/TextBox"
+					data-dojo-attach-point="username"></div>
+			</div>
+
+			<div data-dojo-type="common/ui/FormItem"
+				data-dojo-props="label: 'Role'" data-dojo-attach-point="roleItem">
+				<div data-dojo-type="common/ui/DropdownStoreList"
+					data-dojo-attach-point="role"
+					data-dojo-props="forceSelect: false"></div>
+			</div>
+
+			<button class="btn-primary pull-right" data-dojo-type="common/ui/Button"
+				data-dojo-attach-point="saveButton" data-dojo-props="label: 'Save'"></button>
+				
+			<button class="btn-danger pull-right hidden" data-dojo-type="common/ui/Button"
+				data-dojo-attach-point="deleteButton" style="margin-right:10px;"
+				data-dojo-props="label: 'Delete'"></button>
+		</form>
+	</div>
+</div>

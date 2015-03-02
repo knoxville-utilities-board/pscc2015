@@ -1,27 +1,27 @@
 define(["dojo/_base/config",
     "dojo/_base/lang",
-    "dojo/store/Observable", 
-    "app/stores/UserStore",
-   
+    "dojo/store/Observable",
+    "app/stores/NoteStore",
+
     "app/ui/Login",
     "app/ui/PageNotFound",
     "app/ui/Home",
     "app/ui/Note",
-    
+    "app/ui/NoteListDetail",
+
     "common/pageViewTracker",
     "common/routing/router",
     "common/routing/routeHandler"],
 
-function(config, lang, Observable, UserStore,  Login, PageNotFound, Home, Note, pageViewTracker, router, routeHandler) {
+function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, NoteListDetail, pageViewTracker, router, routeHandler) {
 
     var toolId = "app.";
 
     var baseRoute = "";
 
-    function getUserStore() {
-        if (!lang.getObject("user.stores.users", false, app)) {
-            lang.setObject("user.stores.users", new Observable(new UserStore()), app);
-            lang.setObject("user.stores.roles", new Observable(new RoleStore()), app);
+    function getNoteStore() {
+        if (!lang.getObject("note.stores.notes", false, app)) {
+            lang.setObject("note.stores.note", new Observable(new NoteStore()), app);
         }
         return lang.getObject("user.stores.users", false, app);
     }
@@ -90,10 +90,10 @@ function(config, lang, Observable, UserStore,  Login, PageNotFound, Home, Note, 
         var item;
         if (evt.params.id == "create") {
             titleName = "Create";
-            getUserStore();
+            getNoteStore();
             item = {};
         } else {
-            var store = getUserStore();
+            var store = getNoteStore();
             item = store.get(evt.params.id);
         }
 
@@ -107,14 +107,14 @@ function(config, lang, Observable, UserStore,  Login, PageNotFound, Home, Note, 
                 titleName = item.userName;
             }
             var routeEvent = {
-                targetView: toolId + "UserListDetail",
-                Widget: UserListDetail,
-                title: "Users > " + titleName,
+                targetView: toolId + "NoteListDetail",
+                Widget: NoteListDetail,
+                title: "Notes > " + titleName,
                 isDetail: true,
                 model: {
                     detailItem: item
                 },
-                listRoute: baseRoute + "/user",
+                listRoute: baseRoute + "/note",
                 evt: evt
             };
 
