@@ -41,7 +41,8 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
         onModelComplete: function(model) {
             console.log("model", model);
-
+            app.appbar.set("title", "Notes > " + model.noteId);
+            
             this.form.clearValidation();
 
             this.createdBy.set("value", this.model.createdBy || "");

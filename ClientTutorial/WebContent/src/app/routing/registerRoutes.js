@@ -73,7 +73,7 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
         var routeEvent = {
             targetView: toolId + "NoteListDetail",
             Widget: NoteListDetail,
-            title: "NoteListDetail",
+            title: "Notes",
             isList: true,
             model: {
                 detailItem: false
@@ -110,15 +110,11 @@ function(config, lang, Observable, NoteStore, Login, PageNotFound, Home, Note, N
         	id = "Create";
         }
         if (item) {
-        	console.log("item is ", item);
-
-            if (!titleName) {
-                titleName = item.noteId;
-            }
+      
             var routeEvent = {
                 targetView: toolId + "NoteListDetail",
                 Widget: NoteListDetail,
-                title: "Notes > " + titleName,
+                title: "Loading...",
                 isDetail: true,
                 model: {
                     detailItem: item
