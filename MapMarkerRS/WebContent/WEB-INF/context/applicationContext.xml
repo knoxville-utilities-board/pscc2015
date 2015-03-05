@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "../dtd/spring-beans.dtd">
+<beans>
+    <bean id="categoryRSResource" class="org.kub.web.mapmarker.resources.CategoryRSResource">   
+        <property name="categoryRSDao" ref="categoryRSDao"></property>
+    </bean>
+    <bean id="directionRSResource" class="org.kub.web.mapmarker.resources.DirectionRSResource">   
+        <property name="directionRSDao" ref="directionRSDao"></property>
+    </bean>
+    <bean id="markerRSResource" class="org.kub.web.mapmarker.resources.MarkerRSResource">   
+        <property name="markerRSDao" ref="markerRSDao"></property>
+    </bean>
+    <bean id="severityRSResource" class="org.kub.web.mapmarker.resources.SeverityRSResource">   
+        <property name="severityRSDao" ref="severityRSDao"></property>
+    </bean>
+    <bean id="subtypeRSResource" class="org.kub.web.mapmarker.resources.SubtypeRSResource">   
+        <property name="subtypeRSDao" ref="subtypeRSDao"></property>
+    </bean>
+    <bean id="typeRSResource" class="org.kub.web.mapmarker.resources.TypeRSResource">   
+        <property name="typeRSDao" ref="typeRSDao"></property>
+    </bean>
+    <bean id="utilityRSResource" class="org.kub.web.mapmarker.resources.UtilityRSResource">   
+        <property name="utilityRSDao" ref="utilityRSDao"></property>
+    </bean>
+
+    <bean id="categoryRSDao" class="org.kub.web.mapmarker.dao.impl.CategoryRSDaoImpl">   
+    </bean>
+    <bean id="directionRSDao" class="org.kub.web.mapmarker.dao.impl.DirectionRSDaoImpl">   
+    </bean>
+    <bean id="markerRSDao" class="org.kub.web.mapmarker.dao.impl.MarkerRSDaoImpl">   
+    </bean>
+    <bean id="severityRSDao" class="org.kub.web.mapmarker.dao.impl.SeverityRSDaoImpl">   
+    </bean>
+    <bean id="subtypeRSDao" class="org.kub.web.mapmarker.dao.impl.SubtypeRSDaoImpl">   
+    </bean>
+    <bean id="typeRSDao" class="org.kub.web.mapmarker.dao.impl.TypeRSDaoImpl">   
+    </bean>
+    <bean id="utilityRSDao" class="org.kub.web.mapmarker.dao.impl.UtilityRSDaoImpl">   
+    </bean>
+
+    <!-- Default View Resolver -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="cache" value="true"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Default Exception Handler Bean -->
+    <bean id="defaultExceptionHandlerTemplate"
+        class="org.kub.util.portal.spring.KUBSimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="defError" />
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+        <property name="messageRoot" value="MapMarker" />
+    </bean> 
+</beans>
