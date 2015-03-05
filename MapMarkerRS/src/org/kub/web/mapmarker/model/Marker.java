@@ -23,7 +23,7 @@ public class Marker implements Serializable {
 	
 	private long id;
 	private long categoryId;
-	private long utilityTypeId;
+	private long utilityId;
 	private long typeId;
 	private long subtypeId;
 	private long severityId;
@@ -68,12 +68,12 @@ public class Marker implements Serializable {
 	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}   
-	public long getUtilityTypeId() {
-		return this.utilityTypeId;
+	public long getUtilityId() {
+		return this.utilityId;
 	}
 
-	public void setUtilityTypeId(long utilityTypeId) {
-		this.utilityTypeId = utilityTypeId;
+	public void setUtilityId(long utilityTypeId) {
+		this.utilityId = utilityTypeId;
 	}   
 	public long getTypeId() {
 		return this.typeId;
