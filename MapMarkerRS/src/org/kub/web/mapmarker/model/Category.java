@@ -27,7 +27,7 @@ public class Category implements Serializable {
 	private String editedBy;
 	private Timestamp editedDate;
 	private boolean isActive;
-	private byte[] symbology;
+	private String symbology;
 	private String title;
 
 	public Category() {
@@ -100,11 +100,11 @@ public class Category implements Serializable {
 
 
 	@Lob
-	public byte[] getSymbology() {
+	public String getSymbology() {
 		return this.symbology;
 	}
 
-	public void setSymbology(byte[] symbology) {
+	public void setSymbology(String symbology) {
 		this.symbology = symbology;
 	}
 
