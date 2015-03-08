@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'searchwidget';
+    src: url('../font/search.eot?82010185');
+    src: url('../font/search.eot?82010185#iefix') format('embedded-opentype'), url('../font/search.woff?82010185') format('woff'), url('../font/search.ttf?82010185') format('truetype'), url('../font/search.svg?82010185#searchwidget') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.arcgis-search [class^="icon-"]:before,
+.arcgis-search [class*=" icon-"]:before,
+.arcgis-search [class^="icon-"] {
+    font-family: "searchwidget";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+}
+.arcgis-search .icon-search:before {
+    content: '\e800';
+}
+.arcgis-search .icon-cancel:before {
+    content: '\e801';
+}
+.arcgis-search .icon-down-dir:before {
+    content: '\e802';
+}
+.arcgis-search .icon-search {
+    *zoom: expression( this.runtimeStyle['zoom'] '1', this.innerHTML '&#xe800;&nbsp;');
+}
+.arcgis-search .icon-cancel {
+    *zoom: expression( this.runtimeStyle['zoom'] '1', this.innerHTML '&#xe801;&nbsp;');
+}
+.arcgis-search .icon-down-dir {
+    *zoom: expression( this.runtimeStyle['zoom'] '1', this.innerHTML '&#xe802;&nbsp;');
+}

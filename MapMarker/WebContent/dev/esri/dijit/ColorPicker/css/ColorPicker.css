@@ -1,0 +1,179 @@
+.esriColorPicker {
+    font-family: "Avenir LT W01 65 Medium", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #4d4d4d;
+    text-shadow: none;
+    width: 195px;
+}
+.esriColorPicker.esriColorPickerContainer {
+    border: solid 2px #aaa;
+    display: inline-block;
+    padding: 4px 15px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+.esriColorPicker .esriColorPickerHexInput {
+    display: inline-block;
+    color: #4d4d4d;
+    width: 5.2em;
+    border: 1px solid #aaa;
+    direction: ltr;
+}
+.esriColorPicker .esriColorPickerHexInput .dijitInputInner {
+    text-transform: uppercase;
+}
+.esriColorPicker .esriColorPickerHexInput .dijitInputContainer {
+    height: auto;
+}
+.esriColorPickerInputLabel {
+    display: inline-block;
+    vertical-align: middle;
+}
+.esriColorPickerSwatch {
+    box-sizing: border-box;
+    vertical-align: middle;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 0;
+    transition: background-color .25s;
+}
+.esriColorPickerDisplayNone {
+    display: none;
+}
+.esriColorPickerSwatchEmpty:before {
+    display: inline-block;
+    background-color: #f00;
+    position: absolute;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform-origin: top left;
+    -ms-transform-origin: top left;
+    -webkit-transform-origin: top left;
+    content: "";
+    z-index: 1;
+}
+.esriColorPickerSwatchEmpty {
+    position: relative;
+    overflow: hidden;
+    border: solid 1px #aaa;
+    background-color: #fff;
+}
+.esriColorPicker .esriColorPickerPaletteOptions {
+    padding: 6px 0;
+    position: relative;
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerSwatchEmpty {
+    margin: 0 10px 0;
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle {
+    position: absolute;
+    right: 0;
+    vertical-align: middle;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+.esriRtl .esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle {
+    left: 0;
+    right: auto;
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle .dijitButtonNode {
+    background: url("../images/right-arrows.png") no-repeat;
+    width: 17px;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+.esriRtl .esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle .dijitButtonNode {
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle.dijitChecked {
+    background-color: transparent;
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle.dijitChecked .dijitButtonNode {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+.esriColorPicker .esriColorPickerPaletteOptions .esriColorPickerPaletteToggle.dijitHover .dijitButtonNode {
+    background-position-x: -17px;
+}
+.esriColorPickerFooter .esriColorPickerLabel {
+    margin: 6px 0 4px 0;
+}
+.esriColorPickerSwatchPreview {
+    box-sizing: border-box;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+}
+.esriColorPickerSwatchPreview.esriColorPickerContainer {
+    position: relative;
+    left: 0;
+    right: 0;
+    display: block;
+    text-align: center;
+}
+.esriColorPickerSwatchPreview .esriColorPickerSwatch {
+    position: absolute;
+    cursor: auto;
+    margin: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 25px;
+    width: 100%;
+}
+.esriColorPickerSwatchPreview .esriColorPickerSwatch.esriColorPickerSwatchEmpty {
+    display: none;
+}
+.esriColorPickerSwatchRow {
+    font-size: 0;
+    white-space: nowrap;
+}
+.esriColorPickerSwatch.esriColorPickerSwatchTransparencyBackground {
+    background-image: url("../../images/transparent-bg.png");
+}
+.esriColorPickerSwatch.esriColorPickerSelected,
+.esriColorPickerSwatchPreview .esriColorPickerSwatch {
+    border: 1px solid;
+}
+@-webkit-keyframes highlight-selection {
+    50% {
+        transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+    }
+}
+@keyframes highlight-selection {
+    50% {
+        transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+    }
+}
+.esriColorPickerSwatch.esriColorPickerSelected {
+    -webkit-animation: highlight-selection 0.2s ease;
+    animation: highlight-selection 0.2s ease-out;
+}
+.esriColorPickerHeader,
+.esriColorPickerFooter {
+    margin: 8px 0 10px;
+}
+.esriColorPicker .dijitRuleContainer {
+    padding: 5px;
+    color: #4d4d4d;
+}

@@ -1,0 +1,254 @@
+.arcgis-search .search-group {
+    position: relative;
+    color: #4C4C4C;
+}
+.arcgis-search .search-input-group {
+    float: left;
+}
+.dj_rtl .arcgis-search .search-input-group {
+    float: right;
+}
+.arcgis-search .search-btn {
+    display: block;
+    float: left;
+    padding: 6px 12px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    height: 20px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #57585A;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    background-color: #fff;
+}
+.dj_rtl .arcgis-search .search-btn {
+    float: right;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+.arcgis-search .search-btn:hover,
+.arcgis-search .search-btn:focus {
+    text-decoration: none;
+    background-color: #eee;
+}
+.arcgis-search .search-btn:active {
+    background-color: #ddd;
+}
+.arcgis-search .search-group .search-input {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    float: left;
+    display: block;
+    height: 20px;
+    width: 200px;
+    padding: 6px 23px 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4C4C4C;
+    background-color: #fff;
+    border: 1px solid #57585A;
+    border-right: 0;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+.dj_rtl .arcgis-search .search-group .search-input {
+    float: right;
+    padding: 6px 12px 6px 23px;
+    border: 1px solid #57585A;
+    border-left: 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+.arcgis-search .search-group .search-input::-ms-clear {
+    display: none;
+}
+.arcgis-search .search-input::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+.arcgis-search .search-input:-ms-input-placeholder {
+    color: #999;
+}
+.arcgis-search .search-input::-webkit-input-placeholder {
+    color: #999;
+}
+.arcgis-search .search-input-group {
+    position: relative;
+}
+.arcgis-search .search-clear {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+.dj_rtl .arcgis-search .search-clear {
+    right: auto;
+    left: 0;
+}
+.arcgis-search .source-name {
+    text-align: left;
+    vertical-align: middle;
+    display: none;
+}
+.dj_rtl .arcgis-search .source-name {
+    text-align: right;
+}
+.arcgis-search .has-value .search-clear {
+    display: block;
+}
+.arcgis-search .search-clear-icon {
+    line-height: 32px;
+}
+.arcgis-search .search-loading .search-clear-icon {
+    display: none;
+}
+.arcgis-search .search-loading .search-clear {
+    cursor: default;
+    display: block;
+    background: url(../images/loading.gif) center center no-repeat;
+    width: 23px;
+    height: 32px;
+}
+.arcgis-search .search-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #57585A;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.dj_rtl .arcgis-search .search-menu {
+    left: auto;
+    right: 0;
+    float: right;
+}
+.arcgis-search .search-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.arcgis-search .search-menu li {
+    padding: 6px 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.arcgis-search .search-menu li:hover,
+.arcgis-search .search-menu li:focus {
+    background-color: #eee;
+}
+.arcgis-search .search-menu li:active {
+    background-color: #ddd;
+}
+.arcgis-search .search-menu li.active {
+    background-color: #4C4C4C;
+    color: #fff;
+    cursor: default;
+}
+.arcgis-search .search-menu .menu-header {
+    padding: 6px 12px;
+    background: #4C4C4C;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.arcgis-search .show-suggestions .suggestions-menu {
+    display: block;
+    width: 100%;
+}
+.arcgis-search .show-sources .sources-menu {
+    display: block;
+    width: 70%;
+}
+.arcgis-search .search-toggle {
+    display: none;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+.dj_rtl .arcgis-search .search-toggle {
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+.arcgis-search .has-multiple-sources .search-toggle {
+    display: block;
+}
+.arcgis-search .search-toggle-icon {
+    vertical-align: middle;
+}
+.arcgis-search .has-multiple-sources .search-input {
+    border-left: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.dj_rtl .arcgis-search .has-multiple-sources .search-input {
+    border-right: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.arcgis-search .alternative-results .alternative-header {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.arcgis-search .alternative-results .alternative-item {
+    margin-bottom: 10px;
+}
+.arcgis-search .alternative-results .results-list {
+    display: none;
+}
+.arcgis-search .alternative-results .results-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.arcgis-search .alternative-results .results-list li {
+    padding: 2px 0;
+}
+.arcgis-search .alternative-results .results-list .popup-header {
+    margin: 10px 0 0 0;
+    font-weight: bold;
+}
+.arcgis-search .show-alternative-results .results-list {
+    display: block;
+}
+.arcgis-search .no-results-menu {
+    display: none;
+    width: 100%;
+}
+.arcgis-search .no-results-body {
+    padding: 12px;
+}
+.arcgis-search .no-results-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.arcgis-search .show-no-results .no-results-menu {
+    display: block;
+}
+.arcgis-search .search-clear-float {
+    clear: both;
+}

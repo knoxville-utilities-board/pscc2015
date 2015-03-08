@@ -1,0 +1,94 @@
+.summaryCard {
+	margin-bottom: 15px;
+}
+
+.summaryCardTitle {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.summaryCardImage {
+	background-size: 200px 200px !important;
+	height: 200px;
+	width: 200px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 140pt;
+}
+
+.summaryCardIcon {
+	font-size: 8em;
+}
+
+.summaryCardIcon .fa-stack-1x {
+	padding-top: 25px;
+}
+
+@media ( max-width : 991px) {
+	.summaryCardImage {
+		height: 150px;
+		width: 150px;
+		background-size: 150px 150px !important;
+		font-size: 100pt;
+	}
+	.summaryCardIcon {
+		font-size: 5.85em;
+	}
+	.summaryCardIcon .fa-stack-1x {
+		padding-top: 18px;
+	}
+}
+
+@media ( max-width : 767px) {
+	.summaryCard {
+		padding: 2.5px !important;
+	}
+	.summaryCardImage {
+		height: 100px;
+		width: 100px;
+		background-size: 100px 100px !important;
+		font-size: 75pt;
+	}
+	.summaryCardTitle {
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.summaryCardIcon {
+		font-size: 3.85em;
+	}
+	.summaryCardIcon .fa-stack-1x {
+		padding-top: 12px;
+	}
+}
+
+@media ( max-width : 450px) {
+	.summaryCard {
+		width: 100% !important;
+		margin-left: 0;
+	}
+	.summaryCardImage {
+		height: 50px;
+		width: 50px;
+		background-size: 50px 50px !important;
+		font-size: 50pt;
+	}
+	.summaryCard .panel-heading {
+		height: 100%;
+		width: 40%;
+		float: left;
+		display: inline-block;
+	}
+	.summaryCard .panel-body {
+		height: 100%;
+		width: 55%;
+		float: left;
+		display: inline-block;
+		padding-bottom: 5px;
+	}
+	.summaryCardIcon {
+		font-size: 2.85em;
+	}
+	.summaryCardIcon .fa-stack-1x {
+		padding-top: 8px;
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"name": "kubgis",
+	"version": "0.1.0",
+	"main": "main",
+	"description": "KUB specific GIS utilities",
+	"dependencies": {
+		"dojo": "current"
+	},
+	"dojoBuild": "kubgis.profile.js"
+}

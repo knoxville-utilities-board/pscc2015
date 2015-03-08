@@ -1,0 +1,32 @@
+<div class="panel-body overlay-scroll">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#eventDetail-${id}-summary"
+			data-toggle="tab">Summary</a></li>
+		<li><a href="#eventDetail-${id}-comments" data-toggle="tab">Comments</a></li>
+		<li><a href="#eventDetail-${id}-history" data-toggle="tab">History</a></li>
+		<li class="hidden" data-dojo-attach-point="photoTab"><a href="#eventDetail-${id}-photo" data-toggle="tab">Photos</a></li>
+	</ul>
+
+	<div class="modelLoadingShow contentFill">
+		<div class="loadingCenter">
+			<div class="fa fa-spinner fa-spin"></div>
+			<div class="mapLoadingText">Loading...</div>
+		</div>
+	</div>
+
+	<div class="modelCompleteShow">
+		<div class="tab-content">
+			<div class="tab-pane active" id="eventDetail-${id}-summary"
+				data-dojo-attach-point="summaryNode"></div>
+
+			<div class="tab-pane" id="eventDetail-${id}-comments"
+				data-dojo-attach-point="commentNode"></div>
+
+			<div class="tab-pane" id="eventDetail-${id}-history"
+				data-dojo-attach-point="historyNode"></div>
+				
+			<div class="tab-pane" id="eventDetail-${id}-photo"
+				data-dojo-attach-point="photoNode"></div>
+		</div>
+	</div>
+</div>

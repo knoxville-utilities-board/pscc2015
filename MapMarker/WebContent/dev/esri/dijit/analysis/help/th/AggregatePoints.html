@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="largesize">
+        <h2>รวมจุด</h2><p/>
+        <h2><img src="../images/GUID-6981B80D-B1F0-4037-BFC5-8EC9241B6FC2-web.png" alt="รวมจุด"></h2>
+        <hr/>
+    <p>เครื่องมือนี้ทำงานกับชั้นข้อมูลประเภทจุด (ชั้นข้อมูลที่ใช้วิเคราะห์) และชั้นข้อมูลเชิงพื้นที่ โดยจะพิจารณาจากข้อมูลเชิงจุดที่อยู่ภายในแต่ละพื้นที่ หลังจากที่ตรวจสอบความสัมพันธ์เชิงพื้นที่ของจุดที่อยู่ในพื้นที่, ค่าทางสถิติของจุดที่อยู่ในพื้นที่จะถูกคำนวณและเก็บไว้ในพื้นที่นั้นๆ ค่าทางสถิติพื้นที่ฐานเป็นการนับจำนวนของจุดที่อยู่ภายในพื้นที่ แต่คุณสามารถใช้ค่าสถิติอื่นได้เช่นกัน 
+    </p>
+    <p>ตัวอย่างเช่น สมมติว่าคุณมีข้อมูลตำแหน่งร้านกาแฟและมีข้อมูลพื้นที่เขต และคุณต้องการสรุปจำนวนยอดขายในเขตนั้น  Assuming the  coffee shops have a    <i>TOTAL_SALES</i> attribute, you can get the sum of all <i>TOTAL_SALES</i> within each county, or the minimum or maximum <i>TOTAL_SALES</i> within each county, or the standard deviation of all sales within each county.
+    </p>
+    <p>ผลลัพธ์ คือ แผนที่ที่แสดงสีของแต่ละเขต ซึ่งขึ้นอยู่กับจำนวนของตำแหน่งร้านกาแฟต่อขนาดของพื้นที่  การแบ่งการคำนวณโดยใช้พื้นที่เป็นมาตรฐานที่รู้จักกันทั่วไป และยังเป็นเทคนิคในการทำแผนที่ซึ่งใช้ในการแสดงผลข้อมูลเชิงพื้นที่  การทำให้เป็นมาตรฐานช่วยให้คุณเข้าใจแบบรูปของพื้นที่มากขึ้น เนื่องจากขนาดของพื้นที่ถูกนำไปใช้ในการอธิบายเมื่อมีการเปรียบเทียบพื้นที่แต่ละแห่ง
+    </p>
+    <p>ถ้าเลือก  <b>ใช้ขอบเขตแผนที่ปัจจุบัน</b> เฉพาะคุณลักษณะและชั้นข้อมูลที่แสดงในขอบเขตแผนที่ปัจจุบันเท่านั้นที่จะนำไปวิเคราะห์  ถ้าไม่เลือก คุณลักษณะทั้งหมดในชั้นข้อมูลวิเคราะห์และในชั้นข้อมูลจะถูกนำไปวิเคราะห์ แม้ว่าจะอยู่นอกขอบเขตแผนที่ปัจจุบัน
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="PolygonLayer">
+        <div><h2>เลือกพื้นที่</h2></div>
+        <hr/>
+        <div>
+            <p> Select an area layer from the web map to which the points will be aggregated. ถ้าไม่มีขอบเขตของชั้นข้อมูลในเว็บแมพ คุณสามารถเลือกจากรายการขอบเขตของชั้นข้อมูลที่มีให้ใน ArcGIS Online Any points that fall within the boundaries of areas in this layer will be counted and optionally summarized using your choices of statistics.
+            </p>
+        </div>
+    </div>
+    <div id="KeepBoundaryNoPoints">
+        <div><h2>รักษาพื้นที่ไว้โดยไม่มีจุด</h2></div>
+        <hr/>
+        <div>
+            <p>กำหนดให้ พื้นที่ที่ไม่มีข้อมูลจุด แสดงในชั้นข้อมูลผลลัพธ์  ถ้าไม่เลือก, พื้นที่ที่ไม่มีข้อมูลจุดจะไม่ปรากฎในผลลัพธ์  ถ้าไม่เลือก, พื้นที่ที่ไม่มีข้อมูลจุดจะปรากฎในผลลัพธ์  
+            </p>
+        </div>
+    </div>
+    <div id="SummaryFields">
+        <div><h2>เพิ่มข้อมูลสถิติ</h2></div>
+        <hr/>
+        <div>
+            <p>คุณสามารถคำนวณค่าทางสถิติในตารางคุณลักษณะของชั้นข้อมูลจุด เช่น ค่ารวม, ค่าเฉลี่ย, ค่าต่ำที่สุด, ค่าสูงที่สุด และค่าความเบี่ยงเบนมาตรฐาน ชั้นข้อมูลผลลัพธ์จะประกอบด้วยค่าข้อมูลคุณลักษณะใหม่หลังจากการคำนวณทางสถิติ ค่าทางสถิติใดๆ จะสามารถเพิ่มขึ้นโดยเลือกจากข้อมูลคุณลักษณะและค่าสถิติ (กล่องรายการตัวเลือกแบบดึงลงใหม่จะปรากฎขั้น)
+
+ 
+            </p>
+        </div>
+    </div>
+    <div id="GroupByField">
+        <div><h2>เลือกฟิลด์ที่ต้องการให้รวมกลุ่มกัน</h2></div>
+        <hr/>
+        <div>
+            <p>คุณสามารถสร้างกลุ่มทางสถิติโดยใช้ตารางคุณลักษณะในชั้นข้อมูลสถิติ    For example, if you are aggregating crimes to neighborhood boundaries, you may have an attribute  <i>Crime_type</i> with five different crime types.  Each unique crime type forms a group, and the statistics you choose will be calculated for each unique value of <i>Crime_type</i>.  ค่าสถิติของแต่ละกลุ่ม เช่นเดียวกับจำนวนนับของข้อมูลจุด จะนำไปแสดงใน pop-up ของชั้นข้อมูลผลลัพธ์  เมื่อคุณเลือกข้อมูลเชิงบรรยายที่ถูกจัดกลุ่ม ผลลัพธ์จะถูกสร้างขึ้น 2 แบบ: the result layer and a result table containing the statistics for each unique group.
+            </p>
+        </div>
+    </div>
+    <div id="MinorityMajority">
+        <div><h2>เพิ่มกลุ่มน้อย กลุ่มมาก</h2></div>
+        <hr/>
+        <div>
+            <p>This checkbox is enabled  when you choose a field to group by.    If you want to find out which attribute values within each group are the minority (least dominant) or the majority (most dominant)  within each boundary,  select  <b>Add minority, majority</b>.   เมื่อคุณเลือก <b>เพิ่มกลุ่มน้อย กลุ่มมาก</b> ฟิลด์อีกสองฟิลด์จะถูกเพิ่มลงในชั้นข้อมูลผลลัพธ์ของคุณ   หากคุณเลือก <b>เพิ่มเปอร์เซ็นต์</b> ด้วย ฟิลด์อีกสองฟิลด์จะถูกเพิ่มลงในชั้นข้อมูลผลลัพธ์ที่ประกอบด้วยเปอร์เซ็นต์ของค่าข้อมูลคุณลักษณะส่วนน้อยและส่วนมากภายในแต่ละกลุ่ม
+            </p>
+            <p>For example, if you are a city planner and you want to find out which tree species are in the minority and which are in the majority within all city parks, aggregate your tree data with your park areas and check this option.
+            </p>
+        </div>
+    </div>
+    <div id="PercentPoints">
+        <div><h2>เพิ่มเปอร์เซนต์</h2></div>
+        <hr/>
+        <div>
+            <p>คุณจะใช้กล่องกาเครื่องหมายนี้ได้หากคุณเลือกฟิลด์ที่จะจัดกลุ่ม    เลือก  <b>เพิ่มเปอร์เซนต์</b> หากคุณต้องการค้นหาเปอร์เซ็นต์ของค่าตัวแปรแต่ละค่าภายในแต่ละกลุ่ม  ฟิลด์ใหม่จะถูกเพิ่มลงในตารางผลลัพธ์ที่ประกอบด้วยเปอร์เซ็นต์ของค่าตัวแปรแต่ละค่าภายในแต่ละกลุ่ม   หาก <b>เพิ่มส่วนน้อย ส่วนใหญ่</b> ก็จะถูกเลือกด้วย ฟิลด์อีกสองฟิลด์จะถูกเพิ่มลงในชั้นข้อมูลผลลัพธ์ที่ประกอบด้วยเปอร์เซ็นต์ของค่าตัวแปรส่วนน้อยและส่วนใหญ่ภายในแต่ละกลุ่ม
+            </p>
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>ชื่อชั้นข้อมูลผลลัพธ์</h2></div>
+        <hr/>
+        <div>
+            <p>ชื่อนี้เป็นชื่อของชั้นข้อมูลที่จะถูกสร้างอยู่ใน  <b>เนื้อหาของฉัน</b> และจะถูกเพิ่มเข้าไปบนแผนที่  ชื่อเริ่มต้นจะอ้างอิงกับชนิดและชื่อชั้นข้อมูลที่จะวิเคราะห์ หากชั้นข้อมูลนั้นมีอยู่แล้ว คุณจะถูกถามเพื่อให้ยืนยันว่าคุณต้องการเขียนทับหรือไม่
+            </p>
+            <p>เมื่อใช้กล่องคำสั่งแบบดรอปดาวน์  <b>บันทึกผลลัพธ์ใน</b> คุณสามารถกำหนดชื่อของโฟลเดอร์ใน <b>เนื้อหาของฉัน</b> ซึ่งเป็นที่จัดเก็บผลลัพธ์
+            </p> 
+        </div>
+    </div>
+</div>
+</html>

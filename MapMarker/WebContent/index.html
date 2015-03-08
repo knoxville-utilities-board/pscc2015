@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>AMI</title>
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="icon" sizes="152x152" href="release/images/touch-icon.png">
+<link rel="apple-touch-icon" href="release/images/touch-icon.png">
+
+<link rel="shortcut icon" sizes="32x32" href="release/images/favicon.ico" />
+
+<link rel="stylesheet" href="release/esri/css/esri.css?CurrentBuild_405145662573" />
+<link rel="stylesheet" href="release/app/css/app.css?CurrentBuild_405145662573" />
+</head>
+
+<body>
+</body>
+
+<script src="release/dojo/dojo.js?CurrentBuild_405145662573"></script>
+
+<script>
+	require(["app/main"]);
+</script>
+
+<script>
+	var _gaq = _gaq || [];
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+<!--[if lt IE 9]>
+	<div style="width: 90%;" class="center-block">
+		<div style="max-width: 650px;" class="center-block">Internet Explorer 8 or below are not supported. Please use Chrome, Firefox, Opera, or a newer version of IE.</div>
+	</div>
+<![endif]-->
+</html>

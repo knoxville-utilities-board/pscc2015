@@ -1,0 +1,65 @@
+.toolCardHeading {
+	
+}
+
+.toolCardText {
+	position: relative;
+	z-index: 5;
+}
+
+.toolCardIcon {
+	font-size: 5em;
+	color: rgba(255, 255, 255, .3);
+}
+
+.toolCardIcon .fa-stack {
+	margin-left: -27px;
+}
+
+.toolCardIcon .fa-stack-2x {
+	font-size: 1em;
+	margin-top: 27px;
+}
+
+.toolCardIcon .fa-stack-1x {
+	font-size: .5em;
+	padding-top: 4px;
+}
+
+.toolCardLabel {
+	font-size: 19px;
+	width: 100%;
+}
+
+@media ( max-width : 767px) {
+	.toolCard {
+		padding: 2.5px !important;
+	}
+	.toolCardLabel {
+		display: inline;
+		font-size: 1em;
+	}
+	.toolCardIcon {
+		font-size: 2em;
+		margin-top: -6px;
+	}
+	.toolCardIcon .fa-stack {
+		font-size: .5em;
+		margin-left: 0px;
+	}
+	.toolCardIcon .fa-stack-2x {
+		font-size: 2em;
+		margin-top: 0;
+	}
+	.toolCardIcon .fa-stack-1x {
+		font-size: 1em;
+		padding-top: 4px;
+	}
+	.toolCard .panel-body {
+		min-height: 60px;
+		padding: 7px 6px;
+	}
+	.toolCardHeading {
+		padding: 7px 6px;
+	}
+}
