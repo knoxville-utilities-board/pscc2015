@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "../dtd/spring-beans.dtd">
 <beans>
-    <bean id="categoryRSResource" class="org.kub.web.mapmarker.resources.CategoryRSResource">   
+    <bean id="categoryRSResource" class="org.kub.web.common.mapmarker.resources.CategoryRSResource">   
         <property name="categoryRSDao" ref="categoryRSDao"></property>
     </bean>
-    <bean id="directionRSResource" class="org.kub.web.mapmarker.resources.DirectionRSResource">   
+    <bean id="directionRSResource" class="org.kub.web.common.mapmarker.resources.DirectionRSResource">   
         <property name="directionRSDao" ref="directionRSDao"></property>
     </bean>
-    <bean id="markerRSResource" class="org.kub.web.mapmarker.resources.MarkerRSResource">   
+    <bean id="markerRSResource" class="org.kub.web.common.mapmarker.resources.MarkerRSResource">   
         <property name="markerRSDao" ref="markerRSDao"></property>
     </bean>
-    <bean id="severityRSResource" class="org.kub.web.mapmarker.resources.SeverityRSResource">   
+    <bean id="severityRSResource" class="org.kub.web.common.mapmarker.resources.SeverityRSResource">   
         <property name="severityRSDao" ref="severityRSDao"></property>
     </bean>
-    <bean id="subtypeRSResource" class="org.kub.web.mapmarker.resources.SubtypeRSResource">   
+    <bean id="subtypeRSResource" class="org.kub.web.common.mapmarker.resources.SubtypeRSResource">   
         <property name="subtypeRSDao" ref="subtypeRSDao"></property>
     </bean>
-    <bean id="typeRSResource" class="org.kub.web.mapmarker.resources.TypeRSResource">   
+    <bean id="typeRSResource" class="org.kub.web.common.mapmarker.resources.TypeRSResource">   
         <property name="typeRSDao" ref="typeRSDao"></property>
     </bean>
-    <bean id="utilityRSResource" class="org.kub.web.mapmarker.resources.UtilityRSResource">   
+    <bean id="utilityRSResource" class="org.kub.web.common.mapmarker.resources.UtilityRSResource">   
         <property name="utilityRSDao" ref="utilityRSDao"></property>
     </bean>
 
-    <bean id="categoryRSDao" class="org.kub.web.mapmarker.dao.impl.CategoryRSDaoImpl">   
+    <bean id="categoryRSDao" class="org.kub.web.common.mapmarker.dao.impl.CategoryRSDaoImpl">   
     </bean>
-    <bean id="directionRSDao" class="org.kub.web.mapmarker.dao.impl.DirectionRSDaoImpl">   
+    <bean id="directionRSDao" class="org.kub.web.common.mapmarker.dao.impl.DirectionRSDaoImpl">   
     </bean>
-    <bean id="markerRSDao" class="org.kub.web.mapmarker.dao.impl.MarkerRSDaoImpl">   
+    <bean id="markerRSDao" class="org.kub.web.common.mapmarker.dao.impl.MarkerRSDaoImpl">   
     </bean>
-    <bean id="severityRSDao" class="org.kub.web.mapmarker.dao.impl.SeverityRSDaoImpl">   
+    <bean id="severityRSDao" class="org.kub.web.common.mapmarker.dao.impl.SeverityRSDaoImpl">   
     </bean>
-    <bean id="subtypeRSDao" class="org.kub.web.mapmarker.dao.impl.SubtypeRSDaoImpl">   
+    <bean id="subtypeRSDao" class="org.kub.web.common.mapmarker.dao.impl.SubtypeRSDaoImpl">   
     </bean>
-    <bean id="typeRSDao" class="org.kub.web.mapmarker.dao.impl.TypeRSDaoImpl">   
+    <bean id="typeRSDao" class="org.kub.web.common.mapmarker.dao.impl.TypeRSDaoImpl">   
     </bean>
-    <bean id="utilityRSDao" class="org.kub.web.mapmarker.dao.impl.UtilityRSDaoImpl">   
+    <bean id="utilityRSDao" class="org.kub.web.common.mapmarker.dao.impl.UtilityRSDaoImpl">   
     </bean>
 
     <!-- Default View Resolver -->

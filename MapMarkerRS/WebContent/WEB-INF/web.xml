@@ -10,7 +10,7 @@
 		<servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>org.kub.web.mapmarker.MapMarkerRSApplication</param-value>
+			<param-value>org.kub.web.common.mapmarker.MapMarkerRSApplication</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -27,7 +27,7 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<listener>
-		<listener-class>org.kub.web.mapmarker.MarkerRSEmf</listener-class>
+		<listener-class>org.kub.web.common.mapmarker.MarkerRSEmf</listener-class>
 	</listener>
 
 	<context-param>
