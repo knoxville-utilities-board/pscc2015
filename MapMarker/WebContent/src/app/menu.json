@@ -1,0 +1,16 @@
+{
+    "menu": [{
+        "label": "Home",
+        "route": "/home",
+        "role": "KUBUsers"
+    }, {
+        "label": "Map Markers",
+        "route": "/marker",
+        "role": "KUBUsers"
+    }],
+    "footer": [{
+        "label": "FeedBack",
+        "route": "/feedback",
+        "role": "KUBUsers"
+    }]
+}

@@ -1,0 +1,29 @@
+.detailItem {
+	margin-bottom: 10px;
+}
+
+.listDetailBackButton {
+	margin-bottom: 10px;
+}
+
+.listDetailScroll {
+	overflow-y: overlay;
+	-webkit-overflow-scrolling: touch;
+}
+
+.listDetailScroll::-webkit-scrollbar {
+	display: none;
+}
+
+@media(max-width: 768px) {
+	.listDetailScroll {
+		padding-right: 0;
+	}
+	.listDetail .row {
+		margin-right: 0;
+	}
+}
+
+.listDetailFixed {
+	overflow-y: hidden;
+}

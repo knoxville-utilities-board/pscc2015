@@ -1,0 +1,35 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<a class="pull-left btn btn-link fa fa-bars" data-toggle="modal" data-target=".sideNavMenu"
+		data-dojo-attach-point="menuButtonNode" title="Menu"></a>
+	<a class="pull-left btn btn-link fa fa-arrow-left hidden" data-dojo-attach-point="backButtonNode"
+		title="Back"></a>
+
+	<div class="dropdown pull-right">
+		<p class="navbar-text environment hidden" data-dojo-attach-point="environmentNode"></p>
+		<a class="dropdown-toggle btn btn-link fa fa-ellipsis-v" data-toggle="dropdown"
+			data-dojo-attach-point="contextButtonNode" title="Context Menu"></a>
+		<ul class="dropdown-menu" data-dojo-attach-point="contextMenuNode">
+			<li class="divider hidden" data-dojo-attach-point="contextDividerNode"></li>
+			<li>
+				<a href="javascript:void(0)" data-dojo-attach-point="logoutNode">Logout</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="pull-right appbarContainerNode" data-dojo-attach-point="containerNode"></div>
+
+	<div class="pull-right fa fa-search cursorPointer searchHiddenButton hidden"
+		data-dojo-attach-point="searchCollapsedButton" title="Search"></div>
+
+	<div class="appbarSearchBox hidden" data-dojo-attach-point="searchNode"></div>
+
+	<div class="navbar-header">
+		<div class="navbar-text header-title ellipsis" data-dojo-attach-point="titleNode"></div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="appbarLoadingDiv hidden" data-dojo-attach-point="loadingNode">
+		<span class="fa fa-spinner fa-spin"></span>
+	</div>
+</div>

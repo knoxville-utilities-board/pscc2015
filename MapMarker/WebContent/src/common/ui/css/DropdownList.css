@@ -1,0 +1,9 @@
+.scrollableDropdown {
+	max-height: 250px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.scrollableDropdown::-webkit-scrollbar {
+	display: none;
+}

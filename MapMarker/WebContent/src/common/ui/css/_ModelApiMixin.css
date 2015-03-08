@@ -1,0 +1,35 @@
+.modelEmptyShow {
+	display: none;
+}
+
+.modelLoadingShow {
+	display: none;
+}
+
+.modelErrorShow {
+	display: none;
+}
+
+.modelCompleteShow {
+	display: none;
+}
+
+.modelEmpty .modelEmptyShow {
+	display: block;
+}
+
+.modelLoading .modelLoadingShow {
+	display: block;
+}
+
+.modelError .modelErrorShow {
+	display: block;
+}
+
+.modelComplete .modelCompleteShow {
+	display: block;
+}
+
+.modelLoadingSpinner{
+	font-size: 50px;
+}

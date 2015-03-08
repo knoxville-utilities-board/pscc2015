@@ -1,0 +1,10 @@
+{
+	"name": "app",
+	"version": "0.1.0",
+	"main": "main",
+	"description": "Marker Project",
+	"dependencies": {
+		"dojo": "current"
+	},
+	"dojoBuild": "app.profile.js"
+}

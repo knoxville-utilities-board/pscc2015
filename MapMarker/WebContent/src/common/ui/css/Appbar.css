@@ -1,0 +1,79 @@
+.navbar {
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+}
+
+.navbar-brand {
+	margin: 0;
+}
+
+.appbarLoadingDiv {
+	position: fixed;
+	top: 36px;
+	left: 50%;
+	font-size: 24px;
+	background-color: rgba(6, 60, 111, .98);
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	margin-left: -20px;
+	z-index: 900;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.appbarLoadingDiv span {
+	color: white;
+	z-index: 1031;
+	margin-left: 9px;
+	position: relative;
+	top: -3px;
+}
+
+.searchHiddenButton {
+	font-size: 1.5em;
+	color: #fff;
+	margin-top: 18px;
+}
+
+.newFeaturesButton {
+	font-size: 2em;
+	margin-top: 16px;
+	margin-left: 16px !important;
+}
+
+.appbarSearchBox {
+	margin-left: 58px;
+	margin-right: 60px;
+}
+
+.appbarSearchBox .searchBoxDiv {
+	margin-top: 10px;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.appbarSearchBox .fa {
+	color: white;
+}
+
+.environment.environment {
+	font-size: 1.5em;
+	font-weight: 600;
+	color: #EF5350;
+	display: inline;
+	position: relative;
+	right: -15px;
+	top: 9px;
+	text-transform: uppercase;
+}
+
+.appbarContainerNode {
+	padding-left: 15px;
+}
+
+.appbarContainerNode > div {
+	margin: 13px 8px;
+	display: inline-block;
+}

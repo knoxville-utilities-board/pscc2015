@@ -1,0 +1,11 @@
+.dropdownLabelHasCheckbox{
+	margin-right: 20px;
+}
+
+.dropdownCheckbox {
+	margin: 0 !important;
+}
+
+.dropdownCheckbox input {
+	margin-left: -10px !important;
+}

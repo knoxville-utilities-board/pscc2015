@@ -1,0 +1,12 @@
+<div class="${baseClass}">
+  <div class="${baseClass}Header">
+    <div data-dojo-attach-point="dap_currentScaleLabel" class="${baseClass}Item"></div>
+    <div id="${id}_scaleInput" data-dojo-attach-point="dap_scaleInput" data-dojo-type="dijit/form/TextBox"></div>
+    <div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:'${id}_scaleInput'">${labels.customScaleInputTooltip}</div>
+  </div>
+  <hr/>
+  <ol data-dojo-attach-point="dap_recommendedScales" class="${baseClass}List">
+    <li data-dojo-attach-point="dap_currentScaleItem" class="${baseClass}Item ${baseClass}Selectable"></li>
+    <!--additional list items added dynamically-->
+  </ol>
+</div>

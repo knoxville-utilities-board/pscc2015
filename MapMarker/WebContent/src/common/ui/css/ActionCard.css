@@ -1,0 +1,79 @@
+.actionCardHeading {
+	min-height: 80px;
+}
+
+.actionCardPanel {
+	position: relative;
+	z-index: 5;
+}
+
+.actionCardIcon {
+	position: absolute;
+	font-size: 5em;
+	margin-top: -27px;
+	color: rgba(255, 255, 255, .3);
+	z-index: 0;
+}
+
+.actionCardIcon .fa-stack {
+	margin-left: -27px;
+}
+
+.actionCardIcon .fa-stack-2x {
+	font-size: 1em;
+	margin-top: 27px;
+}
+
+.actionCardIcon .fa-stack-1x {
+	font-size: .5em;
+	padding-top: 4px;
+}
+
+.actionCardLabel {
+	font-size: 19px;
+	width: 100%;
+	color: #fff;
+}
+
+.actionCardBadge {
+	background-color: rgba(120, 120, 120, .5) !important;
+	color: white !important;
+	font-size: 13px;
+}
+
+@media ( max-width : 767px) {
+	.actionCard {
+		padding: 2.5px !important;
+	}
+	.actionCardLabel {
+		display: inline;
+		font-size: 1.1em;
+	}
+	.actionCardBadge {
+		position: absolute;
+		bottom: -15px; right : 0px;
+		z-index: 0;
+		font-size: 12px;
+		right: 0px;
+	}
+	.actionCardIcon {
+		font-size: 2em;
+		margin-top: -6px;
+	}
+	.actionCardIcon .fa-stack {
+		font-size: .5em;
+		margin-left: 0px;
+	}
+	.actionCardIcon .fa-stack-2x {
+		font-size: 2em;
+		margin-top: 0;
+	}
+	.actionCardIcon .fa-stack-1x {
+		font-size: 1em;
+		padding-top: 4px;
+	}
+	.actionCardHeading {
+		min-height: 50px;
+		padding: 7px 6px;
+	}
+}

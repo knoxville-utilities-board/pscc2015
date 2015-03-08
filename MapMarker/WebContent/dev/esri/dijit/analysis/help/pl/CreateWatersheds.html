@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="largesize">
+        <h2>Utwórz zlewnie</h2><p/>
+        <h2><img src="../images/GUID-D0CDF046-A296-4A66-B0D8-F1F4A8EEA0FC-web.png" alt="Utw&oacute;rz zlewnie"></h2>
+        <hr/>
+    <p>To narzędzie pozwala ustalić zlewnie lub obszary spływu w g&oacute;rze rzeki dla każdego punktu w Twojej warstwie analizy. 
+    </p>
+    <p>Na przykład, zakładając, że masz obiekty punktowe przedstawiające lokalizację zanieczyszczenia wododziału i chcesz znaleźć prawdopodobne źr&oacute;dło zanieczyszczenia. Ponieważ źr&oacute;dło zanieczyszczenia musi znajdować się gdzieś w zlewni powyżej analizowanego punktu, możemy użyć tego narzędzia do wyznaczenia zlewni zawierających źr&oacute;dła zanieczyszczenia.
+    </p>
+    <p>Ważna jest lokalizacja Twoich punkt&oacute;w analizy.  Jeżeli nie są one zlokalizowane dokładnie na linii spływu, wynikowe zlewnie mogą być bardzo małe i nie będą przydatne do Twojej analizy.  Opcja  <b>Wyszukaj odległość do najbliższego spływu</b> może być używana do dostosowania lokalizacji Twoich punkt&oacute;w analizy, tak aby wypadały dokładnie na linii spływu w celu znalezienia zlewni, kt&oacute;ra wpływa do punktu zlokalizowanego na linii spływu.  Dostosowane lokalizacje użyte do znalezienia zlewni są zapisane w warstwie wynikowej &mdash; Twoje punkty analizy wejściowej nie zostają zmodyfikowane.
+    </p>
+    <p>Wynikiem jest warstwa grupowa zawierająca dwie warstwy:  zlewni oraz dostosowanych punkt&oacute;w użytych do wyznaczenia zlewni.     
+    </p>
+    <p>Wynikowe zlewnie będą posiadały wszystkie atrybuty Twoich punkt&oacute;w wejściowych, jak r&oacute;wnież atrybuty dodatkowe:     
+        <ul>
+            <li> <i>PourPtID</i>&ndash; zawiera wartość ID od punktu wejściowego,
+            </li>
+            <li> <i>Area Square Kilometers</i>&ndash; zawiera pole powierzchni w kilometrach kwadratowych zlewni w g&oacute;rze rzeki,
+            </li>
+            <li> <i>Description</i> oraz <i>DataResolution</i> &ndash; zawiera informacje dotyczące danych hydrologicznych użytych do obliczenia szlaku.
+            </li>
+        </ul>
+        
+    </p>
+    <p>Jeśli zaznaczono opcję  <b>Użyj bieżącego zasięgu mapy</b>, to do wyznaczenia zlewni użyte zostaną tylko obiekty widoczne w bieżącym zasięgu mapy.  Jeśli opcja ta nie jest zaznaczona, przeanalizowane zostaną wszystkie obiekty w&nbsp;warstwie analizy, nawet jeśli znajdują się one poza bieżącym zasięgiem mapy.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="SearchDistance">
+        <div><h2>Wyszukaj odległość do najbliższego spływu</h2></div>
+        <hr/>
+        <div>
+            <p>Jeżeli Twoje punkty analizy są zlokalizowane z dala od linii spływu, wynikowe zlewnie prawdopodobnie będą bardzo małe i niezbyt użyteczne w określeniu źr&oacute;dła zanieczyszczenia w g&oacute;rze rzeki.  W większości przypadk&oacute;w chodzi o to by punkty analizy były dociągnięte do najbliższej linii spływu, aby wyszukane zostały zlewnie, kt&oacute;re wpływają do punktu zlokalizowanego na linii spływu.  Aby znaleźć najbliższą linię spływu, określ odległość wyszukiwania.  Jeżeli nie określisz odległości wyszukiwania, narzędzie użyje do obliczeń tradycyjnej odległości wyszukiwania.  
+            </p>
+            <p>Aby użyć dokładnej lokalizacji Twojego punktu wejściowego, podaj odległość wyszukiwania r&oacute;wną zeru.  
+            </p>
+            <p>Dla cel&oacute;w analizy linie spływu zostały obliczone wcześniej przez Esri przy użyciu standardowych modeli hydrologicznych.  Jeżeli w odległości wyszukiwania nie ma linii spływu, zostanie użyta lokalizacja zawierająca najwyższą ilość przepływu w ramach tej odległości wyszukiwania.
+            </p> 
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Nazwa warstwy wynikowej</h2></div>
+        <hr/>
+        <div>
+            <p>Jest to nazwa warstwy grupowej, kt&oacute;ra zostanie utworzona w <b>Moje zasoby</b> i zostanie dodana do mapy.  Warstwa grupowa będzie zawierać warstwę dla zlewni i punkt&oacute;w dostosowanych.  Jeśli ta warstwa już istnieje, wyświetli się komunikat z zapytaniem, czy ma zostać zastąpiona.
+            </p>
+            <p>Używając listy rozwijanej  <b>Zapisz wynik w</b>, można określić nazwę folderu w zakładce <b>Moje zasoby</b>, gdzie zostanie zapisany wynik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

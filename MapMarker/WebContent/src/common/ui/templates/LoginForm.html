@@ -1,0 +1,19 @@
+<div>
+	<div data-dojo-attach-point="growler" data-dojo-type="common/ui/Growler"></div>
+	<form class="form-signin" role="form">
+		<div data-dojo-attach-point="usernameControl">
+			<input type="text" placeholder="Username" autofocus autocapitalize="none"
+				data-dojo-type="common/ui/TextBox" data-dojo-attach-point="j_username">
+			<span class="text-danger" data-dojo-attach-point="usernameErrorSpan"></span>
+		</div>
+
+		<div data-dojo-attach-point="passwordControl">
+			<input type="password" placeholder="Password" data-dojo-type="common/ui/TextBox"
+				data-dojo-attach-point="j_password">
+			<span class="text-danger" data-dojo-attach-point="passwordErrorSpan"></span>
+		</div>
+
+		<button class="btn btn-primary btn-block" data-dojo-type="common/ui/Button" type="submit"
+			data-dojo-attach-point="loginButton" label="Login"></button>
+	</form>
+</div>

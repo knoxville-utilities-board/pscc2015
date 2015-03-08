@@ -1,0 +1,59 @@
+.dateTimePickerIcon {
+	display: inline-block !important;
+	font-size: 22px;
+	position: relative;
+	top: 5px;
+}
+
+.dateTimePickerNode .disabled{
+	cursor: not-allowed;
+}
+
+.icon-chevron-up {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chevron-down {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 12px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chevron-up:before {
+	content: "\f077";
+}
+
+.icon-chevron-down:before {
+	content: "\f078";
+}
+
+.timepicker td a.btn {
+	padding: 2px 16px;
+}
+
+.dateTimePickerButtonDiv {
+	margin: 5px 10px;
+}
+
+.bootstrap-datetimepicker-widget .btn-link {
+	color: rgb(102, 102, 102);
+	background-color: #eee;
+	width: 100%;
+	font-weight: 600;
+}
+
+.bootstrap-datetimepicker-widget ul {
+	padding: 0 !important;
+}
+
+.datePickerInput {
+	height: 29px;
+}

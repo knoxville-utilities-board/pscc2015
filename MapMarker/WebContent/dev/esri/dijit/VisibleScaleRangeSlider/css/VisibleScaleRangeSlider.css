@@ -1,0 +1,112 @@
+.esriVisibleScaleRangeSlider {
+    font-family: "Avenir LT W01 65 Medium", Arial, Helvetica, sans-serif;
+    position: relative;
+}
+.esriVisibleScaleRangeSlider .esriVisibleScaleRangeSliderScaleIndicatorContainer.esriVisibleScaleRangeSliderSuggestedScaleIndicatorContainer {
+    position: relative;
+    bottom: 4px;
+    margin-bottom: 6px;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+.esriVisibleScaleRangeSlider .esriVisibleScaleRangeSliderScaleIndicatorContainer {
+    position: absolute;
+    height: 4px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.esriVisibleScaleRangeSlider .esriVisibleScaleRangeSliderCurrentScaleIndicator {
+    position: absolute;
+    top: 1px;
+    height: 4px;
+    width: 5px;
+    background-color: #000;
+    z-index: 2;
+}
+.esriVisibleScaleRangeSliderScaleIndicator {
+    transition-property: left, width;
+    transition-duration: 0.2s;
+}
+.esriVisibleScaleRangeSlider .esriVisibleScaleRangeSliderSuggestedScaleIndicator {
+    position: absolute;
+    height: 4px;
+    background-color: #5C9668;
+    z-index: 50;
+}
+.esriVisibleScaleRangeSlider .esriVisibleScaleRangeSliderSuggestedScaleIndicator.esriVisibleScaleRangeSliderSnappable {
+    cursor: pointer;
+}
+.esriScalePreviewPopup.dijitPopup {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    padding-bottom: 20px;
+}
+.esriScalePreviewPopup.dijitPopup .esriScalePreview {
+    background-color: #fff;
+    padding: 6px;
+    box-shadow: #4d4d4d 0 0 6px;
+}
+.esriScalePreviewPopup.dijitPopup .esriScalePreview .esriScalePreviewHeader {
+    color: #5cace1;
+    margin: 0 0 4px 0;
+    max-width: 128px;
+    word-wrap: break-word;
+}
+.esriScalePreviewPopup.dijitPopup .esriScalePreview .esriScalePreviewThumbnail {
+    display: block;
+    box-sizing: border-box;
+    padding: 64px;
+}
+.esriVisibleScaleRangeSlider .esriScaleMenuButton {
+    margin-top: 6px;
+    width: 50%;
+}
+.esriVisibleScaleRangeSlider .esriMinScaleMenuButton {
+    text-align: left;
+}
+.esriVisibleScaleRangeSlider .esriMaxScaleMenuButton {
+    text-align: right;
+}
+.esriVisibleScaleRangeSlider .esriScaleMenuButton .dijitButtonNode {
+    border: none;
+    background: transparent none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .esriScaleMenu {
+    padding: 10px;
+    background-color: #f6f6f8;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .esriScaleMenu .esriScaleMenuList {
+    padding: 0;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .esriScaleMenuItem {
+    padding: 4px 0;
+    margin: 0;
+    list-style-type: none;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .esriScaleMenuItem.esriScaleMenuSelectable:hover {
+    cursor: pointer;
+    font-weight: bolder;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .esriScaleMenu .esriScaleMenuHeader .esriScaleMenuItem {
+    display: inline-block;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog {
+    padding: 0;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .dijitTooltipContainer {
+    padding: 0;
+    box-shadow: none;
+    background-color: #f6f6f8;
+    border-color: #999;
+}
+.esriScaleMenuDialogPopup .esriScaleMenuDialog .dijitTooltipContainer + .dijitTooltipConnector {
+    background-image: none;
+}
+.esriVisibleScaleRangeSlider .esriScaleMenuButton .dijitDownArrowButton .dijitArrowButtonInner {
+    background: url("../../../css/calcite/images/ago_sprite.png") -66px -50px;
+}
