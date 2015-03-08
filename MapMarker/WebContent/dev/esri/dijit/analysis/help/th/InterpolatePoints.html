@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="largesize">
+        <h2>เพิ่มจุดข้อมูล</h2><p/>
+        <h2><img src="../images/GUID-6E142A07-EA32-4E66-8423-ECDB8CD6B927-web.png" alt="เพิ่มจุดข้อมูล"></h2>
+        <hr/>
+    <p>   The Interpolate Points tool allows you to predict values at new locations based on measurements from a collection of points. โดยเครื่องมือนี้จะนำเอาข้อมูลจุดที่มีค่าตัวแปรแต่ละค่า และแก้ไขพื้นที่ให้เป็นไปตามกลุ่มที่มีการคาดการณ์ค่าตัวแปรไว้ For example
+        <ul>
+            <li>An air quality management district has sensors that measure pollution levels.    Interpolate Points can be used to predict pollution levels at  locations that don't have sensors, such as locations with at-risk populations&mdash;schools or hospitals, for example.
+            </li>
+            <li>Predict heavy metal concentrations in crops based on samples taken from individual plants.
+            </li>
+            <li>Predict soil nutrient levels (nitrogen, phosphorus, potassium, and so on) and other indicators (such as electrical conductivity) in order to study their relationships to crop yield and prescribe precise amounts of fertilizer for each location in the field.
+            </li>
+            <li>ในทางอุตุนิยมวิทยา ยังรวมไปถึงการคาดการณ์สภาพอากาศ อุณหภูมิ ปริมาณน้ำฝน และตัวแปรอื่นๆ ที่เกี่ยวข้อง (เช่น การเกิดฝนกรด) 
+            </li>
+        </ul>
+        
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="field">
+        <div><h2>เลือกฟิลด์เพื่อประมวลค่า</h2></div>
+        <hr/>
+        <div>
+            <p>เลือกฟิลด์ที่ประกอบไปด้วยค่าตัวแปรที่คุณต้องการที่จะนำไปประมวลค่า  
+            </p>
+        </div>
+    </div>
+    <div id="interpolateOption">
+        <div><h2>เพิ่มประสิทธิภาพสำหรับ</h2></div>
+        <hr/>
+        <div>
+            <p>เลือกตั้งค่าระดับความเร็วและความถูกต้อง ยิ่งต้องการความถูกต้องมากขึ้น จะยิ่งใช้เวลาในการคำนวณมากขึ้น
+            </p> 
+        </div>
+    </div>
+    <div id="outputPredictionError">
+        <div><h2>การประเมินผลลัพธ์ผิดพลาด</h2></div>
+        <hr/>
+        <div>
+            <p> If checked, a layer of standard errors for the interpolation predictions will be created.  และชื่อของชั้นข้อมูลผลลัพธ์จะเป็นชื่อชั้นข้อมูลผลลัพธ์ที่ต่อท้ายด้วยคำว่า ผิดพลาด
+            </p>
+            <p>ข้อผิดพลาดมาตรฐานนั้นก็มีประโยชน์ เนื่องจากเป็นการแสดงข้อมูลเกี่ยวกับความน่าเชื่อถือของค่าที่คาดการณ์ไว้  กฏพื้นฐานนี้ คือ ค่าที่แท้จริงจะตกอยู่ในช่วงของค่าผิดพลาดมาตรฐานสองค่า โดยคาดการณ์ได้ 95 เปอร์เซ็นต์ของเวลาทั้งหมด  ตัวอย่างเช่น การคาดคะเนตำแหน่งใหม่ ต้องใช้ค่าการคาดการณ์ถึง 50 พร้อมกับค่าผิดพลาดมาตรฐานระดับ 5 นั่นความหมายว่าเครื่องมือนี้ได้คาดการณ์ค่าแท้จริงที่ดีที่สุดของตำแหน่งนี้ที่ 50 แต่อาจจะต่ำกว่า 40 ก็เป็นไปได้ หรืออาจจะสูงถึง 60 ก็ได้ ในการคำนวณช่วงค่าอย่างสมเหตุสมผล คูณด้วยค่าผิดพลาดมาตรฐานด้วย 2 แล้วเพิ่มค่าตัวแปรนี้ไปยังค่าที่คาดการณ์เพื่อหาค่าสูงสุดที่อยู่ในช่วงนี้ และหักออกจากค่าที่คาดการณ์ไว้ เพื่อหาค่าต่ำสุดที่อยู่ในช่วงนี้
+            </p>
+        </div>
+    </div>
+    <div id="classificationType">
+        <div><h2>จำแนกประเภทโดย</h2></div>
+        <hr/>
+        <div>
+            <p>Choose how predicted values will be classified into areas.
+                <ul>
+                    <li>Geometric interval&mdash;Areas are based on class intervals that have a geometric series. This method ensures that each class range has approximately the same number of values within each class and that the change between intervals is consistent.
+                    </li>
+                    <li>Equal interval&mdash;Areas are created such that the range of predicted values  is equal for each area.
+                    </li>
+                    <li>Equal area&mdash;Areas are created such that the number of data values in each area is equal.  For example, if the data has more large values than small values, more areas will be created for large values.
+                    </li>
+                    <li>Manual&mdash;This option allows you to define your own range of values for areas.  These values will be entered in the  <b>Class break values</b> parameter below.
+                    </li>
+                </ul>
+                
+            </p>
+        </div>
+    </div>
+    <div id="numClasses">
+        <div><h2>จำนวนของประเภท</h2></div>
+        <hr/>
+        <div>
+            <p>กำหนดจำนวนช่วงชั้น (ช่วงค่าที่คาดการณ์) ในชั้นข้อมูลผลลัพธ์  แต่ละช่วงชั้นจะกำหนดขอบเขตของพื้นที่  โดยค่าของช่วงชั้นเหล่านี้จะถูกกำหนดขึ้นจาก  <b>แบ่งกลุ่มโดยใช้</b> ตามค่าพารามิเตอร์ด้านบน
+            </p>
+        </div>
+    </div>
+    <div id="classBreaks">
+        <div><h2>จำแนกค่าเบรค</h2></div>
+        <hr/>
+        <div>
+            <p>ใส่จำนวนช่วงชั้นที่ต้องการ และใช้การเว้นวรรคเป็นตัวแบ่ง  ตัวอย่างเช่น ถ้าคุณต้องการแบ่งช่วงชั้นที่ค่า 1.5, 3, และ 7 ให้ใส่ตัวเลข  <code>1.5 3 7</code>  ค่าเหล่านี้จะใช้ในการกำหนดค่าสูงสุดของแต่ละช่วงชั้น ฉะนั้นจำนวนของช่วงชั้นจะต้องเท่ากับจำนวนค่าที่ใส่ลงไปนี้  อย่างไรก็ตาม พื้นที่จะไม่สามารถสร้างขึ้นในตำแหน่งใดๆ ได้ หากมีการใส่ค่าที่มากกว่าค่าการแบ่งช่วงชั้น  โดยคุณต้องใส่อย่างน้อยสองค่า แต่ไม่เกิน 32 ค่า
+            </p>
+        </div>
+    </div>
+    <div id="boundingPolygonLayer">
+        <div><h2>ตัดผลลัพธ์ไปยัง</h2></div>
+        <hr/>
+        <div>
+            <p>ไม่ว่าจะเป็นการวาด หรือการจัดเตรียมชั้นข้อมูลที่ระบุพื้นที่ที่คุณต้องการให้ผลลัพธ์แสดงออกมา ตัวอย่างเช่น ถ้าคุณกำลังเพิ่มข้อมูลระดับมลพิษของทะเลสาบ คุณสามารถใช้ขอบเขตของทะเลสาบเป็นค่าพารามิเตอร์ได้ โดยผลลัพธ์ที่ได้จะแสดงเฉพาะบริเวณที่อยู่ในขอบเขตของทะเลสาบเท่านั้น
+            </p>
+        </div>
+    </div>
+    <div id="predictAtPointLayer">
+        <div><h2>ประเมินที่ตำแหน่งนี้</h2></div>
+        <hr/>
+        <div>
+            <p>ไม่ว่าจะเป็นการวาด หรือการจัดเตรียมชั้นข้อมูลที่ระบุตำแหน่งในการคำนวณหาค่าที่คาดการณ์ไว้ โดยจะอนุญาตให้คุณสร้างการคาดการณ์ไว้ที่ตำแหน่งที่สนใจที่เลือกไว้ ตัวอย่างเช่น ถ้าชั้นข้อมูลที่ทำการวิเคราะห์แทนด้วยระดับมลพิษ คุณสามารถใช้ค่าพารามิเตอร์นี้คาดการณ์ระดับมลพิษในบริเวณนี้ได้ พร้อมด้วยความเสี่ยงที่อาจเกิดขึ้นกับประชากร เช่น โรงเรียน หรือโรงพยาบาล  รวมทั้ง คุณยังสามารถใช้ข้อมูลเหล่านี้ในการให้คำแนะนำแก่เจ้าหน้าที่สาธารณสุขที่อยู่ในบริเวณเหล่านั้น
+            </p>
+            <p>ผลลัพธ์ที่ได้จากเครื่องมือนี้ เป็นชั้นข้อมูลจุดที่มีการคาดการณ์ตำแหน่งที่ระบุไว้  ชื่อของชั้นข้อมูลผลลัพธ์ได้มาจากผลลัพธ์ที่ได้ พร้อมด้วยข้อมูลจุดที่เพิ่มเข้าไป  
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div><h2>ชื่อชั้นข้อมูลผลลัพธ์</h2></div>
+        <hr/>
+        <div>
+            <p>ชื่อชั้นข้อมูลที่ได้จะถูกสร้างขึ้นอยู่ใน  <b>เนื้อหาของฉัน</b> และถูกเพิ่มเข้าไปบนแผนที่
+            </p>
+            <p>เมื่อใช้กล่องคำสั่งแบบดรอปดาวน์  <b>บันทึกผลลัพธ์ลงใน</b> คุณสามารถกำหนดชื่อของโฟลเดอร์ใน <b>เนื้อหาของฉัน</b> ซึ่งเป็นที่จัดเก็บผลลัพธ์
+            </p>
+        </div>
+    </div>
+</div>
+</html>

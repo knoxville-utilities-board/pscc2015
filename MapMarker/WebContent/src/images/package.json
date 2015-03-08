@@ -1,0 +1,10 @@
+{
+	"name": "images",
+	"version": "0.1.0",
+	"main": "main",
+	"description": "Employee Web App image files",
+	"dependencies": {
+		"dojo": "current"
+	},
+	"dojoBuild": "images.profile.js"
+}

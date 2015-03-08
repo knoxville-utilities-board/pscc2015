@@ -1,0 +1,6 @@
+{
+	"name": "jquery",
+	"version": "2.1.1",	
+	"description": "http://jquery.com/",
+	"dojoBuild": "jquery.profile.js"
+}

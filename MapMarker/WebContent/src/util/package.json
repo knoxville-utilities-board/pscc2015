@@ -1,0 +1,10 @@
+{
+	"name": "util",
+	"version": "0.1.0",
+	"main": "main",
+	"description": "Employee Mobile Web util files",
+	"dependencies": {
+		"dojo": "current"
+	},
+	"dojoBuild": "util.profile.js"
+}

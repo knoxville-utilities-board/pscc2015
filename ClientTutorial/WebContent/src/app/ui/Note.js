@@ -28,52 +28,52 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             };
 
             this.store = lang.getObject("note.stores.notes", false, app);
-            console.log("the store", this.store);
-            // var rolesStore = lang.getObject("user.stores.roles", false, app);
-            /// this.role.setStore(rolesStore);
 
-            //this.username.validate = emptyValidate;
-            // this.role.validate = emptyValidate;
-
-            //    this.saveButton.on("click", lang.hitch(this, this.save));
-            //   this.deleteButton.on("click", lang.hitch(this, this.remove));
+            this.saveButton.on("click", lang.hitch(this, this.save));
+            this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
 
         onModelComplete: function(model) {
             console.log("model", model);
             app.appbar.set("title", "Notes > " + model.noteId);
-            
+
             this.form.clearValidation();
 
             this.createdBy.set("value", this.model.createdBy || "");
             this.note.set("value", this.model.note || "");
 
-            if (!model.noteId) {
-                //model defaults here
-                model.createdDate = dateHandling.javaISOString(new Date());
+            if (this.model.noteId) {
+                this.deleteButton.show();
+            } else {
+                this.deleteButton.hide();
             }
         },
 
         save: function() {
             if (this.form.validate()) {
-                this.model.userName = this.username.get("value");
-                this.model.loweredUserName = this.username.get("value").toLowerCase();
-                this.model.roles[0] = this.role.get("value");
+                this.model.note = this.note.get("value");
+                this.model.createdBy = this.createdBy.get("value");
 
-                if (this.model.userId) {
-                    this.store.put(this.model, {
-                        id: this.model.userId
-                    });
+                if (this.model.noteId) {
+                    this.store.put(this.model);
                 } else {
-                    console.log(this.store.put(this.model));
-                    router.go("/note/create/success");
+                    this.store.add(this.model).then(function() {
+                        router.go("/note/create/success");
+                    });
                 }
             }
         },
 
         remove: function() {
-            this.store.remove(this.item.userId);
-            router.go("/note");
+            if (!this._confirmDelete) {
+                this.deleteButton.set("label", "Confirm Delete");
+                this._confirmDelete = true;
+            } else {
+                this._confirmDelete = false;
+                this.store.remove(this.model.noteId).then(function() {
+                    router.go("/note");
+                });
+            }
         }
     });
 });

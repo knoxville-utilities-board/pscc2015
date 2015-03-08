@@ -1,0 +1,8 @@
+.form-signin {
+	max-width: 330px;
+	margin: 0 auto;
+}
+
+.form-signin button[type="submit"] {
+	margin-top: 15px;
+}
