@@ -4,11 +4,8 @@ define(["dojo/_base/declare",
 function(declare, KubJsonStore) {
 
     return declare([KubJsonStore], {
-    	
         idProperty: "noteId",
-        
-        getFromServer: true,
-        
+                
         baseURL: "/JPATutorial/dojorest/note"
     });
 });
