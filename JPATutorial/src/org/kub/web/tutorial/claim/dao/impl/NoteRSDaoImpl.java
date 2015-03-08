@@ -1,5 +1,6 @@
 package org.kub.web.tutorial.claim.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -102,6 +103,8 @@ public class NoteRSDaoImpl implements NoteRSDao {
         try {
             em = ClaimRSEmf.createEntityManager();
             entityTransaction = em.getTransaction();
+            
+			note.setEditDate(new Date());
 
             entityTransaction.begin();
             note = em.merge(note);
@@ -131,6 +134,9 @@ public class NoteRSDaoImpl implements NoteRSDao {
         try {
             em = ClaimRSEmf.createEntityManager();
             entityTransaction = em.getTransaction();
+            
+            note.setCreateDate(new Date());
+			note.setEditDate(new Date());
 
             entityTransaction.begin();
             em.persist(note);

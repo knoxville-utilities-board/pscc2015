@@ -2,27 +2,25 @@ package org.kub.web.tutorial.claim.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Timestamp;
-
+import java.util.Date;
 
 /**
  * The persistent class for the tblNotes database table.
- * 
  */
 @Entity
-@Table(name="tblNotes")
+@Table(name = "tblNotes")
 @NamedQueries({
-    @NamedQuery(name="Note.getList", query="SELECT n FROM Note n WHERE n.incidentId = :incidentId ORDER BY n.createDate ASC"),
-    @NamedQuery(name="Note.getListAll", query="SELECT n FROM Note n ORDER BY n.createDate ASC"),
-    @NamedQuery(name="Note.getCount", query="SELECT COUNT(n) FROM Note n WHERE n.incidentId = :incidentId"),
-    @NamedQuery(name="Note.getCountAll", query="SELECT COUNT(n) FROM Note n")
+		@NamedQuery(name = "Note.getList", query = "SELECT n FROM Note n WHERE n.incidentId = :incidentId ORDER BY n.createDate ASC"),
+		@NamedQuery(name = "Note.getListAll", query = "SELECT n FROM Note n ORDER BY n.createDate ASC"),
+		@NamedQuery(name = "Note.getCount", query = "SELECT COUNT(n) FROM Note n WHERE n.incidentId = :incidentId"),
+		@NamedQuery(name = "Note.getCountAll", query = "SELECT COUNT(n) FROM Note n") 
 })
 public class Note implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long noteId;
-	private Timestamp createDate;
+	private Date createDate;
 	private String createdBy;
-	private Timestamp editDate;
+	private Date editDate;
 	private String editedBy;
 	private long incidentId;
 	private String note;
@@ -30,10 +28,9 @@ public class Note implements Serializable {
 	public Note() {
 	}
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="NoteId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "NoteId")
 	public long getNoteId() {
 		return this.noteId;
 	}
@@ -42,18 +39,16 @@ public class Note implements Serializable {
 		this.noteId = noteId;
 	}
 
-
-	@Column(name="CreateDate")
-	public Timestamp getCreateDate() {
+	@Column(name = "CreateDate")
+	public Date getCreateDate() {
 		return this.createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-
-	@Column(name="CreatedBy")
+	@Column(name = "CreatedBy")
 	public String getCreatedBy() {
 		return this.createdBy;
 	}
@@ -62,18 +57,16 @@ public class Note implements Serializable {
 		this.createdBy = createdBy;
 	}
 
-
-	@Column(name="EditDate")
-	public Timestamp getEditDate() {
+	@Column(name = "EditDate")
+	public Date getEditDate() {
 		return this.editDate;
 	}
 
-	public void setEditDate(Timestamp editDate) {
+	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
 
-
-	@Column(name="EditedBy")
+	@Column(name = "EditedBy")
 	public String getEditedBy() {
 		return this.editedBy;
 	}
@@ -82,8 +75,7 @@ public class Note implements Serializable {
 		this.editedBy = editedBy;
 	}
 
-
-	@Column(name="IncidentId")
+	@Column(name = "IncidentId")
 	public long getIncidentId() {
 		return this.incidentId;
 	}
@@ -92,8 +84,7 @@ public class Note implements Serializable {
 		this.incidentId = incidentId;
 	}
 
-
-	@Column(name="Note")
+	@Column(name = "Note")
 	public String getNote() {
 		return this.note;
 	}
