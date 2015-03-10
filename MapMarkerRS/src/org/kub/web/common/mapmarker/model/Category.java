@@ -1,7 +1,7 @@
 package org.kub.web.common.mapmarker.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,10 +28,10 @@ public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String createdBy;
-	private Timestamp createdDate;
+	private Date createdDate;
 	private String description;
 	private String editedBy;
-	private Timestamp editedDate;
+	private Date editedDate;
 	private boolean isActive;
 	private String symbology;
 	private String title;
@@ -59,11 +59,11 @@ public class Category implements Serializable {
 	}
 
 
-	public Timestamp getCreatedDate() {
+	public Date getCreatedDate() {
 		return this.createdDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -86,11 +86,11 @@ public class Category implements Serializable {
 	}
 
 
-	public Timestamp getEditedDate() {
+	public Date getEditedDate() {
 		return this.editedDate;
 	}
 
-	public void setEditedDate(Timestamp editedDate) {
+	public void setEditedDate(Date editedDate) {
 		this.editedDate = editedDate;
 	}
 

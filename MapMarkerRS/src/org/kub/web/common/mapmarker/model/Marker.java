@@ -1,10 +1,15 @@
 package org.kub.web.common.mapmarker.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.*;
-
-import java.sql.Timestamp;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Marker
@@ -28,9 +33,9 @@ public class Marker implements Serializable {
 	private long subtypeId;
 	private long severityId;
 	private long directionId;
-	private Timestamp startDate;
-	private Timestamp updateDate;
-	private Timestamp endDate;
+	private Date startDate;
+	private Date updateDate;
+	private Date endDate;
 	private String description;
 	private String location;
 	private String street;
@@ -44,9 +49,9 @@ public class Marker implements Serializable {
 	private double endLongitude;
 	private boolean isActive;
 	private String createdBy;
-	private Timestamp createdDate;
+	private Date createdDate;
 	private String editedBy;
-	private Timestamp editedDate;
+	private Date editedDate;
 	private static final long serialVersionUID = 1L;
 
 	public Marker() {
@@ -103,25 +108,25 @@ public class Marker implements Serializable {
 	public void setDirectionId(long directionId) {
 		this.directionId = directionId;
 	}   
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return this.startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}   
-	public Timestamp getUpdateDate() {
+	public Date getUpdateDate() {
 		return this.updateDate;
 	}
 
-	public void setUpdateDate(Timestamp updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}   
-	public Timestamp getEndDate() {
+	public Date getEndDate() {
 		return this.endDate;
 	}
 
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}   
 	public String getDescription() {
@@ -215,11 +220,11 @@ public class Marker implements Serializable {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}   
-	public Timestamp getCreatedDate() {
+	public Date getCreatedDate() {
 		return this.createdDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}   
 	public String getEditedBy() {
@@ -229,11 +234,11 @@ public class Marker implements Serializable {
 	public void setEditedBy(String editedBy) {
 		this.editedBy = editedBy;
 	}   
-	public Timestamp getEditedDate() {
+	public Date getEditedDate() {
 		return this.editedDate;
 	}
 
-	public void setEditedDate(Timestamp editedDate) {
+	public void setEditedDate(Date editedDate) {
 		this.editedDate = editedDate;
 	}
 
