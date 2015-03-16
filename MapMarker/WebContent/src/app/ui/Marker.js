@@ -55,15 +55,15 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             this.fromCrossStreet.set("value", this.model.fromCrossStreet || "");
             this.latitude.set("value", this.model.latitude || "");
             this.location.set("value", this.model.location || "");
-            this.longitude.set("value", this.longitude || "");
-            this.severityId.set("value", this.severityId || "");
-            this.specifyEnd.set("value", this.specifyEnd || "");
-            this.startDate.set("value", this.startDate || "");
-            this.street.set("value", this.street || "");
-            this.subtypeId.set("value", this.subtypeId || "");
-            this.typeId.set("value", this.typeId || "");
-            this.updateDate.set("value", this.updateDate || "");
-            this.utilityId.set("value", this.utilityId || "");
+            this.longitude.set("value", this.model.longitude || "");
+            this.severityId.set("value", this.model.severityId || "");
+            this.specifyEnd.set("value", this.model.specifyEnd || "");
+            this.startDate.set("value", this.model.startDate || "");
+            this.street.set("value", this.model.street || "");
+            this.subtypeId.set("value", this.model.subtypeId || "");
+            this.typeId.set("value", this.model.typeId || "");
+            this.updateDate.set("value", this.model.updateDate || "");
+            this.utilityId.set("value", this.model.utilityId || "");
 
             if (this.model.id) {
             	this.deleteButton.show();
