@@ -7,6 +7,6 @@ function(declare, KubJsonStore) {
     	
         idProperty: "id",
         
-        baseURL: "/MapMarkerRS/dojorest/marker"
+        baseURL: "/MapMarkerRS/dojorest/category"
     });
 });

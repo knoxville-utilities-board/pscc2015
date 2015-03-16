@@ -25,6 +25,21 @@ function(declare, lang, router, Button, StoreList, ListDetailView, Marker, Marke
                 }
             });
             this.set("list", list);
+            
+            var queryButton = this.queryButton = new Button({
+            	innerHTML: '<i class="buttonIcon fa fa-2x fa-minus"></i>',
+            	"class": "pull-left btn-link userListWidget",
+            	title: "Filter Markers"
+            });
+            queryButton.on("click", lang.hitch(this, function(){
+            	list.clearList();
+            	list.setQuery({
+            		createdBy: "fsdarwin"
+            	}, {
+            		sort: [{attribute: "createdDate", descending: true}]
+            	});
+            }));
+            list.addWidget(queryButton);
 
             var createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-plus"></i>',

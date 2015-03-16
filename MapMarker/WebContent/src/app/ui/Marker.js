@@ -29,14 +29,9 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
-            // var rolesStore = lang.getObject("user.stores.roles", false, app);
-            /// this.role.setStore(rolesStore);
-
-            //this.username.validate = emptyValidate;
-            // this.role.validate = emptyValidate;
-
-            //    this.saveButton.on("click", lang.hitch(this, this.save));
-            //   this.deleteButton.on("click", lang.hitch(this, this.remove));
+            
+            this.saveButton.on("click", lang.hitch(this, this.save));
+            this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
 
         onModelComplete: function(model) {
@@ -45,25 +40,73 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             
             this.form.clearValidation();
 
+            this.categoryId.set("value", this.model.categoryId || "");
+            this.city.set("value", this.model.city || "");
             this.createdBy.set("value", this.model.createdBy || "");
+            this.createdDate.set("value", this.model.createdDate || "");
             this.description.set("value", this.model.description || "");
+            this.directionId.set("value", this.model.directionId || "");
+            this.editedBy.set("value", this.model.editedBy || "");
+            this.editedDate.set("value", this.model.editedDate || "");
+            this.endCrossStreet.set("value", this.model.endCrossStreet || "");
+            this.endDate.set("value", this.model.endDate || "");
+            this.endLatitude.set("value", this.model.endLatitude || "");
+            this.endLongitude.set("value", this.model.endLongitude || "");
+            this.fromCrossStreet.set("value", this.model.fromCrossStreet || "");
+            this.latitude.set("value", this.model.latitude || "");
+            this.location.set("value", this.model.location || "");
+            this.longitude.set("value", this.longitude || "");
+            this.severityId.set("value", this.severityId || "");
+            this.specifyEnd.set("value", this.specifyEnd || "");
+            this.startDate.set("value", this.startDate || "");
+            this.street.set("value", this.street || "");
+            this.subtypeId.set("value", this.subtypeId || "");
+            this.typeId.set("value", this.typeId || "");
+            this.updateDate.set("value", this.updateDate || "");
+            this.utilityId.set("value", this.utilityId || "");
 
-            if (!model.id) {
+            if (this.model.id) {
+            	this.deleteButton.show();
+            } else {
+            	this.deleteButton.hide();
+            	this.model.createdDate = dateHandling.javaISOString(new Date());
+            }
+            
+            /*if (!model.id) {
                 //model defaults here
                 model.createdDate = dateHandling.javaISOString(new Date());
-            }
+            }*/
         },
 
         save: function() {
             if (this.form.validate()) {
-                this.model.userName = this.username.get("value");
-                this.model.loweredUserName = this.username.get("value").toLowerCase();
-                this.model.roles[0] = this.role.get("value");
-
-                if (this.model.userId) {
-                    this.store.put(this.model, {
-                        id: this.model.userId
-                    });
+            	this.model.categoryId = this.categoryId.get("value");
+            	this.model.city = this.city.get("value");
+            	this.model.createdBy = this.createdBy.get("value");
+            	this.model.createdDate = this.createdDate.get("value");
+            	this.model.description = this.description.get("value");
+            	this.model.directionId = this.directionId.get("value");
+            	this.model.editedBy = this.editedBy.get("value");
+            	this.model.editedDate = dateHandling.javaISOString(new Date());
+            	this.model.endCrossStreet  = this.endCrossStreet.get("value");
+            	this.model.endDate = this.endDate.get("value");
+            	this.model.endLatitude = this.endLatitude.get("value");
+            	this.model.endLongitude = this.endLongitude.get("value");
+            	this.model.fromCrossStreet  = this.fromCrossStreet.get("value");
+            	this.model.latitude = this.latitude.get("value");
+            	this.model.location = this.location.get("value");
+            	this.model.longitude = this.longitude.get("value");
+            	this.model.severityId = this.severityId.get("value");
+            	this.model.specifyEnd = this.specifyEnd.get("value");
+            	this.model.startDate = this.startDate.get("value");
+            	this.model.street = this.street.get("value");
+            	this.model.subtypeId = this.subtypeId.get("value");
+            	this.model.typeId = this.typeId.get("value");
+            	this.model.updateDate = this.updateDate.get("value");
+            	this.model.utilityId = this.utilityId.get("value");
+            	
+                if (this.model.id) {
+                    this.store.put(this.model);
                 } else {
                     console.log(this.store.put(this.model));
                     router.go("/marker/create/success");
@@ -72,8 +115,15 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
         },
 
         remove: function() {
-            this.store.remove(this.item.userId);
-            router.go("/marker");
+            if (!this._confirmDelete) {
+            	this.deleteButton.set("label", "Confirm Delete");
+            	this._confirmDelete = true;
+            } else {
+            	this._confirmDelete = false;
+            	this.store.remove(this.model.id).then(function() {
+            		router.go("/marker");
+            	});
+            }            
         }
     });
 });

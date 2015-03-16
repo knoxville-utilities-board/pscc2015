@@ -62,29 +62,11 @@ function(declare, lang, Deferred, JSON, request, QueryResults) {
         },
 
         put: function(object, options) {
-            options = options || {};
-            var id = ("id" in options) ? options.id : this.getIdentity(object);
-            var hasId = id && typeof id !== "undefined";
-            var service = this.baseURL + (hasId ? "/update" : "/create");
-
-            return request(service, {
-                method: "POST",
-                handleAs: "json",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accepts": "application/json"
-                },
-                data: JSON.stringify(object),
-                preventCache: true
-            }).then(function(response) {
-                //normalize the response
-                return response.data ? response.data : response;
-            });
+        	return put.apply(this, arguments);
         },
 
         add: function(object, options) {
-            options = options || {};
-            return this.put(object, options);
+        	return put.apply(this, arguments);
         },
 
         _createRange: function(start, count) {
@@ -174,4 +156,25 @@ function(declare, lang, Deferred, JSON, request, QueryResults) {
             return new QueryResults(deferredResponse);
         }
     });
+    
+    function put(object, options) {
+    	options = options || {};
+    	var id = ("id" in options) ? options.id : this.getIdentity(object);
+    	var hasId = id && typeof id !== "undefined";
+    	var service = this.baseURL + (hasId ? "/update" : "/create");
+    	
+    	return request(service, {
+    		method: "POST",
+    		handleAs: "json",
+    		headers: {
+    			"Content-Type": "application/json",
+    			"Accepts": "application/json"
+    		},
+    		data: JSON.stringify(object),
+    		preventCache: true
+    	}).then(function(response) {
+    		//normalize the response
+    		return response.data ? response.data : response;
+    	});
+    }
 });

@@ -9,15 +9,16 @@ function(declare, ListItem, dateHandling) {
         postCreate: function() {
             this.inherited(arguments);
 
-            this.set("leftBody", "Created By " + this.item.createdBy);
+            this.set("leftBody", "Street: " + this.item.street);
 
             var createDateText = "Imported 1/2015";
 
             if (this.item.createdDate) {
-            	createDateText = "Create Date " +dateHandling.kubDate(this.item.createdDate)
+            	createDateText = "Created: " +dateHandling.kubDate(this.item.createdDate)
             }
 
             this.set("leftLabel",  createDateText);
+            this.set("rightText", this.item.description);
         }
     });
 });
