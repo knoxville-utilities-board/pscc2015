@@ -5,6 +5,7 @@ define(["dojo/_base/declare",
     "common/routing/router",
     "common/ui/_ModelApiMixin",
     "common/ui/Button",
+    "common/ui/DateTimePicker",
     "common/ui/DropdownStoreList",
     "common/ui/Form",
     "common/ui/FormItem",
@@ -14,7 +15,7 @@ define(["dojo/_base/declare",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DropdownStoreList, Form, FormItem, TextArea, TextBox, View, dateHandling, template) {
+function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TextArea, TextBox, View, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
@@ -39,34 +40,49 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             app.appbar.set("title", "Markers > " + model.id);
             
             this.form.clearValidation();
-
-            this.categoryId.set("value", this.model.categoryId || "");
-            this.city.set("value", this.model.city || "");
-            this.createdBy.set("value", this.model.createdBy || "");
-            this.createdDate.set("value", this.model.createdDate || "");
+            
+            //Text
             this.description.set("value", this.model.description || "");
-            this.directionId.set("value", this.model.directionId || "");
-            this.editedBy.set("value", this.model.editedBy || "");
-            this.editedDate.set("value", this.model.editedDate || "");
-            this.endCrossStreet.set("value", this.model.endCrossStreet || "");
-            this.endDate.set("value", this.model.endDate || "");
-            this.endLatitude.set("value", this.model.endLatitude || "");
-            this.endLongitude.set("value", this.model.endLongitude || "");
-            this.fromCrossStreet.set("value", this.model.fromCrossStreet || "");
-            this.latitude.set("value", this.model.latitude || "");
-            this.location.set("value", this.model.location || "");
-            this.longitude.set("value", this.model.longitude || "");
-            this.severityId.set("value", this.model.severityId || "");
-            this.specifyEnd.set("value", this.model.specifyEnd || "");
-            this.startDate.set("value", this.model.startDate || "");
             this.street.set("value", this.model.street || "");
+            this.city.set("value", this.model.city || "");
+            this.fromCrossStreet.set("value", this.model.fromCrossStreet || "");
+            this.endCrossStreet.set("value", this.model.endCrossStreet || "");
+            this.location.set("value", this.model.location || "");
+            this.specifyEnd.set("value", this.model.specifyEnd || "");
+            this.createdBy.set("value", this.model.createdBy || "");
+            this.editedBy.set("value", this.model.editedBy || "");
+
+
+            //Dropdowns
+            this.categoryId.set("value", this.model.categoryId || "");
+            this.directionId.set("value", this.model.directionId || "");
+            this.severityId.set("value", this.model.severityId || "");
             this.subtypeId.set("value", this.model.subtypeId || "");
             this.typeId.set("value", this.model.typeId || "");
-            this.updateDate.set("value", this.model.updateDate || "");
             this.utilityId.set("value", this.model.utilityId || "");
+            
+            //Dates
+            this.startDate.set("value", new Date(this.model.startDate) || "");
+            this.updateDate.set("value", new Date(this.model.updateDate) || "");
+            this.endDate.set("value", new Date(this.model.endDate) || "");
+            this.createdDate.set("value", new Date(this.model.createdDate) || "");
+            this.editedDate.set("value", new Date(this.model.editedDate) || "");
+
+            //Map
+            this.latitude.set("value", this.model.latitude || "");
+            this.longitude.set("value", this.model.longitude || "");
+            this.endLatitude.set("value", this.model.endLatitude || "");
+            this.endLongitude.set("value", this.model.endLongitude || "");
+            
+            //Disabled - these values are set automatically on saving
+            this.createdBy.set("disabled", true);
+            this.createdDate.set("disabled", true);
+            //this.editedBy.set("disabled", true);
+            this.editedDate.set("disabled", true);
 
             if (this.model.id) {
             	this.deleteButton.show();
+            	this.model.editedDate = dateHandling.javaISOString(new Date());
             } else {
             	this.deleteButton.hide();
             	this.model.createdDate = dateHandling.javaISOString(new Date());
