@@ -13,10 +13,11 @@ define(["dojo/_base/declare",
     "common/ui/TextArea",
     "common/ui/TextBox",
     "common/ui/View",
+    "app/ui/DropdownListItem",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, dateHandling, template) {
+function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
@@ -35,6 +36,7 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
             console.log("category store", categoryStore);
             this.category.setStore(categoryStore);
+            this.category.itemRenderer = DropdownListItem;
             
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
@@ -60,7 +62,7 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
             //Dropdowns
             //this.categoryId.set("value", this.model.categoryId || ""); 
-            this.category.set("label", this.model.categoryId || "Select One");
+            //this.category.set("value", this.model.categoryId);
             this.directionId.set("value", this.model.directionId || "");
             this.directionId.set("label", this.model.categoryId || "Select One");
             this.severityId.set("value", this.model.severityId || "");

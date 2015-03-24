@@ -78,6 +78,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFou
     router.registerSecured(baseRoute + "/marker", function(evt) {
         console.info("route " + baseRoute + "/marker");
         getMarkerStore();
+        getCategoryStore();
         
         var routeEvent = {
             targetView: toolId + "MarkerListDetail",
@@ -105,13 +106,18 @@ function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFou
         var titleName;
 
         var item;
+        var categoryItem;
         if (evt.params.id == "create") {
             titleName = "Create";
             getMarkerStore();
+            getCategoryStore();
             item = {};
+            categoryItem = {};
         } else {
             var store = getMarkerStore();
             item = store.get(evt.params.id);
+            var categoryStore = getCategoryStore();
+            categoryItem = categoryStore.query();
         }
 
         var id = evt.params.id;
