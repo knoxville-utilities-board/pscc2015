@@ -1,164 +1,188 @@
 <div class="panel panel-default engineeringInspectionDetail">
-	<div class="panel-heading" data-dojo-attach-point="panelHeadingNode">
-		<h3 class="panel-title modelEmptyShow">Please select a marker.</h3>
-		<div class="modelLoadingShow">
-			<span class="fa fa-spinner fa-spin"></span> <span>Loading...</span>
+	<div role="tabpanel">
+
+		<ul class="nav nav-pills" role="tablist">
+			<li role="presentation" class="active"><a href="#form"
+				aria-controls="form" role="tab" data-toggle="pill">Form</a></li>
+			<li role="presentation"><a href="#map" aria-controls="map"
+				role="tab" data-toggle="pill">Map</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+			<div role="tabpanel" class="tab-pane active" id="form">
+				<div class="panel-heading" data-dojo-attach-point="panelHeadingNode">
+					<h3 class="panel-title modelEmptyShow">Please select a marker.</h3>
+					<div class="modelLoadingShow">
+						<span class="fa fa-spinner fa-spin"></span> <span>Loading...</span>
+					</div>
+				</div>
+				<div class="modelCompleteShow" data-dojo-attach-point="tab">
+					<form class="panel-body" data-dojo-type="common/ui/Form"
+						data-dojo-attach-point="form">
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Category'">
+							<div data-dojo-type="common/ui/DropdownStoreList"
+								data-dojo-attach-point="category"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Utility'">
+							<div data-dojo-type="common/ui/DropdownList"
+								data-dojo-attach-point="utilityId"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Type'">
+							<div data-dojo-type="common/ui/DropdownList"
+								data-dojo-attach-point="typeId"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Subtype'">
+							<div data-dojo-type="common/ui/DropdownList"
+								data-dojo-attach-point="subtypeId"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Severity'">
+							<div data-dojo-type="common/ui/DropdownList"
+								data-dojo-attach-point="severityId"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Description'">
+							<div data-dojo-type="common/ui/TextArea"
+								data-dojo-attach-point="description"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'City'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="city"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Street'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="street"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'From Cross Street'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="fromCrossStreet"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Cross Street'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="endCrossStreet"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Direction'">
+							<div data-dojo-type="common/ui/DropdownList"
+								data-dojo-attach-point="directionId"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Latitude'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="latitude"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Longitude'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="longitude"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Latitude'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="endLatitude"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Longitude'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="endLongitude"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Description of Location'">
+							<div data-dojo-type="common/ui/TextArea"
+								data-dojo-attach-point="location"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Description of End Location'">
+							<div data-dojo-type="common/ui/TextArea"
+								data-dojo-attach-point="specifyEnd"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Start Date'">
+							<div data-dojo-type="common/ui/DateTimePicker"
+								data-dojo-attach-point="startDate" type="date"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Update date'">
+							<div data-dojo-type="common/ui/DateTimePicker"
+								data-dojo-attach-point="updateDate" type="date"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Date'">
+							<div data-dojo-type="common/ui/DateTimePicker"
+								data-dojo-attach-point="endDate" type="date"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Created By'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="createdBy"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Created Date'">
+							<div data-dojo-type="common/ui/DateTimePicker"
+								data-dojo-attach-point="createdDate" type="date"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Edited By'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="editedBy"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Edited Date'">
+							<div data-dojo-type="common/ui/DateTimePicker"
+								data-dojo-attach-point="editedDate" type="date"></div>
+						</div>
+
+						<button class="btn-primary pull-right"
+							data-dojo-type="common/ui/Button"
+							data-dojo-attach-point="saveButton"
+							data-dojo-props="label: 'Save'"></button>
+
+						<button class="btn-danger pull-right"
+							data-dojo-type="common/ui/Button"
+							data-dojo-attach-point="deleteButton" style="margin-right: 10px;"
+							data-dojo-props="label: 'Delete'"></button>
+					</form>
+				</div>
+			</div>
+
+			<div role="tabpanel" class="tab-pane" id="map">
+				<div class="panel-heading">
+					<h3 class="panel-title">Here there be map stuff.</h3>
+				</div>
+			</div>
+
 		</div>
 	</div>
-	<div class="modelCompleteShow">
-		<form class="panel-body" data-dojo-type="common/ui/Form"
-			data-dojo-attach-point="form">
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Category'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="categoryId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Utility'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="utilityId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Type'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="typeId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Subtype'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="subtypeId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Severity'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="severityId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Description'">
-				<div data-dojo-type="common/ui/TextArea"
-					data-dojo-attach-point="description"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'City'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="city"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Street'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="street"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'From Cross Street'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="fromCrossStreet"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'End Cross Street'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="endCrossStreet"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Direction'">
-				<div data-dojo-type="common/ui/DropdownList"
-					data-dojo-attach-point="directionId"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Latitude'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="latitude"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Longitude'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="longitude"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'End Latitude'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="endLatitude"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'End Longitude'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="endLongitude"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Description of Location'">
-				<div data-dojo-type="common/ui/TextArea"
-					data-dojo-attach-point="location"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Description of End Location'">
-				<div data-dojo-type="common/ui/TextArea"
-					data-dojo-attach-point="specifyEnd"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Start Date'">
-				<div data-dojo-type="common/ui/DateTimePicker"
-					data-dojo-attach-point="startDate" type="date"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Update date'">
-				<div data-dojo-type="common/ui/DateTimePicker"
-					data-dojo-attach-point="updateDate" type="date"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'End Date'">
-				<div data-dojo-type="common/ui/DateTimePicker"
-					data-dojo-attach-point="endDate" type="date"></div>
-			</div>
-
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Created By'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="createdBy"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Created Date'">
-				<div data-dojo-type="common/ui/DateTimePicker"
-					data-dojo-attach-point="createdDate" type="date"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Edited By'">
-				<div data-dojo-type="common/ui/TextBox"
-					data-dojo-attach-point="editedBy"></div>
-			</div>
-			
-			<div data-dojo-type="common/ui/FormItem"
-				data-dojo-props="label: 'Edited Date'">
-				<div data-dojo-type="common/ui/DateTimePicker"
-					data-dojo-attach-point="editedDate" type="date"></div>
-			</div>
-
-			<button class="btn-primary pull-right" data-dojo-type="common/ui/Button"
-				data-dojo-attach-point="saveButton" data-dojo-props="label: 'Save'"></button>
-				
-			<button class="btn-danger pull-right" data-dojo-type="common/ui/Button"
-				data-dojo-attach-point="deleteButton" style="margin-right:10px;"
-				data-dojo-props="label: 'Delete'"></button>
-		</form>
-	</div>
-</div>

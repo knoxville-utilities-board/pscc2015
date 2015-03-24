@@ -16,7 +16,7 @@ function(declare, lang, domClass, domConstruct, _TemplatedMixin, Button, View, t
 
         picker: null,
 
-        type: "datetime", // "date" and "time" are valid, any other values defualt to datetime
+        type: "datetime", // "date" and "time" are valid, any other values default to datetime
 
         format: "MM/dd/yyyy HH:mm PP",
 

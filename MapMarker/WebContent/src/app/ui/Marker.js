@@ -9,17 +9,18 @@ define(["dojo/_base/declare",
     "common/ui/DropdownStoreList",
     "common/ui/Form",
     "common/ui/FormItem",
+    "common/ui/TabContainer",
     "common/ui/TextArea",
     "common/ui/TextBox",
     "common/ui/View",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TextArea, TextBox, View, dateHandling, template) {
+function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
-
+        
         postCreate: function() {
             var emptyValidate = function() {
                 if (this.get("value") === "") {
@@ -30,6 +31,10 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
+            
+            var categoryStore = lang.getObject("marker.stores.categories", false, app);
+            console.log("category store", categoryStore);
+            this.category.setStore(categoryStore);
             
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
@@ -54,12 +59,18 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
 
             //Dropdowns
-            this.categoryId.set("value", this.model.categoryId || "");
+            //this.categoryId.set("value", this.model.categoryId || ""); 
+            this.category.set("label", this.model.categoryId || "Select One");
             this.directionId.set("value", this.model.directionId || "");
+            this.directionId.set("label", this.model.categoryId || "Select One");
             this.severityId.set("value", this.model.severityId || "");
+            this.severityId.set("label", this.model.severityId || "Select One");
             this.subtypeId.set("value", this.model.subtypeId || "");
+            this.subtypeId.set("label", this.model.subtypeId || "Select One");
             this.typeId.set("value", this.model.typeId || "");
+            this.typeId.set("label", this.model.typeId || "Select One");
             this.utilityId.set("value", this.model.utilityId || "");
+            this.utilityId.set("value", this.model.utilityId || "Select One");
             
             //Dates
             this.startDate.set("value", new Date(this.model.startDate) || "");
@@ -77,21 +88,19 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             //Disabled - these values are set automatically on saving
             this.createdBy.set("disabled", true);
             this.createdDate.set("disabled", true);
-            //this.editedBy.set("disabled", true);
+            this.editedBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
             this.editedDate.set("disabled", true);
 
             if (this.model.id) {
             	this.deleteButton.show();
-            	this.model.editedDate = dateHandling.javaISOString(new Date());
             } else {
             	this.deleteButton.hide();
-            	this.model.createdDate = dateHandling.javaISOString(new Date());
+            	this.createdDate.set("value", new Date());
+            	this.createdBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
+            	this.editedBy.set("disabled", true);
+            	this.editedDate.set("disabled", true);
             }
             
-            /*if (!model.id) {
-                //model defaults here
-                model.createdDate = dateHandling.javaISOString(new Date());
-            }*/
         },
 
         save: function() {
@@ -103,7 +112,6 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             	this.model.description = this.description.get("value");
             	this.model.directionId = this.directionId.get("value");
             	this.model.editedBy = this.editedBy.get("value");
-            	this.model.editedDate = dateHandling.javaISOString(new Date());
             	this.model.endCrossStreet  = this.endCrossStreet.get("value");
             	this.model.endDate = this.endDate.get("value");
             	this.model.endLatitude = this.endLatitude.get("value");
@@ -122,6 +130,7 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             	this.model.utilityId = this.utilityId.get("value");
             	
                 if (this.model.id) {
+                	this.model.editedDate = dateHandling.javaISOString(new Date());
                     this.store.put(this.model);
                 } else {
                     console.log(this.store.put(this.model));

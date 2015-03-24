@@ -2,21 +2,19 @@ define(["dojo/_base/config",
     "dojo/_base/lang",
     "dojo/store/Observable",
     "app/stores/MarkerStore",
-    //"app/stores/CategoryStore",
+    "app/stores/CategoryStore",
 
     "app/ui/Login",
     "app/ui/PageNotFound",
     "app/ui/Home",
     "app/ui/Marker",
     "app/ui/MarkerListDetail",
-    //"app/ui/Category",
-    //"app/ui/CategoryListDetail",
 
     "common/pageViewTracker",
     "common/routing/router",
     "common/routing/routeHandler"],
 
-function(config, lang, Observable, MarkerStore, Login, PageNotFound, Home, Marker, MarkerListDetail, pageViewTracker, router, routeHandler) {
+function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFound, Home, Marker, MarkerListDetail, pageViewTracker, router, routeHandler) {
 
     var toolId = "app.";
 
@@ -30,7 +28,6 @@ function(config, lang, Observable, MarkerStore, Login, PageNotFound, Home, Marke
         return lang.getObject("marker.stores.markers", false, app);
     }
     
-    //dwallace - 3/15/2015 - Started implementing a CategoryStore to see if it could be used to make a dropdown of categories on the Marker page
     function getCategoryStore() {
     	console.log("getCategoryStore");
     	if (!lang.getObject("marker.stores.categories", false, app)) {

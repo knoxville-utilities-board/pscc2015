@@ -51,7 +51,7 @@ function(declare, lang, router, Button, StoreList, ListDetailView, Marker, Marke
                 router.go("/marker/create");
             }));
             list.addWidget(createButton);
-
+            
             var detail = new Marker();
             this.set("detail", detail);
         }
