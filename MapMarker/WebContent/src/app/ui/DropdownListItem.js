@@ -1,9 +1,9 @@
 define(["dojo/_base/declare",
-    "common/ui/ListItem"],
+    "common/ui/DropdownListItem"],
 
-function(declare, ListItem) {
+function(declare, DropdownListItem) {
 
-    return declare([ListItem], {
+    return declare([DropdownListItem], {
 
         postCreate: function() {
             this.inherited(arguments);

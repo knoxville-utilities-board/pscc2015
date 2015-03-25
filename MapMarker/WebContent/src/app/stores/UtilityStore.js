@@ -9,6 +9,6 @@ function(declare, KubJsonStore) {
         
         getFromServer: false,
         
-        baseURL: "/MapMarkerRS/dojorest/category"
+        baseURL: "/MapMarkerRS/dojorest/utility"
     });
 });

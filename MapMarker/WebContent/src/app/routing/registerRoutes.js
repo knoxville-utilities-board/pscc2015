@@ -3,6 +3,11 @@ define(["dojo/_base/config",
     "dojo/store/Observable",
     "app/stores/MarkerStore",
     "app/stores/CategoryStore",
+    "app/stores/DirectionStore",
+    "app/stores/SeverityStore",
+    "app/stores/SubtypeStore",
+    "app/stores/TypeStore",
+    "app/stores/UtilityStore",
 
     "app/ui/Login",
     "app/ui/PageNotFound",
@@ -14,7 +19,7 @@ define(["dojo/_base/config",
     "common/routing/router",
     "common/routing/routeHandler"],
 
-function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFound, Home, Marker, MarkerListDetail, pageViewTracker, router, routeHandler) {
+function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, SeverityStore, SubtypeStore, TypeStore, UtilityStore, Login, PageNotFound, Home, Marker, MarkerListDetail, pageViewTracker, router, routeHandler) {
 
     var toolId = "app.";
 
@@ -34,6 +39,46 @@ function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFou
     		lang.setObject("marker.stores.categories", new Observable(new CategoryStore()), app);
     	}
     	return lang.getObject("marker.stores.categories", false, app);
+    }
+    
+    function getDirectionStore() {
+    	console.log("getDirectionStore");
+    	if (!lang.getObject("marker.stores.directions", false, app)) {
+    		lang.setObject("marker.stores.directions", new Observable(new DirectionStore()), app);
+    	}
+    	return lang.getObject("marker.stores.directions", false, app);
+    }
+    
+    function getSeverityStore() {
+    	console.log("getSeverityStore");
+    	if (!lang.getObject("marker.stores.severities", false, app)) {
+    		lang.setObject("marker.stores.severities", new Observable(new SeverityStore()), app);
+    	}
+    	return lang.getObject("marker.stores.severities", false, app);
+    }
+    
+    function getSubtypeStore() {
+    	console.log("getSubtypeStore");
+    	if (!lang.getObject("marker.stores.subtypes", false, app)) {
+    		lang.setObject("marker.stores.subtypes", new Observable(new SubtypeStore()), app);
+    	}
+    	return lang.getObject("marker.stores.subtypes", false, app);
+    }
+    
+    function getTypeStore() {
+    	console.log("getTypeStore");
+    	if (!lang.getObject("marker.stores.types", false, app)) {
+    		lang.setObject("marker.stores.types", new Observable(new TypeStore()), app);
+    	}
+    	return lang.getObject("marker.stores.types", false, app);
+    }
+    
+    function getUtilityStore() {
+    	console.log("getUtilityStore");
+    	if (!lang.getObject("marker.stores.utilities", false, app)) {
+    		lang.setObject("marker.stores.utilities", new Observable(new UtilityStore()), app);
+    	}
+    	return lang.getObject("marker.stores.utilities", false, app);
     }
 
     router.registerBefore(/.*/, function(evt) {
@@ -79,6 +124,11 @@ function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFou
         console.info("route " + baseRoute + "/marker");
         getMarkerStore();
         getCategoryStore();
+        getDirectionStore();
+        getSeverityStore();
+        getSubtypeStore();
+        getTypeStore();
+        getUtilityStore();
         
         var routeEvent = {
             targetView: toolId + "MarkerListDetail",
@@ -111,13 +161,33 @@ function(config, lang, Observable, MarkerStore, CategoryStore, Login, PageNotFou
             titleName = "Create";
             getMarkerStore();
             getCategoryStore();
+            getDirectionStore();
+            getSeverityStore();
+            getSubtypeStore();
+            getTypeStore();
+            getUtilityStore();
             item = {};
             categoryItem = {};
+            directionItem = {};
+            severityItem = {};
+            subtypeItem = {};
+            typeItem = {};
+            utilityItem = {};
         } else {
             var store = getMarkerStore();
             item = store.get(evt.params.id);
             var categoryStore = getCategoryStore();
             categoryItem = categoryStore.query();
+            var directionStore = getDirectionStore();
+            directionItem = directionStore.query();
+            var severityStore = getSeverityStore();
+            severityItem = severityStore.query();
+            var subtypeStore = getSubtypeStore();
+            subtypeItem = subtypeStore.query();
+            var typeStore = getTypeStore();
+            typeItem = typeStore.query();
+            var utilityStore = getUtilityStore();
+            utilityItem = utilityStore.query();
         }
 
         var id = evt.params.id;

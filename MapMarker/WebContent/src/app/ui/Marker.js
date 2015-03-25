@@ -38,6 +38,28 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             this.category.setStore(categoryStore);
             this.category.itemRenderer = DropdownListItem;
             
+            var directionStore = lang.getObject("marker.stores.directions", false, app);
+            //var nullItem = {id: null, title: "None"};
+            //directionStore.newItem(nullItem);
+            this.direction.setStore(directionStore);
+            this.direction.itemRenderer = DropdownListItem;
+            
+            var severityStore = lang.getObject("marker.stores.severities", false, app);
+            this.severity.setStore(severityStore);
+            this.severity.itemRenderer = DropdownListItem;
+            
+            var subtypeStore = lang.getObject("marker.stores.subtypes", false, app);
+            this.subtype.setStore(subtypeStore);
+            this.subtype.itemRenderer = DropdownListItem;
+            
+            var typeStore = lang.getObject("marker.stores.types", false, app);
+            this.type.setStore(typeStore);
+            this.type.itemRenderer = DropdownListItem;
+            
+            var utilityStore = lang.getObject("marker.stores.utilities", false, app);
+            this.utility.setStore(utilityStore);
+            this.utility.itemRenderer = DropdownListItem;
+            
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
@@ -61,8 +83,8 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
 
             //Dropdowns
-            //this.categoryId.set("value", this.model.categoryId || ""); 
-            //this.category.set("value", this.model.categoryId);
+            /*this.categoryId.set("value", this.model.categoryId || ""); 
+            this.category.set("value", this.model.categoryId);
             this.directionId.set("value", this.model.directionId || "");
             this.directionId.set("label", this.model.categoryId || "Select One");
             this.severityId.set("value", this.model.severityId || "");
@@ -73,12 +95,13 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             this.typeId.set("label", this.model.typeId || "Select One");
             this.utilityId.set("value", this.model.utilityId || "");
             this.utilityId.set("value", this.model.utilityId || "Select One");
+            */
             
             //Dates
             this.startDate.set("value", new Date(this.model.startDate) || "");
             this.updateDate.set("value", new Date(this.model.updateDate) || "");
             this.endDate.set("value", new Date(this.model.endDate) || "");
-            this.createdDate.set("value", new Date(this.model.createdDate) || "");
+            this.createdDate.set("value", new Date(this.model.createdDate));
             this.editedDate.set("value", new Date(this.model.editedDate) || "");
 
             //Map
@@ -108,33 +131,37 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
         save: function() {
             if (this.form.validate()) {
             	this.model.categoryId = this.categoryId.get("value");
-            	this.model.city = this.city.get("value");
-            	this.model.createdBy = this.createdBy.get("value");
-            	this.model.createdDate = this.createdDate.get("value");
-            	this.model.description = this.description.get("value");
             	this.model.directionId = this.directionId.get("value");
-            	this.model.editedBy = this.editedBy.get("value");
-            	this.model.endCrossStreet  = this.endCrossStreet.get("value");
-            	this.model.endDate = this.endDate.get("value");
-            	this.model.endLatitude = this.endLatitude.get("value");
-            	this.model.endLongitude = this.endLongitude.get("value");
-            	this.model.fromCrossStreet  = this.fromCrossStreet.get("value");
-            	this.model.latitude = this.latitude.get("value");
-            	this.model.location = this.location.get("value");
-            	this.model.longitude = this.longitude.get("value");
             	this.model.severityId = this.severityId.get("value");
-            	this.model.specifyEnd = this.specifyEnd.get("value");
-            	this.model.startDate = this.startDate.get("value");
-            	this.model.street = this.street.get("value");
             	this.model.subtypeId = this.subtypeId.get("value");
             	this.model.typeId = this.typeId.get("value");
-            	this.model.updateDate = this.updateDate.get("value");
             	this.model.utilityId = this.utilityId.get("value");
             	
+            	this.model.startDate = dateHandling.javaISOString(this.startDate.get("value"));
+            	this.model.updateDate = dateHandling.javaISOString(this.updateDate.get("value"));
+            	this.model.endDate = dateHandling.javaISOString(this.endDate.get("value"));
+            	//createdDate and editedDate are set automatically
+            	
+            	this.model.latitude = this.latitude.get("value");
+            	this.model.longitude = this.longitude.get("value");
+            	this.model.endLatitude = this.endLatitude.get("value");
+            	this.model.endLongitude = this.endLongitude.get("value");
+            	
+            	this.model.description = this.description.get("value");
+            	this.model.street = this.street.get("value");
+            	this.model.city = this.city.get("value");
+            	this.model.fromCrossStreet  = this.fromCrossStreet.get("value");
+            	this.model.endCrossStreet  = this.endCrossStreet.get("value");
+            	this.model.location = this.location.get("value");
+            	this.model.specifyEnd = this.specifyEnd.get("value");
+            	this.model.createdBy = this.createdBy.get("value")
+            	this.model.editedBy = this.editedBy.get("value");
+
                 if (this.model.id) {
                 	this.model.editedDate = dateHandling.javaISOString(new Date());
                     this.store.put(this.model);
                 } else {
+                	this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
                     console.log(this.store.put(this.model));
                     router.go("/marker/create/success");
                 }
