@@ -37,8 +37,15 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             console.log("category store", categoryStore);
             this.category.setStore(categoryStore);
             this.category.itemRenderer = DropdownListItem;
+            //This comes up undefined because CategoryStore getFromServer is set to use cache
+            console.log(categoryStore.get(1));
+            //Have to do this instead
+            var query = categoryStore.query();
+            var get = query.then(categoryStore.get(1));
+            console.log(get);
             
             var directionStore = lang.getObject("marker.stores.directions", false, app);
+            //Would like to add a value to the stores that becomes a null insert, for records where certain categories aren't applicable. Not sure if possible.
             //var nullItem = {id: null, title: "None"};
             //directionStore.newItem(nullItem);
             this.direction.setStore(directionStore);

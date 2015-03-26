@@ -12,7 +12,7 @@
 
 @import url('../../common/ui/css/common.css');
 
-@import url('clienttutorial.css');
+@import url('mapmarker.css');
 
 .logo {
 	background: url("../../images/logo.svg") no-repeat;
