@@ -1,5 +1,6 @@
 define(["dojo/_base/declare",
     "dojo/_base/lang",
+    "dojo/when",
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
     "common/routing/router",
@@ -17,7 +18,7 @@ define(["dojo/_base/declare",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
+function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
@@ -33,21 +34,31 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
             
+            //var categoryStore = lang.getObject("marker.stores.categories", false, app);
+            //console.log("category store", categoryStore);
+            //this.category.setStore(categoryStore);
+            //this.category.itemRenderer = DropdownListItem;
+            //This comes up undefined because CategoryStore getFromServer is set to use cache
+            //console.log(categoryStore.get(1));
+            //Have to do this instead
+            //var query = categoryStore.query();
+            //var get = query.then(categoryStore.get(1));
+            //console.log(get);
+            
+            this.saveButton.on("click", lang.hitch(this, this.save));
+            this.deleteButton.on("click", lang.hitch(this, this.remove));
+        },
+
+        onModelComplete: function(model) {
+            console.log("model", model);
+            
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
             console.log("category store", categoryStore);
             this.category.setStore(categoryStore);
             this.category.itemRenderer = DropdownListItem;
-            //This comes up undefined because CategoryStore getFromServer is set to use cache
             console.log(categoryStore.get(1));
-            //Have to do this instead
-            var query = categoryStore.query();
-            var get = query.then(categoryStore.get(1));
-            console.log(get);
             
             var directionStore = lang.getObject("marker.stores.directions", false, app);
-            //Would like to add a value to the stores that becomes a null insert, for records where certain categories aren't applicable. Not sure if possible.
-            //var nullItem = {id: null, title: "None"};
-            //directionStore.newItem(nullItem);
             this.direction.setStore(directionStore);
             this.direction.itemRenderer = DropdownListItem;
             
@@ -67,12 +78,6 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
             this.utility.setStore(utilityStore);
             this.utility.itemRenderer = DropdownListItem;
             
-            this.saveButton.on("click", lang.hitch(this, this.save));
-            this.deleteButton.on("click", lang.hitch(this, this.remove));
-        },
-
-        onModelComplete: function(model) {
-            console.log("model", model);
             app.appbar.set("title", "Markers > " + model.id);
             
             this.form.clearValidation();
@@ -90,19 +95,69 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
 
             //Dropdowns
-            /*this.categoryId.set("value", this.model.categoryId || ""); 
-            this.category.set("value", this.model.categoryId);
-            this.directionId.set("value", this.model.directionId || "");
-            this.directionId.set("label", this.model.categoryId || "Select One");
-            this.severityId.set("value", this.model.severityId || "");
-            this.severityId.set("label", this.model.severityId || "Select One");
-            this.subtypeId.set("value", this.model.subtypeId || "");
-            this.subtypeId.set("label", this.model.subtypeId || "Select One");
-            this.typeId.set("value", this.model.typeId || "");
-            this.typeId.set("label", this.model.typeId || "Select One");
-            this.utilityId.set("value", this.model.utilityId || "");
-            this.utilityId.set("value", this.model.utilityId || "Select One");
-            */
+            var label;
+            var value;
+            
+            if (this.model.categoryId) {
+	            var categoryModel = categoryStore.get(this.model.categoryId);
+	            when(categoryModel).then(function(categoryModel) {
+	            	label = categoryModel.title;
+	                value = categoryModel.id;
+	            });
+        	}
+            this.category.set("label", label || 'Select One...');
+            this.category.set("value", value);
+            
+            if (this.model.directionId) {
+	            var directionModel = directionStore.get(this.model.directionId);
+	            when(directionModel).then(function(directionModel) {
+	            	label = directionModel.title;
+	                value = directionModel.id;
+	            });
+            }
+            this.direction.set("label", label || 'Select One...');
+            this.direction.set("value", value);
+            
+            if (this.model.severityId) {
+	            var severityModel = severityStore.get(this.model.severityId);
+	            when(severityModel).then(function(severityModel) {
+	            	label = severityModel.title;
+	                value = severityModel.id;
+	            });
+            }
+            this.severity.set("label", label || 'Select One...');
+            this.severity.set("value", value);
+            
+            if (this.model.subtypeId) {
+	            var subtypeModel = subtypeStore.get(this.model.subtypeId);
+	            when(subtypeModel).then(function(subtypeModel) {
+	            	label = subtypeModel.title;
+	                value = subtypeModel.id;
+	            });
+            }
+            this.subtype.set("label", label || 'Select One...');
+            this.subtype.set("value", value);
+            
+            if (this.model.typeId) {
+	            var typeModel = typeStore.get(this.model.typeId);
+	            when(typeModel).then(function(typeModel) {
+	            	label = typeModel.title;
+	                value = typeModel.id;
+	            });
+            }
+            this.type.set("label", label || 'Select One...');
+            this.type.set("value", value);
+            
+            if (this.model.utilityId) {
+	            var utilityModel = utilityStore.get(this.model.utilityId);
+	            when(utilityModel).then(function(utilityModel) {
+	            	label = utilityModel.title;
+	                value = utilityModel.id;
+	            });
+            }
+            this.utility.set("label", label || 'Select One...');
+            this.utility.set("value", value);
+
             
             //Dates
             this.startDate.set("value", new Date(this.model.startDate) || "");
@@ -137,12 +192,12 @@ function(declare, lang, _TemplatedMixin, _WidgetsInTemplateMixin, router, _Model
 
         save: function() {
             if (this.form.validate()) {
-            	this.model.categoryId = this.categoryId.get("value");
-            	this.model.directionId = this.directionId.get("value");
-            	this.model.severityId = this.severityId.get("value");
-            	this.model.subtypeId = this.subtypeId.get("value");
-            	this.model.typeId = this.typeId.get("value");
-            	this.model.utilityId = this.utilityId.get("value");
+            	this.model.categoryId = this.category.get("value");
+            	this.model.directionId = this.direction.get("value");
+            	this.model.severityId = this.severity.get("value");
+            	this.model.subtypeId = this.subtype.get("value");
+            	this.model.typeId = this.type.get("value");
+            	this.model.utilityId = this.utility.get("value");
             	
             	this.model.startDate = dateHandling.javaISOString(this.startDate.get("value"));
             	this.model.updateDate = dateHandling.javaISOString(this.updateDate.get("value"));

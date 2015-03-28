@@ -27,58 +27,71 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
 
     function getMarkerStore() {
     	console.log("getMarkerStore");
-        if (!lang.getObject("marker.stores.markers", false, app)) {
-            lang.setObject("marker.stores.markers", new Observable(new MarkerStore()), app);
+    	var store = lang.getObject("marker.stores.markers", false, app);
+        if (!store) {
+            store = lang.setObject("marker.stores.markers", new Observable(new MarkerStore()), app);
+            store.query();            
         }
-        return lang.getObject("marker.stores.markers", false, app);
+        return store;
     }
     
     function getCategoryStore() {
     	console.log("getCategoryStore");
-    	if (!lang.getObject("marker.stores.categories", false, app)) {
-    		lang.setObject("marker.stores.categories", new Observable(new CategoryStore()), app);
+    	var store = lang.getObject("marker.stores.categories", false, app);
+    	if (!store) {
+    		store = lang.setObject("marker.stores.categories", new Observable(new CategoryStore()), app);
+    		store.query();
     	}
-    	return lang.getObject("marker.stores.categories", false, app);
+    	return store;
     }
     
     function getDirectionStore() {
     	console.log("getDirectionStore");
-    	if (!lang.getObject("marker.stores.directions", false, app)) {
-    		lang.setObject("marker.stores.directions", new Observable(new DirectionStore()), app);
+    	var store = lang.getObject("marker.stores.directions", false, app);
+    	if (!store) {
+    		store = lang.setObject("marker.stores.directions", new Observable(new DirectionStore()), app);
+    		store.query();
     	}
-    	return lang.getObject("marker.stores.directions", false, app);
+    	return store;
     }
     
     function getSeverityStore() {
     	console.log("getSeverityStore");
-    	if (!lang.getObject("marker.stores.severities", false, app)) {
-    		lang.setObject("marker.stores.severities", new Observable(new SeverityStore()), app);
+    	var store = lang.getObject("marker.stores.severities", false, app)
+    	if (!store) {
+    		store = lang.setObject("marker.stores.severities", new Observable(new SeverityStore()), app);
+    		store.query();
     	}
-    	return lang.getObject("marker.stores.severities", false, app);
+    	return store;
     }
     
     function getSubtypeStore() {
     	console.log("getSubtypeStore");
-    	if (!lang.getObject("marker.stores.subtypes", false, app)) {
-    		lang.setObject("marker.stores.subtypes", new Observable(new SubtypeStore()), app);
+    	var store = lang.getObject("marker.stores.subtypes", false, app)
+    	if (!store) {
+    		store = lang.setObject("marker.stores.subtypes", new Observable(new SubtypeStore()), app);
+    		store.query();
     	}
-    	return lang.getObject("marker.stores.subtypes", false, app);
+    	return store;
     }
     
     function getTypeStore() {
     	console.log("getTypeStore");
-    	if (!lang.getObject("marker.stores.types", false, app)) {
-    		lang.setObject("marker.stores.types", new Observable(new TypeStore()), app);
+    	var store = lang.getObject("marker.stores.types", false, app)
+    	if (!store) {
+    		store = lang.setObject("marker.stores.types", new Observable(new TypeStore()), app);
+    		store.query();
     	}
-    	return lang.getObject("marker.stores.types", false, app);
+    	return store;
     }
     
     function getUtilityStore() {
     	console.log("getUtilityStore");
-    	if (!lang.getObject("marker.stores.utilities", false, app)) {
-    		lang.setObject("marker.stores.utilities", new Observable(new UtilityStore()), app);
+    	var store = lang.getObject("marker.stores.utilities", false, app)
+    	if (!store) {
+    		store = lang.setObject("marker.stores.utilities", new Observable(new UtilityStore()), app);
     	}
-    	return lang.getObject("marker.stores.utilities", false, app);
+    	return store;
     }
 
     router.registerBefore(/.*/, function(evt) {

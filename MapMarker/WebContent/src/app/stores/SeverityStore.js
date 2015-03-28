@@ -7,7 +7,7 @@ function(declare, KubJsonStore) {
     	
         idProperty: "id",
         
-        getFromServer: false,
+        //getFromServer: false,
         
         baseURL: "/MapMarkerRS/dojorest/severity"
     });
