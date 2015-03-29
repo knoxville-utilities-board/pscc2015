@@ -3,6 +3,8 @@ define(["dojo/_base/declare",
     "dojo/when",
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
+    "kubgis/defaults",
+    "kubgis/utils",
     "common/routing/router",
     "common/ui/_ModelApiMixin",
     "common/ui/Button",
@@ -18,10 +20,25 @@ define(["dojo/_base/declare",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
+function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
+        
+        /* This is for the map; it's not working. Throwing GET error on some KUB resources. Asked Zach about it 3/28.
+        startup: function() {
+            var options = {
+            	    mapOptions: {
+            	        lods: kubgisDefaults.lods,
+            	        scrollWheelZoom: true,
+            	        slider: true
+            	    }
+            	};
+
+            // kubgis/utils
+            kubgisUtils.createWebMap(this.mapNode, options).then(lang.hitch(this, this.onMapComplete));
+        },
+        */
         
         postCreate: function() {
             var emptyValidate = function() {
@@ -33,18 +50,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
 
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
-            
-            //var categoryStore = lang.getObject("marker.stores.categories", false, app);
-            //console.log("category store", categoryStore);
-            //this.category.setStore(categoryStore);
-            //this.category.itemRenderer = DropdownListItem;
-            //This comes up undefined because CategoryStore getFromServer is set to use cache
-            //console.log(categoryStore.get(1));
-            //Have to do this instead
-            //var query = categoryStore.query();
-            //var get = query.then(categoryStore.get(1));
-            //console.log(get);
-            
+                        
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
@@ -95,9 +101,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
 
 
             //Dropdowns
-            var label;
-            var value;
-            
+            var label = "Select One...";
+            var value = null;            
             if (this.model.categoryId) {
 	            var categoryModel = categoryStore.get(this.model.categoryId);
 	            when(categoryModel).then(function(categoryModel) {
@@ -108,6 +113,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             this.category.set("label", label || 'Select One...');
             this.category.set("value", value);
             
+            label = "Select One...";
+            value = null;
             if (this.model.directionId) {
 	            var directionModel = directionStore.get(this.model.directionId);
 	            when(directionModel).then(function(directionModel) {
@@ -118,6 +125,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             this.direction.set("label", label || 'Select One...');
             this.direction.set("value", value);
             
+            label = "Select One...";
+            value = null;            
             if (this.model.severityId) {
 	            var severityModel = severityStore.get(this.model.severityId);
 	            when(severityModel).then(function(severityModel) {
@@ -128,6 +137,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             this.severity.set("label", label || 'Select One...');
             this.severity.set("value", value);
             
+            label = "Select One...";
+            value = null;            
             if (this.model.subtypeId) {
 	            var subtypeModel = subtypeStore.get(this.model.subtypeId);
 	            when(subtypeModel).then(function(subtypeModel) {
@@ -138,6 +149,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             this.subtype.set("label", label || 'Select One...');
             this.subtype.set("value", value);
             
+            label = "Select One...";
+            value = null;            
             if (this.model.typeId) {
 	            var typeModel = typeStore.get(this.model.typeId);
 	            when(typeModel).then(function(typeModel) {
@@ -148,6 +161,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             this.type.set("label", label || 'Select One...');
             this.type.set("value", value);
             
+            label = "Select One...";
+            value = null;            
             if (this.model.utilityId) {
 	            var utilityModel = utilityStore.get(this.model.utilityId);
 	            when(utilityModel).then(function(utilityModel) {
@@ -157,7 +172,6 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             }
             this.utility.set("label", label || 'Select One...');
             this.utility.set("value", value);
-
             
             //Dates
             this.startDate.set("value", new Date(this.model.startDate) || "");
@@ -209,6 +223,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             	this.model.endLatitude = this.endLatitude.get("value");
             	this.model.endLongitude = this.endLongitude.get("value");
             	
+            	
             	this.model.description = this.description.get("value");
             	this.model.street = this.street.get("value");
             	this.model.city = this.city.get("value");
@@ -240,6 +255,14 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, router, 
             		router.go("/marker");
             	});
             }            
+        },
+        
+        
+        /* This is for the map; it's not working. Throwing GET error on some KUB resources. Asked Zach about it 3/28.
+        onMapComplete: function(response) {
+            this.map = response.map;
+            //set up map related events here
         }
+        */
     });
 });

@@ -7,6 +7,10 @@
         "label": "Map Markers",
         "route": "/marker",
         "role": "KUBUsers"
+    }, {
+    	"label": "Categories",
+    	"route": "/category",
+    	"role": "KUBUsers"
     }],
     "footer": [{
         "label": "FeedBack",

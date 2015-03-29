@@ -1,0 +1,78 @@
+<div class="panel panel-default engineeringInspectionDetail">
+	<div role="tabpanel">
+		<div class="tab-content">
+
+			<div class="panel-heading" data-dojo-attach-point="panelHeadingNode">
+				<h3 class="panel-title modelEmptyShow">Please select a
+					category.</h3>
+				<div class="modelLoadingShow">
+					<span class="fa fa-spinner fa-spin"></span> <span>Loading...</span>
+				</div>
+			</div>
+			<div class="modelCompleteShow">
+				<form class="panel-body" data-dojo-type="common/ui/Form"
+					data-dojo-attach-point="form">
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Title'">
+						<div data-dojo-type="common/ui/TextBox"
+							data-dojo-attach-point="title"></div>
+					</div>
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Description'">
+						<div data-dojo-type="common/ui/TextArea"
+							data-dojo-attach-point="description"></div>
+					</div>
+					
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Symbol'">
+						<div data-dojo-type="common/ui/DropdownStoreList"
+							data-dojo-attach-point="symbol"></div>
+					</div>
+					
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Color'">
+						<div data-dojo-type="dojox/widget/ColorPicker"
+							data-dojo-attach-point="color"></div>
+					</div>
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Created By'">
+						<div data-dojo-type="common/ui/TextBox"
+							data-dojo-attach-point="createdBy"></div>
+					</div>
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Created Date'">
+						<div data-dojo-type="common/ui/DateTimePicker"
+							data-dojo-attach-point="createdDate" type="date"></div>
+					</div>
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Edited By'">
+						<div data-dojo-type="common/ui/TextBox"
+							data-dojo-attach-point="editedBy"></div>
+					</div>
+
+					<div data-dojo-type="common/ui/FormItem"
+						data-dojo-props="label: 'Edited Date'">
+						<div data-dojo-type="common/ui/DateTimePicker"
+							data-dojo-attach-point="editedDate" type="date"></div>
+					</div>
+
+					<button class="btn-primary pull-right"
+						data-dojo-type="common/ui/Button"
+						data-dojo-attach-point="saveButton"
+						data-dojo-props="label: 'Save'"></button>
+
+					<button class="btn-danger pull-right"
+						data-dojo-type="common/ui/Button"
+						data-dojo-attach-point="deleteButton" style="margin-right: 10px;"
+						data-dojo-props="label: 'Delete'"></button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

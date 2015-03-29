@@ -10,6 +10,8 @@
 
 @import url('../../vendor/bootstrapmap/css/bootstrapmap.css');
 
+@import url('../../../dev/dojox/widget/ColorPicker/ColorPicker.css');
+
 @import url('../../common/ui/css/common.css');
 
 @import url('mapmarker.css');

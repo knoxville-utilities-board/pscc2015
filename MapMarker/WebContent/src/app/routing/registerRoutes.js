@@ -14,12 +14,14 @@ define(["dojo/_base/config",
     "app/ui/Home",
     "app/ui/Marker",
     "app/ui/MarkerListDetail",
+    "app/ui/Category",
+    "app/ui/CategoryListDetail",
 
     "common/pageViewTracker",
     "common/routing/router",
     "common/routing/routeHandler"],
 
-function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, SeverityStore, SubtypeStore, TypeStore, UtilityStore, Login, PageNotFound, Home, Marker, MarkerListDetail, pageViewTracker, router, routeHandler) {
+function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, SeverityStore, SubtypeStore, TypeStore, UtilityStore, Login, PageNotFound, Home, Marker, MarkerListDetail, Category, CategoryListDetail, pageViewTracker, router, routeHandler) {
 
     var toolId = "app.";
 
@@ -170,6 +172,11 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
 
         var item;
         var categoryItem;
+        var directionItem;
+        var severityItem;
+        var subtypeItem;
+        var typeItem;
+        var utilityItem;
         if (evt.params.id == "create") {
             titleName = "Create";
             getMarkerStore();
@@ -240,6 +247,84 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
             router.go(baseRoute + "/marker", true);
         }, 0);
     });
+    
+    router.registerSecured(baseRoute + "/category", function(evt) {
+        console.info("route " + baseRoute + "/category");
+        getCategoryStore();
+        
+        var routeEvent = {
+            targetView: toolId + "CategoryListDetail",
+            Widget: CategoryListDetail,
+            title: "Categories",
+            isList: true,
+            model: {
+                detailItem: false
+            },
+            evt: evt
+        };
+
+        routeHandler.route(routeEvent);
+    });
+
+    var route = baseRoute + "/category/:id";
+    
+//    pageViewTracker.registerPageView(route, function(match) {
+//        return match !== "create" ? "category" : match;
+//    });
+    
+    router.register(route, function(evt) {
+        console.info("route " + route);
+
+        var titleName;
+
+        var item;
+        var categoryItem;
+        if (evt.params.id == "create") {
+            titleName = "Create";
+            getCategoryStore();
+            item = {};
+        } else {
+            var store = getCategoryStore();
+            item = store.get(evt.params.id);
+        }
+
+        var id = evt.params.id;
+        if (id == "create") {
+        	id = "Create";
+        }
+        if (item) {
+      
+            var routeEvent = {
+                targetView: toolId + "CategoryListDetail",
+                Widget:CategoryListDetail,
+                title: "Loading...",
+                isDetail: true,
+                model: {
+                    detailItem: item
+                },
+                listRoute: baseRoute + "/category",
+                evt: evt
+            };
+
+            routeHandler.route(routeEvent);
+        } else {
+            evt.preventDefault();
+            router.go(baseRoute + "/category");
+        }
+    });
+
+    router.register(baseRoute + "/category/create/success", function(evt) {
+        console.info("route " + baseRoute + "/category/create/success");
+
+        app.growler.growl({
+            message: "Category created successfully.",
+            level: "success",
+            timeout: 5000
+        });
+        setTimeout(function() {
+            router.go(baseRoute + "/category", true);
+        }, 0);
+    });
 
     router.register(baseRoute + "/login", function(evt) {
         console.info("route " + baseRoute + "/login");
@@ -260,6 +345,8 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
         routeHandler.route(routeEvent);
     });
 
+    
+    
     function registerLayer(evt, layer, modules) {
         var layers = (typeof layer === "string") ? [layer] : layer;
         var layersAreLoaded = layers.every(function(layer) {

@@ -43,7 +43,6 @@ function(declare, lang, win, domClass, domStyle, on, _TemplatedMixin, _ModelApiM
         _setDetailAttr: function(detail) {
             this.detail = detail;
             detail.placeAt(this.detailDiv);
-            detail.startup();
         },
 
         resize: function() {
