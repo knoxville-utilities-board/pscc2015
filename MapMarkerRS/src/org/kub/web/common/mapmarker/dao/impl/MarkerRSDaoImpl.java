@@ -104,6 +104,9 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 			// *** This is the code I added
 			// *** From JPA Tutorial Sort and Filters update  3-14-15
 			
+			// Ed Broxson 3-29-15
+            //  Added isActive parameter for sorting and filtering
+			
 			// Create the dynamic query based on the input to the server
 			String queryString = "SELECT n FROM Marker n";
 			List<String> whereClauses = new ArrayList<String>();
@@ -118,6 +121,12 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 					// Having wildcard at the beginning can result in a very
 					// slow query - an example
 					parameters.put("location", "%" + value + "%");
+				} else if(StringUtils.equals(filter.getKey(), "categoryId")){
+					whereClauses.add("n.categoryId LIKE :categoryId ");
+					parameters.put("categoryId", value);
+				} else if(StringUtils.equals(filter.getKey(), "isActive")){
+					whereClauses.add("n.isActive = :isActive ");
+					parameters.put("isActive", Boolean.parseBoolean(value));
 				}
 			}
 
