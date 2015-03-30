@@ -19,7 +19,8 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             // Ed Broxson 3-29-15
             //  Added flags for sorting and filtering
             var direct = null;
-            var active = null;
+            var active = true;
+            var category = null;
 
             var store = this.store = lang.getObject("marker.stores.markers", false, app);
 
@@ -44,11 +45,13 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             var catStore = lang.getObject("marker.stores.categories", false, app);
             var catDropdown = new DropdownStoreList({
             	store: catStore,
+            	forceSelect: false,
             	select: "single",
             	itemRenderer: DropdownListItem
             });
             
             catDropdown.on("select", lang.hitch(this, function(){
+            	category = catDropdown.get("value");
             	list.clearList();
             	list.setQuery({
             		categoryId: catDropdown.get("value"),
@@ -58,7 +61,9 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             	});
             }));
             list.addWidget(catDropdown);
-            
+
+/*
+TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows viewing of inactive markers.
             // Ed Broxson 3-29-15
             //  Added isActiveCheckbox for sorting and filtering
             var isActiveCheckbox = this.isActiveCheckbox = new CheckBox({
@@ -82,29 +87,11 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             	});
             }));
             list.addWidget(isActiveCheckbox);
+*/
             
             // Ed Broxson 3-29-15
             //  Changed from queryButton and modified for sorting and filtering
-            var sortButton = this.sortButton = new Button({
-            	innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>',
-            	"class": "pull-left btn-link userListWidget",
-            	title: "Sort Markers"
-            });
-            sortButton.on("click", lang.hitch(this, function(){
-            	if(direct == null){
-            		direct = false;
-            	}
-            	direct = !direct;
-            	list.clearList();
-            	list.setQuery({
-            		categoryId: catDropdown.get("value"),
-            		isActive: active
-            	}, {
-            		sort: [{attribute: "createdDate", descending: direct}]
-            	});
-            }));
-            list.addWidget(sortButton);
-
+            
             var createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-plus"></i>',
                 "class": "pull-right btn-link userListWidget",
@@ -116,6 +103,58 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             }));
             list.addWidget(createButton);
             
+            var sortButton = this.sortButton = new Button({
+            	innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>',
+            	"class": "pull-right btn-link userListWidget",
+            	title: "Sort Markers by Date"
+            });
+            sortButton.on("click", lang.hitch(this, function(){
+            	if(direct == null){
+            		direct = false;
+            	}
+            	direct = !direct;
+            	if (sortButton.innerHTML == '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>') {
+            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
+            	}
+            	else {
+            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>');
+            	}
+            	list.clearList();
+            	if (category) {
+                	list.setQuery({
+                		categoryId: catDropdown.get("value"),
+                		isActive: active
+                	}, {
+                		sort: [{attribute: "createdDate", descending: direct}]
+                	});
+            	} else {
+                	list.setQuery({
+                		isActive: active
+                	}, {
+                		sort: [{attribute: "createdDate", descending: direct}]
+                	});
+            	}
+
+            }));
+            list.addWidget(sortButton);
+            
+            var createButton = this.createButton = new Button({
+                innerHTML: '<i class="buttonIcon fa fa-2x fa-remove"></i>',
+                "class": "pull-right btn-link userListWidget",
+                title: "Remove Filter"
+            });
+            createButton.on("click", lang.hitch(this, function() {
+            	category = null;
+                list.clearList();
+                list.setQuery({
+            		isActive: active
+            	}, {
+            		sort: [{attribute: "createdDate", descending: direct}]
+            	});
+            }));
+            list.addWidget(createButton);
+
+
             var detail = new Marker();
             this.set("detail", detail);
         }
