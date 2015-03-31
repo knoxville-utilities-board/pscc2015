@@ -54,7 +54,7 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             	category = catDropdown.get("value");
             	list.clearList();
             	list.setQuery({
-            		categoryId: catDropdown.get("value"),
+            		categoryId: category,
             		isActive: active
             	}, {
             		sort: [{attribute: "createdDate", descending: direct}]
@@ -79,12 +79,20 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             	}
             	active = !active;
             	list.clearList();
-            	list.setQuery({
-            		categoryId: catDropdown.get("value"),
-            		isActive: active
-            	}, {
-            		sort: [{attribute: "createdDate", descending: direct}]
-            	});
+            	if (category) {
+                	list.setQuery({
+                		categoryId: category,
+                		isActive: active
+                	}, {
+                		sort: [{attribute: "createdDate", descending: direct}]
+                	});
+            	} else {
+                	list.setQuery({
+                		isActive: active
+                	}, {
+                		sort: [{attribute: "createdDate", descending: direct}]
+                	});
+            	}
             }));
             list.addWidget(isActiveCheckbox);
 */
@@ -104,7 +112,7 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             list.addWidget(createButton);
             
             var sortButton = this.sortButton = new Button({
-            	innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>',
+            	innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>',
             	"class": "pull-right btn-link userListWidget",
             	title: "Sort Markers by Date"
             });
@@ -113,16 +121,16 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             		direct = false;
             	}
             	direct = !direct;
-            	if (sortButton.innerHTML == '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>') {
-            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
+            	if (direct) {
+            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>');
             	}
             	else {
-            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>');
+            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
             	}
             	list.clearList();
             	if (category) {
                 	list.setQuery({
-                		categoryId: catDropdown.get("value"),
+                		categoryId: category,
                 		isActive: active
                 	}, {
                 		sort: [{attribute: "createdDate", descending: direct}]

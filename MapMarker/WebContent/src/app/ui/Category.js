@@ -49,7 +49,8 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
         onModelComplete: function(model) {
             console.log("model", model);
             
-            app.appbar.set("title", "Categories > " + model.id);
+            var categoryNo = model.id? model.id : 'New';
+            app.appbar.set("title", "Categories > " + categoryNo);
             
             this.form.clearValidation();
             

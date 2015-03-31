@@ -84,7 +84,8 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             this.utility.setStore(utilityStore);
             this.utility.itemRenderer = DropdownListItem;
             
-            app.appbar.set("title", "Markers > " + model.id);
+            var markerNo = model.id? model.id : 'New';
+            app.appbar.set("title", "Markers > " + markerNo);
             
             this.form.clearValidation();
             
