@@ -25,7 +25,6 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
         
-        /* This is for the map; it's not working. Throwing GET error on some KUB resources. Asked Zach about it 3/28.
         startup: function() {
             var options = {
             	    mapOptions: {
@@ -36,10 +35,14 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	};
 
             // kubgis/utils
-            kubgisUtils.createWebMap(this.mapNode, options).then(lang.hitch(this, this.onMapComplete));
+            kubgisUtils.createWebMap(this.mapLarge, options).then(lang.hitch(this, this.onMapCompleteLarge));
+            
+            //These are for the form inputs. Not really sure how to differentiate the three maps. Best guess is to create new maps with separate completion functions.
+            //I can get it to load any single map by commenting out the map(s) that are created before it, but not all together.
+            kubgisUtils.createWebMap(this.mapInputStart, options).then(lang.hitch(this, this.onMapCompleteInputStart));
+            kubgisUtils.createWebMap(this.mapInputEnd, options).then(lang.hitch(this, this.onMapCompleteInputEnd));
         },
-        */
-        
+
         postCreate: function() {
             var emptyValidate = function() {
                 if (this.get("value") === "") {
@@ -50,7 +53,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
 
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
-                        
+                                   
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
         },
@@ -221,9 +224,18 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	
             	this.model.latitude = this.latitude.get("value");
             	this.model.longitude = this.longitude.get("value");
-            	this.model.endLatitude = this.endLatitude.get("value");
-            	this.model.endLongitude = this.endLongitude.get("value");
             	
+            	//If there is no distance, then the end point == the start point
+            	if (this.endLatitude.get("value") == "") {
+            		this.model.endLatitude = this.latitude.get("value");
+            	} else {
+                	this.model.endLatitude = this.endLatitude.get("value");
+            	};
+            	if (this.endLongitude.get("value") == "") {
+            		this.model.endLongitude = this.longitude.get("value");
+            	} else {
+            		this.model.endLongitude = this.endLongitude.get("value");
+            	};        
             	
             	this.model.description = this.description.get("value");
             	this.model.street = this.street.get("value");
@@ -259,11 +271,25 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
         },
         
         
-        /* This is for the map; it's not working. Throwing GET error on some KUB resources. Asked Zach about it 3/28.
-        onMapComplete: function(response) {
-            this.map = response.map;
+        onMapCompleteLarge: function(response) {
+        	//console.log(response);
+            this.mapLarge = response.map;
+            this.mapLarge.enableScrollWheelZoom();
+            this.mapLarge.showZoomSlider();
+            //set up map related events here
+        },
+        
+        onMapCompleteInputStart: function(response) {
+        	console.log(response);
+            this.mapInputStart = response.map;
+            //set up map related events here
+        },
+        
+        onMapCompleteInputEnd: function(response) {
+        	console.log(response);
+            this.mapInputEnd = response.map;
             //set up map related events here
         }
-        */
+
     });
 });

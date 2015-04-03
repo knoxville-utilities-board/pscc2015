@@ -86,6 +86,13 @@
 							<div data-dojo-type="common/ui/DropdownStoreList"
 								data-dojo-attach-point="direction"></div>
 						</div>
+						
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Start Point'">
+							<div class="panel-body map-panel-body">
+					    		<div id="${id}.mapStart" data-dojo-attach-point="mapInputStart"></div>
+							</div>
+						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Latitude'">
@@ -97,6 +104,13 @@
 							data-dojo-props="label: 'Longitude'">
 							<div data-dojo-type="common/ui/TextBox"
 								data-dojo-attach-point="longitude"></div>
+						</div>
+						
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Point'">
+							<div class="panel-body map-panel-body">
+					    		<div id="${id}.mapEnd" data-dojo-attach-point="mapInputEnd"></div>
+							</div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
@@ -181,7 +195,7 @@
 			<div role="tabpanel" class="tab-pane" id="map">
 				<div class="panel-heading">
 					<div class="panel-body map-panel-body">
-					    <div id="${id}.map" data-dojo-attach-point="mapNode"></div>
+					    <div id="${id}.map" data-dojo-attach-point="mapLarge"></div>
 					</div>
 				</div>
 			</div>
