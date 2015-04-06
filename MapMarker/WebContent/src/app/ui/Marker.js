@@ -5,6 +5,7 @@ define(["dojo/_base/declare",
     "dijit/_WidgetsInTemplateMixin",
     "kubgis/defaults",
     "kubgis/utils",
+    "bootstrapmap/bootstrapmap",
     "common/routing/router",
     "common/ui/_ModelApiMixin",
     "common/ui/Button",
@@ -20,7 +21,7 @@ define(["dojo/_base/declare",
     "util/dateHandling",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
+function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, bootstrapMap, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
@@ -34,13 +35,25 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	    }
             	};
 
-            // kubgis/utils
+            //kubgis/utils
             kubgisUtils.createWebMap(this.mapLarge, options).then(lang.hitch(this, this.onMapCompleteLarge));
             
-            //These are for the form inputs. Not really sure how to differentiate the three maps. Best guess is to create new maps with separate completion functions.
-            //I can get it to load any single map by commenting out the map(s) that are created before it, but not all together.
-            kubgisUtils.createWebMap(this.mapInputStart, options).then(lang.hitch(this, this.onMapCompleteInputStart));
-            kubgisUtils.createWebMap(this.mapInputEnd, options).then(lang.hitch(this, this.onMapCompleteInputEnd));
+            //ArcGIS
+        	var mapInputStart;
+            mapInputStart = bootstrapMap.create("mapStart", {
+                basemap:"streets",
+                center:[-83.93,35.97],
+                zoom:13,
+              });
+            mapInputStart.on("load", this.onMapCompleteInputStart);
+            
+        	var mapInputEnd;
+            mapInputEnd = bootstrapMap.create("mapEnd", {
+                basemap:"streets",
+                center:[-83.93,35.97],
+                zoom:13,
+              });
+            mapInputEnd.on("load", this.onMapCompleteInputEnd);
         },
 
         postCreate: function() {
@@ -272,7 +285,6 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
         
         
         onMapCompleteLarge: function(response) {
-        	//console.log(response);
             this.mapLarge = response.map;
             this.mapLarge.enableScrollWheelZoom();
             this.mapLarge.showZoomSlider();
@@ -280,14 +292,12 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
         },
         
         onMapCompleteInputStart: function(response) {
-        	console.log(response);
-            this.mapInputStart = response.map;
+            //this.mapInputStart = response.map;
             //set up map related events here
         },
         
         onMapCompleteInputEnd: function(response) {
-        	console.log(response);
-            this.mapInputEnd = response.map;
+            //this.mapInputEnd = response.map;
             //set up map related events here
         }
 
