@@ -43,7 +43,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             mapInputStart = bootstrapMap.create("mapStart", {
                 basemap:"streets",
                 center:[-83.93,35.97],
-                zoom:13,
+                zoom:13
               });
             mapInputStart.on("load", this.onMapCompleteInputStart);
             
@@ -51,7 +51,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             mapInputEnd = bootstrapMap.create("mapEnd", {
                 basemap:"streets",
                 center:[-83.93,35.97],
-                zoom:13,
+                zoom:13
               });
             mapInputEnd.on("load", this.onMapCompleteInputEnd);
         },

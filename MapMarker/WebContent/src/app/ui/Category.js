@@ -145,7 +145,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             		router.go("/category");
             	});
             }            
-        },
+        }
         
     });
 });
