@@ -3,7 +3,7 @@
     <wb-module deploy-name="MapMarker">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="MapMarker"/>
         <property name="java-output-path" value="/MapMarker/WebContent/WEB-INF/classes"/>
+        <property name="context-root" value="map-marker"/>
     </wb-module>
 </project-modules>
