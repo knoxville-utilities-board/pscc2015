@@ -1,0 +1,4 @@
+Node build command
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\MapMarker\WebContent\src\dev.profile.js --release 
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\MapMarker\WebContent\src\test.profile.js --release 
+node C:\DEV\dojo\v_003\src\dojo\dojo.js load=build --profile C:\workspace\MapMarker\WebContent\src\release.profile.js --release 
