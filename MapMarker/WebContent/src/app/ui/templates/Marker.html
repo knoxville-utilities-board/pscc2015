@@ -94,36 +94,22 @@
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Start Point'">
-
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'Latitude'">
-							<div data-dojo-type="common/ui/TextBox"
-								data-dojo-attach-point="latitude"></div>
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'Longitude'">
-							<div data-dojo-type="common/ui/TextBox"
-								data-dojo-attach-point="longitude"></div>
+							<div class="input-append" data-dojo-attach-point="startPoint">
+								<span class="add-on">
+									<input class="cursorPointer" readonly type="text" data-dojo-attach-point="startPointText"></input>
+									<i class="fa fa-globe cursorPointer"></i>
+								</span>
+							</div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'End Point'">
-
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'End Latitude'">
-							<div data-dojo-type="common/ui/TextBox"
-								data-dojo-attach-point="endLatitude"></div>
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'End Longitude'">
-							<div data-dojo-type="common/ui/TextBox"
-								data-dojo-attach-point="endLongitude"></div>
+							<div class="input-append" data-dojo-attach-point="endPoint">
+								<span class="add-on">
+									<input class="cursorPointer" readonly type="text" data-dojo-attach-point="endPointText"></input>
+									<i class="fa fa-globe cursorPointer"></i>
+								</span>
+							</div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"

@@ -58,7 +58,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             mapInputLarge.on("load", lang.hitch(this,this.onMapCompleteLarge));
             
             this.pointPicker = new PointPicker().placeAt(this.domNode);
-            this.pointPicker.show();
             
             
         	/*var mapInputStart;
@@ -233,10 +232,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.editedDate.set("value", new Date(this.model.editedDate) || "");
 
             //Map
-            this.latitude.set("value", this.model.latitude || "");
-            this.longitude.set("value", this.model.longitude || "");
-            this.endLatitude.set("value", this.model.endLatitude || "");
-            this.endLongitude.set("value", this.model.endLongitude || "");
+            this.startPointText.value = this.model.latitude + ", " + this.model.longitude || "";
+            this.endPointText.value = this.model.endLatitude + ", " + this.model.endLongitude || "";
             
             //Disabled - these values are set automatically on saving
             this.createdBy.set("disabled", true);
@@ -362,15 +359,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             }));
         },
         
-        onMapCompleteInputStart: function(response) {
-            //this.mapInputStart = response.map;
-            //set up map related events here
-        },
-        
-        onMapCompleteInputEnd: function(response) {
-            //this.mapInputEnd = response.map;
-            //set up map related events here
-        }
 
     });
 });
