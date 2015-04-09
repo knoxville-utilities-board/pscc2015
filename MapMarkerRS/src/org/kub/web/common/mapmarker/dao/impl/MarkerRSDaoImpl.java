@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import org.apache.commons.lang.StringUtils;  //*** Ed Broxson - For JPA Tutorial Sort and Filters update  3-14-15
+import org.apache.commons.lang.StringUtils; //*** Ed Broxson - For JPA Tutorial Sort and Filters update  3-14-15
 import org.kub.web.common.mapmarker.MarkerRSEmf;
 import org.kub.web.common.mapmarker.dao.MarkerRSDao;
 import org.kub.web.common.mapmarker.model.Marker;
@@ -66,9 +66,9 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 
 			// *** Ed Broxson
 			// *** This is the code I pulled to add the below block
-			// *** From JPA Tutorial Sort and Filters update  3-14-15
+			// *** From JPA Tutorial Sort and Filters update 3-14-15
 			// *** StringUtils uses the import I commented above
-			
+
 			// Query query = null;
 			// Query totalCountQuery = null;
 			//
@@ -102,32 +102,32 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 
 			// *** Ed Broxson
 			// *** This is the code I added
-			// *** From JPA Tutorial Sort and Filters update  3-14-15
-			
+			// *** From JPA Tutorial Sort and Filters update 3-14-15
+
 			// Ed Broxson 3-29-15
-            //  Added isActive parameter for sorting and filtering
-			
+			// Added isActive parameter for sorting and filtering
+
 			// Create the dynamic query based on the input to the server
 			String queryString = "SELECT n FROM Marker n";
 			List<String> whereClauses = new ArrayList<String>();
 			Map<String, Object> parameters = new HashMap<String, Object>();
+			boolean active = false;
 			for (Filter filter : filterList) {
 				String value = filter.getValue().getCriteria();
-				if (StringUtils.equals(filter.getKey(), "createdBy")) {
-					whereClauses.add("n.createdBy = :createdBy ");
-					parameters.put("createdBy", value);
-				} else if (StringUtils.equals(filter.getKey(), "location")) {
-					whereClauses.add("n.location LIKE :location ");
-					// Having wildcard at the beginning can result in a very
-					// slow query - an example
-					parameters.put("location", "%" + value + "%");
-				} else if(StringUtils.equals(filter.getKey(), "categoryId")){
+				if (StringUtils.equals(filter.getKey(), "categoryId")) {
 					whereClauses.add("n.categoryId LIKE :categoryId ");
 					parameters.put("categoryId", value);
-				} else if(StringUtils.equals(filter.getKey(), "isActive")){
-					whereClauses.add("n.isActive = :isActive ");
-					parameters.put("isActive", Boolean.parseBoolean(value));
+				} else if (StringUtils.equals(filter.getKey(), "isActive")) {
+					if (!value.equalsIgnoreCase("all")) {
+						whereClauses.add("n.isActive = :isActive ");
+						parameters.put("isActive", Boolean.parseBoolean(value));
+					}
+					active = true;
 				}
+			}
+
+			if (!active) {
+				whereClauses.add("n.isActive = true");
 			}
 
 			// add the whereClauses to queryString
@@ -164,7 +164,7 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 
 			// a default sort order
 			if (i == 0) {
-				queryString += " ORDER BY n.startDate";
+				queryString += " ORDER BY n.description";
 			}
 
 			Query query = em.createQuery(queryString);
@@ -279,8 +279,10 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 			if (marker == null)
 				return;
 
+			marker.setIsActive(false);
 			entityTransaction.begin();
-			em.remove(marker);
+			marker = em.merge(marker);
+			// em.remove(marker); // Uncomment to re-implement full delete
 			entityTransaction.commit();
 		} catch (Exception e) {
 			throw new KUBGenericException(
@@ -302,7 +304,7 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 
 	// *** Ed Broxson
 	// *** This is code I added
-	// *** From JPA Tutorial Sort and Filters update  3-14-15
+	// *** From JPA Tutorial Sort and Filters update 3-14-15
 	@SuppressWarnings("unused")
 	private boolean isPropertyName(@SuppressWarnings("rawtypes") Class model,
 			String fieldName) {
