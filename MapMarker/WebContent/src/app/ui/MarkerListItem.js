@@ -14,7 +14,7 @@ function(declare, ListItem, dateHandling) {
             var createDateText = "Imported 1/2015";
 
             if (this.item.createdDate) {
-            	createDateText = "Created: " +dateHandling.kubDate(this.item.createdDate);
+            	createDateText = "Created: " +dateHandling.kubDate(this.item.createdDate)
             }
 
             this.set("leftLabel",  createDateText);

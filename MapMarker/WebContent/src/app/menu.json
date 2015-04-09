@@ -11,10 +11,5 @@
     	"label": "Categories",
     	"route": "/category",
     	"role": "KUBUsers"
-    }],
-    "footer": [{
-        "label": "FeedBack",
-        "route": "/feedback",
-        "role": "KUBUsers"
     }]
 }

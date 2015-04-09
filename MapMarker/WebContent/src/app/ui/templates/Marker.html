@@ -1,16 +1,21 @@
 <div class="panel panel-default engineeringInspectionDetail">
 	<div role="tabpanel">
 
-		<ul class="nav nav-pills" role="tablist">
-			<li role="presentation" class="active"><a href="#form"
-				aria-controls="form" role="tab" data-toggle="pill">Form</a></li>
-			<li role="presentation"><a href="#map" aria-controls="map"
-				role="tab" data-toggle="pill">Map</a></li>
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#map"
+				aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
+			<li role="presentation"><a href="#form" aria-controls="form"
+				role="tab" data-toggle="tab" data-dojo-attach-point="formTab">Form</a></li>
 		</ul>
 
 		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="map">
+				<div class="panel-body map-panel-body">
+					<div id="mapLarge" data-dojo-attach-point="mapLarge"></div>
+				</div>
+			</div>
 
-			<div role="tabpanel" class="tab-pane active" id="form">
+			<div role="tabpanel" class="tab-pane" id="form">
 				<div class="panel-heading" data-dojo-attach-point="panelHeadingNode">
 					<h3 class="panel-title modelEmptyShow">Please select a marker.</h3>
 					<div class="modelLoadingShow">
@@ -86,10 +91,10 @@
 							<div data-dojo-type="common/ui/DropdownStoreList"
 								data-dojo-attach-point="direction"></div>
 						</div>
-						
+
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Start Point'">
-					    	<div id="mapStart" data-dojo-attach-point="mapInputStart"></div>
+
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
@@ -103,10 +108,10 @@
 							<div data-dojo-type="common/ui/TextBox"
 								data-dojo-attach-point="longitude"></div>
 						</div>
-						
+
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'End Point'">
-							<div id="mapEnd" data-dojo-attach-point="mapInputEnd"></div>
+
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
@@ -185,14 +190,6 @@
 							data-dojo-attach-point="deleteButton" style="margin-right: 10px;"
 							data-dojo-props="label: 'Delete'"></button>
 					</form>
-				</div>
-			</div>
-
-			<div role="tabpanel" class="tab-pane" id="map">
-				<div class="panel-heading">
-					<div class="panel-body map-panel-body">
-					    <div id="${id}.map" data-dojo-attach-point="mapLarge"></div>
-					</div>
 				</div>
 			</div>
 
