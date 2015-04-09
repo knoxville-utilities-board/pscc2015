@@ -9,6 +9,7 @@ define(["dojo/_base/declare",
 
 function(declare, lang, bootstrapMap, _ModelApiMixin, View, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
 
+    return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
 
         postCreate: function() {
