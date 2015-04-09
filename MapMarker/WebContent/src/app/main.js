@@ -26,7 +26,7 @@ function(lang, domConstruct, JSON, notify, topic, pageViewTracker, router, envir
             },
             "roles": ["KUBUsers"]
         }
-    }
+    };
 
     var loggerRegex = /dojorest\/logger/;
     notify("error", function(error) {
@@ -59,7 +59,7 @@ function(lang, domConstruct, JSON, notify, topic, pageViewTracker, router, envir
     //        appInit();
     //    });
 
-    appInit(mockUser.data)
+    appInit(mockUser.data);
 
     function appInit(data) {
         console.info("appInit()");

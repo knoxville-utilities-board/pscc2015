@@ -239,16 +239,16 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	this.model.longitude = this.longitude.get("value");
             	
             	//If there is no distance, then the end point == the start point
-            	if (this.endLatitude.get("value") == "") {
+            	if (this.endLatitude.get("value") === "") {
             		this.model.endLatitude = this.latitude.get("value");
             	} else {
                 	this.model.endLatitude = this.endLatitude.get("value");
-            	};
-            	if (this.endLongitude.get("value") == "") {
+            	}
+            	if (this.endLongitude.get("value") === "") {
             		this.model.endLongitude = this.longitude.get("value");
             	} else {
             		this.model.endLongitude = this.endLongitude.get("value");
-            	};        
+            	}        
             	
             	this.model.description = this.description.get("value");
             	this.model.street = this.street.get("value");
@@ -257,7 +257,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	this.model.endCrossStreet  = this.endCrossStreet.get("value");
             	this.model.location = this.location.get("value");
             	this.model.specifyEnd = this.specifyEnd.get("value");
-            	this.model.createdBy = this.createdBy.get("value")
+            	this.model.createdBy = this.createdBy.get("value");
             	this.model.editedBy = this.editedBy.get("value");
 
                 if (this.model.id) {

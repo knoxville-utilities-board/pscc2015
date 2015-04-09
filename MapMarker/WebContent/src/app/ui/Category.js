@@ -74,7 +74,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             if (this.model.symbology) {
             	var split = this.model.symbology.split(",");
             	symbol = split[0];
-            	if (split[1]) color = split[1];
+            	if (split[1]) {color = split[1];}
             }
             
             var label = "Select One...";
@@ -120,7 +120,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             	this.model.title = this.title.get("value");
             	this.model.description = this.description.get("value");
             	this.model.symbology = this.symbol.get("value") + "," + this.color.get("value");
-            	this.model.createdBy = this.createdBy.get("value")
+            	this.model.createdBy = this.createdBy.get("value");
             	this.model.editedBy = this.editedBy.get("value");
             	//createdDate and editedDate are set automatically
 

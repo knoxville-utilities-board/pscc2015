@@ -16,8 +16,8 @@ function(declare, ListItem, dateHandling) {
             var color = "#000000";
             if (this.item.symbology) {
 	            var split = this.item.symbology.split(",");
-	            if (split[0]) symbol = split[0];
-	            if (split[1]) color = split[1];
+	            if (split[0]) {symbol = split[0];}
+	            if (split[1]) {color = split[1];}
             }
             
             this.set("rightText", '<span style="color:' + color + '">' + symbol + '</span>');

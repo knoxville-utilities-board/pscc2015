@@ -59,7 +59,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
     
     function getSeverityStore() {
     	console.log("getSeverityStore");
-    	var store = lang.getObject("marker.stores.severities", false, app)
+    	var store = lang.getObject("marker.stores.severities", false, app);
     	if (!store) {
     		store = lang.setObject("marker.stores.severities", new Observable(new SeverityStore()), app);
     		store.query();
@@ -69,7 +69,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
     
     function getSubtypeStore() {
     	console.log("getSubtypeStore");
-    	var store = lang.getObject("marker.stores.subtypes", false, app)
+    	var store = lang.getObject("marker.stores.subtypes", false, app);
     	if (!store) {
     		store = lang.setObject("marker.stores.subtypes", new Observable(new SubtypeStore()), app);
     		store.query();
@@ -79,7 +79,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
     
     function getTypeStore() {
     	console.log("getTypeStore");
-    	var store = lang.getObject("marker.stores.types", false, app)
+    	var store = lang.getObject("marker.stores.types", false, app);
     	if (!store) {
     		store = lang.setObject("marker.stores.types", new Observable(new TypeStore()), app);
     		store.query();
@@ -89,7 +89,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
     
     function getUtilityStore() {
     	console.log("getUtilityStore");
-    	var store = lang.getObject("marker.stores.utilities", false, app)
+    	var store = lang.getObject("marker.stores.utilities", false, app);
     	if (!store) {
     		store = lang.setObject("marker.stores.utilities", new Observable(new UtilityStore()), app);
     	}
@@ -266,7 +266,7 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
         routeHandler.route(routeEvent);
     });
 
-    var route = baseRoute + "/category/:id";
+    route = baseRoute + "/category/:id";
     
 //    pageViewTracker.registerPageView(route, function(match) {
 //        return match !== "create" ? "category" : match;

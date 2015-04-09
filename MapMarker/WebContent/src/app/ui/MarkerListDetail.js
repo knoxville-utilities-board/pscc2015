@@ -146,7 +146,7 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             }));
             list.addWidget(sortButton);
             
-            var createButton = this.createButton = new Button({
+            createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-remove"></i>',
                 "class": "pull-right btn-link userListWidget",
                 title: "Remove Filter"
