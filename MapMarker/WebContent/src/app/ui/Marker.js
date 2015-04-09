@@ -1,11 +1,19 @@
 define(["dojo/_base/declare",
     "dojo/_base/lang",
+    "dojo/on",
     "dojo/when",
+    "dojo/dom-construct",
     "dijit/_TemplatedMixin",
     "dijit/_WidgetsInTemplateMixin",
     "kubgis/defaults",
     "kubgis/utils",
+    "kubgis/dijit/Popup",
     "bootstrapmap/bootstrapmap",
+    "esri/layers/GraphicsLayer",
+    "esri/graphic",
+    "esri/geometry/Point",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/InfoTemplate",
     "common/routing/router",
     "common/ui/_ModelApiMixin",
     "common/ui/Button",
@@ -18,28 +26,42 @@ define(["dojo/_base/declare",
     "common/ui/TextBox",
     "common/ui/View",
     "app/ui/DropdownListItem",
+    "app/ui/PointPicker",
     "util/dateHandling",
+    "dojo/text!./templates/MarkerInfoWindowTemplate.html",
     "dojo/text!./templates/Marker.html"],
 
-function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, bootstrapMap, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, dateHandling, template) {
+function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, Popup, bootstrapMap, GraphicsLayer, Graphic, Point, SimpleMarkerSymbol, InfoTemplate, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, PointPicker, dateHandling, markerInfoTemplate, template) {
 
+	var symbols = {Circle: "STYLE_CIRCLE", Cross: "STYLE_CROSS", Diamond: "STYLE_DIAMOND", Square: "STYLE_SQUARE", X: "STYLE_X"};
+	
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
         
+        chosenCategory: {},
+        
         startup: function() {
-            var options = {
-            	    mapOptions: {
-            	        lods: kubgisDefaults.lods,
-            	        scrollWheelZoom: true,
-            	        slider: true
-            	    }
-            	};
-
-            //kubgis/utils
-            kubgisUtils.createWebMap(this.mapLarge, options).then(lang.hitch(this, this.onMapCompleteLarge));
+        	this.inherited(arguments);
             
+        	var customPopup = new Popup({}, domConstruct.create("div"));
+        	
             //ArcGIS
-        	var mapInputStart;
+        	var mapInputLarge;
+            mapInputLarge = bootstrapMap.create("mapLarge", {
+            	mapOptions: {
+            		infoWindow: customPopup
+            	},
+                basemap:"streets",
+                center:[-83.93,35.97],
+                zoom:13
+              });
+            mapInputLarge.on("load", lang.hitch(this,this.onMapCompleteLarge));
+            
+            this.pointPicker = new PointPicker().placeAt(this.domNode);
+            this.pointPicker.show();
+            
+            
+        	/*var mapInputStart;
             mapInputStart = bootstrapMap.create("mapStart", {
                 basemap:"streets",
                 center:[-83.93,35.97],
@@ -53,10 +75,11 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
                 center:[-83.93,35.97],
                 zoom:13
               });
-            mapInputEnd.on("load", this.onMapCompleteInputEnd);
+            mapInputEnd.on("load", this.onMapCompleteInputEnd);*/
         },
 
         postCreate: function() {
+        	this.inherited(arguments);
             var emptyValidate = function() {
                 if (this.get("value") === "") {
                     return "Required field";
@@ -66,6 +89,18 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
 
             this.store = lang.getObject("marker.stores.markers", false, app);
             console.log("the store", this.store);
+            
+            this.on("category-change", lang.hitch(this, function(evt){
+            	//These lines shouldn't be needed?
+                this.category.set("label", evt.category.title);
+                this.category.set("value", evt.category.value);
+                if (evt.category.title == "All") {
+                	this.chosenCategory = {};
+                } else {
+                	this.chosenCategory = evt.category;
+                }
+                
+            }));
                                    
             this.saveButton.on("click", lang.hitch(this, this.save));
             this.deleteButton.on("click", lang.hitch(this, this.remove));
@@ -118,9 +153,9 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
 
 
             //Dropdowns
-            var label = "Select One...";
-            var value = null;            
-            if (this.model.categoryId) {
+            var label = this.chosenCategory.title || "Select One...";
+            var value = this.chosenCategory.value;            
+            if (this.model.categoryId && !value) {
 	            var categoryModel = categoryStore.get(this.model.categoryId);
 	            when(categoryModel).then(function(categoryModel) {
 	            	label = categoryModel.title;
@@ -219,6 +254,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	this.editedDate.set("disabled", true);
             }
             
+            $(this.formTab).tab("show");
         },
 
         save: function() {
@@ -239,16 +275,16 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	this.model.longitude = this.longitude.get("value");
             	
             	//If there is no distance, then the end point == the start point
-            	if (this.endLatitude.get("value") === "") {
+            	if (this.endLatitude.get("value") == "") {
             		this.model.endLatitude = this.latitude.get("value");
             	} else {
                 	this.model.endLatitude = this.endLatitude.get("value");
-            	}
-            	if (this.endLongitude.get("value") === "") {
+            	};
+            	if (this.endLongitude.get("value") == "") {
             		this.model.endLongitude = this.longitude.get("value");
             	} else {
             		this.model.endLongitude = this.endLongitude.get("value");
-            	}        
+            	};        
             	
             	this.model.description = this.description.get("value");
             	this.model.street = this.street.get("value");
@@ -257,7 +293,7 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             	this.model.endCrossStreet  = this.endCrossStreet.get("value");
             	this.model.location = this.location.get("value");
             	this.model.specifyEnd = this.specifyEnd.get("value");
-            	this.model.createdBy = this.createdBy.get("value");
+            	this.model.createdBy = this.createdBy.get("value")
             	this.model.editedBy = this.editedBy.get("value");
 
                 if (this.model.id) {
@@ -283,12 +319,47 @@ function(declare, lang, when, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDe
             }            
         },
         
+        setMarkers: function(markers) {
+        	this.mapLargeGraphicsLayer.clear();
+        	var categoryStore = lang.getObject("marker.stores.categories", false, app);
+            var map = this.mapLarge;
+            
+        	
+        	markers.forEach(function(marker){
+        		var cat = categoryStore.get(marker.categoryId);
+        		when(cat).then(lang.hitch(this, function(cat) {
+		            var split = cat.symbology.split(",");
+		            var symbol = split[0];
+		            var color = split[1];
+		            
+		            var markerDates = lang.clone(marker);
+		            markerDates.startDate = dateHandling.kubDate(marker.startDate);
+		            markerDates.endDate = dateHandling.kubDate(marker.endDate);
+		            
+	        		var infoTemplate = new InfoTemplate("${description}", markerInfoTemplate);
+	        		var graphic = new Graphic(
+	        				new Point(marker.longitude, marker.latitude), 
+	        				new SimpleMarkerSymbol(SimpleMarkerSymbol[symbols[symbol]], 10, null, color), 
+	        				markerDates,
+	        				infoTemplate);
+
+	                this.mapLargeGraphicsLayer.add(graphic);
+        		}));
+        	}, this);
+        	
+        },
         
         onMapCompleteLarge: function(response) {
             this.mapLarge = response.map;
             this.mapLarge.enableScrollWheelZoom();
             this.mapLarge.showZoomSlider();
-            //set up map related events here
+            
+        	this.mapLargeGraphicsLayer = new GraphicsLayer();
+        	this.mapLarge.addLayer(this.mapLargeGraphicsLayer);
+            this.setMarkers(app.marker.markers);
+            this.on("new-markers", lang.hitch(this, function(evt){
+            	this.setMarkers(evt.markers);
+            }));
         },
         
         onMapCompleteInputStart: function(response) {

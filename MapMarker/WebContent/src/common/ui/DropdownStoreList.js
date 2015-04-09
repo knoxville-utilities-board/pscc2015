@@ -7,6 +7,33 @@ function(declare, _StoreListMixin, DropdownList, GenericDropdownListItem) {
 
     return declare([DropdownList, _StoreListMixin], {
         itemRenderer: GenericDropdownListItem,
+        
+        allSelection: false,
+
+        allSelectionLabel: "All",
+
+        allSelectionValue: "",
+
+        postMixInProperties: function() {
+            this.inherited(arguments);
+            if (this.allSelection) {
+                this.forceSelect = false;
+            }
+            if (!this.allSelectionValue) {
+                this.allSelectionValue = this.allSelectionLabel;
+            }
+        },
+
+        generateList: function( /*Array*/ items) {
+            if (this.allSelection) {
+                var item = {
+                    label: this.allSelectionLabel,
+                    value: this.allSelectionValue
+                };
+                items.unshift(item);
+            }
+            this.inherited(arguments);
+        },
 
         _createItemProperties: function( /*Object*/ item) {
             var props = {};
@@ -25,6 +52,16 @@ function(declare, _StoreListMixin, DropdownList, GenericDropdownListItem) {
             }
 
             return props;
-        }
+        },
+
+        onAdd: refresh,
+
+        onUpdate: refresh,
+
+        onDelete: refresh
     });
+
+    function refresh() {
+        this.refresh();
+    }
 });

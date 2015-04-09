@@ -15,7 +15,7 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
     return declare([ListDetailView], {
         postCreate: function() {
             console.log("postCreate()");
-            
+
             // Ed Broxson 3-29-15
             //  Added flags for sorting and filtering
             var direct = null;
@@ -24,6 +24,9 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
 
             var store = this.store = lang.getObject("marker.stores.markers", false, app);
 
+            var detail = new Marker();
+            this.set("detail", detail);
+
             var list = new StoreList({
                 store: store,
                 select: "single",
@@ -31,7 +34,7 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                 // Ed Broxson 3-29-15
                 //  Added query for sorting and filtering
                 query: {
-                	isActive: true
+                    isActive: true
                 },
                 itemRenderer: MarkerListItem,
                 onSelect: function(evt) {
@@ -39,30 +42,59 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                 }
             });
             this.set("list", list);
-            
+            list.on("complete", lang.hitch(this, function(data) {
+                app.marker.markers = data;
+                detail.emit("new-markers", {
+                    markers: data,
+                    bubbles: true
+                });
+            }));
+
             // Ed Broxson 3-29-15
             //  Added catStore and catDropdown for sorting and filtering
             var catStore = lang.getObject("marker.stores.categories", false, app);
             var catDropdown = new DropdownStoreList({
-            	store: catStore,
-            	forceSelect: false,
-            	select: "single",
-            	itemRenderer: DropdownListItem
+                store: catStore,
+                forceSelect: false,
+                select: "single",
+                itemRenderer: DropdownListItem,
+                allSelection: true
             });
-            
-            catDropdown.on("select", lang.hitch(this, function(){
-            	category = catDropdown.get("value");
-            	list.clearList();
-            	list.setQuery({
-            		categoryId: category,
-            		isActive: active
-            	}, {
-            		sort: [{attribute: "createdDate", descending: direct}]
-            	});
+
+            catDropdown.on("select", lang.hitch(this, function() {
+                category = catDropdown.get("value");
+                list.clearList();
+                if (category != "All") {
+                    list.setQuery({
+                        categoryId: category,
+                        isActive: active
+                    }, {
+                        sort: [{
+                            attribute: "createdDate",
+                            descending: direct
+                        }]
+                    });
+                } else {
+                    list.setQuery({
+                        isActive: active
+                    }, {
+                        sort: [{
+                            attribute: "createdDate",
+                            descending: direct
+                        }]
+                    });
+                }
+                detail.emit("category-change", {
+                    category: {
+                        value: category,
+                        title: catDropdown.get("label")
+                    },
+                    bubbles: true
+                });
             }));
             list.addWidget(catDropdown);
 
-/*
+            /*
 TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows viewing of inactive markers.
             // Ed Broxson 3-29-15
             //  Added isActiveCheckbox for sorting and filtering
@@ -96,10 +128,10 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             }));
             list.addWidget(isActiveCheckbox);
 */
-            
+
             // Ed Broxson 3-29-15
             //  Changed from queryButton and modified for sorting and filtering
-            
+
             var createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-plus"></i>',
                 "class": "pull-right btn-link userListWidget",
@@ -110,43 +142,49 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                 router.go("/marker/create");
             }));
             list.addWidget(createButton);
-            
+
             var sortButton = this.sortButton = new Button({
-            	innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>',
-            	"class": "pull-right btn-link userListWidget",
-            	title: "Sort Markers by Date"
+                innerHTML: '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>',
+                "class": "pull-right btn-link userListWidget",
+                title: "Sort Markers by Date"
             });
-            sortButton.on("click", lang.hitch(this, function(){
-            	if(direct == null){
-            		direct = false;
-            	}
-            	direct = !direct;
-            	if (direct) {
-            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>');
-            	}
-            	else {
-            		sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
-            	}
-            	list.clearList();
-            	if (category) {
-                	list.setQuery({
-                		categoryId: category,
-                		isActive: active
-                	}, {
-                		sort: [{attribute: "createdDate", descending: direct}]
-                	});
-            	} else {
-                	list.setQuery({
-                		isActive: active
-                	}, {
-                		sort: [{attribute: "createdDate", descending: direct}]
-                	});
-            	}
+            sortButton.on("click", lang.hitch(this, function() {
+                if (direct == null) {
+                    direct = false;
+                }
+                direct = !direct;
+                if (direct) {
+                    sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-down"></i>');
+                } else {
+                    sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
+                }
+                list.clearList();
+                if (category) {
+                    list.setQuery({
+                        categoryId: category,
+                        isActive: active
+                    }, {
+                        sort: [{
+                            attribute: "createdDate",
+                            descending: direct
+                        }]
+                    });
+                } else {
+                    list.setQuery({
+                        isActive: active
+                    }, {
+                        sort: [{
+                            attribute: "createdDate",
+                            descending: direct
+                        }]
+                    });
+                }
 
             }));
             list.addWidget(sortButton);
-            
-            createButton = this.createButton = new Button({
+
+            /* Button for removing filter; was replaced with a default option in DropdownListStore
+             var createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-remove"></i>',
                 "class": "pull-right btn-link userListWidget",
                 title: "Remove Filter"
@@ -161,10 +199,10 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             	});
             }));
             list.addWidget(createButton);
+            */
 
 
-            var detail = new Marker();
-            this.set("detail", detail);
+
         }
     });
 });
