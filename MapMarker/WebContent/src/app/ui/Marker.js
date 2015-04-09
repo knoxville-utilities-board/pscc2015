@@ -58,6 +58,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             mapInputLarge.on("load", lang.hitch(this,this.onMapCompleteLarge));
             
             this.pointPicker = new PointPicker().placeAt(this.domNode);
+            this.pointPicker.show();
             
             
         	/*var mapInputStart;
