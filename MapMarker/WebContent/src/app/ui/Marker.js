@@ -86,8 +86,10 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 } else {
                     this.chosenCategory = evt.category;
                 }
-                this.category.set("label", this.chosenCategory.title || "Select One...");
-                this.category.set("value", this.chosenCategory.value || null);
+                if (!this.model.id) {
+                	this.category.set("label", this.chosenCategory.title || "Select One...");
+                	this.category.set("value", this.chosenCategory.value || null);
+                }
             }));
 
             this.saveButton.on("click", lang.hitch(this, this.save));
