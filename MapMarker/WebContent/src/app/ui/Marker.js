@@ -64,24 +64,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             mapInputLarge.on("load", lang.hitch(this, this.onMapCompleteLarge));
 
             this.pointPicker = new PointPicker().placeAt(this.domNode);
-            this.pointPicker.show();
+            //this.pointPicker.show();
 
-
-            /*var mapInputStart;
-            mapInputStart = bootstrapMap.create("mapStart", {
-                basemap:"streets",
-                center:[-83.93,35.97],
-                zoom:13
-              });
-            mapInputStart.on("load", this.onMapCompleteInputStart);
-            
-        	var mapInputEnd;
-            mapInputEnd = bootstrapMap.create("mapEnd", {
-                basemap:"streets",
-                center:[-83.93,35.97],
-                zoom:13
-              });
-            mapInputEnd.on("load", this.onMapCompleteInputEnd);*/
         },
 
         postCreate: function() {
@@ -97,15 +81,13 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             console.log("the store", this.store);
 
             this.on("category-change", lang.hitch(this, function(evt) {
-                //These lines shouldn't be needed?
-                this.category.set("label", evt.category.title);
-                this.category.set("value", evt.category.value);
                 if (evt.category.title == "All") {
                     this.chosenCategory = {};
                 } else {
                     this.chosenCategory = evt.category;
                 }
-
+                this.category.set("label", this.chosenCategory.title || "Select One...");
+                this.category.set("value", this.chosenCategory.value || null);
             }));
 
             this.saveButton.on("click", lang.hitch(this, this.save));
@@ -161,14 +143,14 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             //Dropdowns
             var label = this.chosenCategory.title || "Select One...";
             var value = this.chosenCategory.value;
-            if (this.model.categoryId && !value) {
+            if (this.model.categoryId) {
                 var categoryModel = categoryStore.get(this.model.categoryId);
                 when(categoryModel).then(function(categoryModel) {
                     label = categoryModel.title;
                     value = categoryModel.id;
                 });
             }
-            this.category.set("label", label || 'Select One...');
+        	this.category.set("label", label || 'Select One...');
             this.category.set("value", value);
 
             label = "Select One...";
@@ -239,8 +221,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.editedDate.set("value", new Date(this.model.editedDate) || "");
 
             //Map
-            this.startPointText.value = this.model.latitude + ", " + this.model.longitude || "";
-            this.endPointText.value = this.model.endLatitude + ", " + this.model.endLongitude || "";
+            this.startPointText.value = (this.model.latitude)? this.model.latitude + ", " + this.model.longitude: "";
+            this.endPointText.value = (this.model.endLatitude)? this.model.endLatitude + ", " + this.model.endLongitude: "";
 
             //Disabled - these values are set automatically on saving
             this.createdBy.set("disabled", true);
@@ -279,16 +261,16 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.model.longitude = this.longitude.get("value");
 
                 //If there is no distance, then the end point == the start point
-                if (this.endLatitude.get("value") == "") {
+                if (this.endLatitude.get("value") === "") {
                     this.model.endLatitude = this.latitude.get("value");
                 } else {
                     this.model.endLatitude = this.endLatitude.get("value");
-                };
-                if (this.endLongitude.get("value") == "") {
+                }
+                if (this.endLongitude.get("value") === "") {
                     this.model.endLongitude = this.longitude.get("value");
                 } else {
                     this.model.endLongitude = this.endLongitude.get("value");
-                };
+                }
 
                 this.model.description = this.description.get("value");
                 this.model.street = this.street.get("value");
@@ -297,13 +279,14 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.model.endCrossStreet = this.endCrossStreet.get("value");
                 this.model.location = this.location.get("value");
                 this.model.specifyEnd = this.specifyEnd.get("value");
-                this.model.createdBy = this.createdBy.get("value")
+                this.model.createdBy = this.createdBy.get("value");
                 this.model.editedBy = this.editedBy.get("value");
 
                 if (this.model.id) {
                     this.model.editedDate = dateHandling.javaISOString(new Date());
                     this.store.put(this.model);
                 } else {
+                	this.model.isActive = true;
                     this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
                     console.log(this.store.put(this.model));
                     router.go("/marker/create/success");
@@ -316,6 +299,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.deleteButton.set("label", "Confirm Delete");
                 this._confirmDelete = true;
             } else {
+            	this.deleteButton.set("label", "Delete");
                 this._confirmDelete = false;
                 this.store.remove(this.model.id).then(function() {
                     router.go("/marker");
@@ -326,8 +310,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
         setMarkers: function(markers) {
             this.mapLargeGraphicsLayer.clear();
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
-            var map = this.mapLarge;
-
 
             markers.forEach(function(marker) {
                 var cat = categoryStore.get(marker.categoryId);

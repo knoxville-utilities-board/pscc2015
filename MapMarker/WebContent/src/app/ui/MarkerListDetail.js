@@ -20,7 +20,7 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             //  Added flags for sorting and filtering
             var direct = null;
             var active = true;
-            var category = null;
+            var category = "All";
 
             var store = this.store = lang.getObject("marker.stores.markers", false, app);
 
@@ -159,7 +159,7 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                     sortButton.set("innerHTML", '<i class="buttonIcon fa fa-2x fa-toggle-up"></i>');
                 }
                 list.clearList();
-                if (category) {
+                if (category != "All") {
                     list.setQuery({
                         categoryId: category,
                         isActive: active
@@ -179,7 +179,6 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                         }]
                     });
                 }
-
             }));
             list.addWidget(sortButton);
 

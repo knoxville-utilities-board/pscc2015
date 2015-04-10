@@ -110,7 +110,6 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             	this.createdDate.set("value", new Date());
             	this.createdBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
             	this.editedBy.set("disabled", true);
-            	this.editedDate.set("disabled", true);
             }
             
         },
@@ -128,6 +127,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                 	this.model.editedDate = dateHandling.javaISOString(new Date());
                     this.store.put(this.model);
                 } else {
+                	this.model.isActive = true;
                 	this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
                     console.log(this.store.put(this.model));
                     router.go("/category/create/success");
@@ -140,6 +140,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             	this.deleteButton.set("label", "Confirm Delete");
             	this._confirmDelete = true;
             } else {
+            	this.deleteButton.set("label", "Delete");
             	this._confirmDelete = false;
             	this.store.remove(this.model.id).then(function() {
             		router.go("/category");
