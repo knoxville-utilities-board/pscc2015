@@ -9,7 +9,7 @@ function(declare, ListItem, dateHandling) {
         postCreate: function() {
             this.inherited(arguments);
 
-            this.set("leftBody", "Street: " + this.item.street);
+            this.set("leftLabel", this.item.location);
 
             var createDateText = "Imported 1/2015";
 
@@ -17,8 +17,8 @@ function(declare, ListItem, dateHandling) {
             	createDateText = "Created: " +dateHandling.kubDate(this.item.createdDate);
             }
 
-            this.set("leftLabel",  createDateText);
-            this.set("rightText", this.item.description);
+            this.set("rightText",  createDateText);
+            this.set("leftBody", this.item.description);
         }
     });
 });

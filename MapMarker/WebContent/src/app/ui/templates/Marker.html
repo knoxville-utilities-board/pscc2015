@@ -94,22 +94,14 @@
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Start Point'">
-							<div class="input-append" data-dojo-attach-point="startPoint">
-								<span class="add-on">
-									<input class="cursorPointer" readonly type="text" data-dojo-attach-point="startPointText"></input>
-									<i class="fa fa-globe cursorPointer"></i>
-								</span>
-							</div>
+							<div data-dojo-type="app/ui/PointPicker"
+								data-dojo-attach-point="startPoint"></div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'End Point'">
-							<div class="input-append" data-dojo-attach-point="endPoint">
-								<span class="add-on">
-									<input class="cursorPointer" readonly type="text" data-dojo-attach-point="endPointText"></input>
-									<i class="fa fa-globe cursorPointer"></i>
-								</span>
-							</div>
+							<div data-dojo-type="app/ui/PointPicker"
+								data-dojo-attach-point="endPoint"></div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
@@ -171,7 +163,7 @@
 							data-dojo-attach-point="saveButton"
 							data-dojo-props="label: 'Save'"></button>
 
-						<button class="btn-danger pull-right"
+						<button class="btn-link pull-right"
 							data-dojo-type="common/ui/Button"
 							data-dojo-attach-point="deleteButton" style="margin-right: 10px;"
 							data-dojo-props="label: 'Delete'"></button>

@@ -62,10 +62,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 zoom: 13
             });
             mapInputLarge.on("load", lang.hitch(this, this.onMapCompleteLarge));
-
-            this.pointPicker = new PointPicker().placeAt(this.domNode);
-            //this.pointPicker.show();
-
         },
 
         postCreate: function() {
@@ -87,8 +83,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     this.chosenCategory = evt.category;
                 }
                 if (!this.model.id) {
-                	this.category.set("label", this.chosenCategory.title || "Select One...");
-                	this.category.set("value", this.chosenCategory.value || null);
+                    this.category.set("label", this.chosenCategory.title || "Select One...");
+                    this.category.set("value", this.chosenCategory.value || null);
                 }
             }));
 
@@ -99,6 +95,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
         onModelComplete: function(model) {
             console.log("model", model);
 
+            //Stores for dropdowns
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
             console.log("category store", categoryStore);
             this.category.setStore(categoryStore);
@@ -125,6 +122,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.utility.setStore(utilityStore);
             this.utility.itemRenderer = DropdownListItem;
 
+            //Set marker ID
             var markerNo = model.id ? model.id : 'New';
             app.appbar.set("title", "Markers > " + markerNo);
 
@@ -152,7 +150,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     value = categoryModel.id;
                 });
             }
-        	this.category.set("label", label || 'Select One...');
+            this.category.set("label", label || 'Select One...');
             this.category.set("value", value);
 
             label = "Select One...";
@@ -223,8 +221,17 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.editedDate.set("value", new Date(this.model.editedDate) || "");
 
             //Map
-            this.startPointText.value = (this.model.latitude)? this.model.latitude + ", " + this.model.longitude: "";
-            this.endPointText.value = (this.model.endLatitude)? this.model.endLatitude + ", " + this.model.endLongitude: "";
+            this.startPoint.latitude = this.model.latitude;
+            this.startPoint.longitude = this.model.longitude;
+            this.startPoint.set("value", (this.model.latitude) ? this.model.latitude + ", " + this.model.longitude : "");
+
+            if (this.model.latitude != this.model.endLatitude && this.model.longitude != this.model.endLongitude) {
+                this.endPoint.latitude = this.model.latitude;
+                this.endPoint.longitude = this.model.longitude;
+                this.endPoint.set("value", (this.model.endLatitude) ? this.model.endLatitude + ", " + this.model.endLongitude : "");
+            } else {
+                this.endPoint.set("value", "");
+            }
 
             //Disabled - these values are set automatically on saving
             this.createdBy.set("disabled", true);
@@ -259,19 +266,16 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.model.endDate = dateHandling.javaISOString(this.endDate.get("value"));
                 //createdDate and editedDate are set automatically
 
-                this.model.latitude = this.latitude.get("value");
-                this.model.longitude = this.longitude.get("value");
+                this.model.latitude = this.startPoint.latitude;
+                this.model.longitude = this.startPoint.longitude;
 
                 //If there is no distance, then the end point == the start point
-                if (this.endLatitude.get("value") === "") {
-                    this.model.endLatitude = this.latitude.get("value");
+                if (this.endPoint.get("value") === "") {
+                    this.model.endLatitude = this.startPoint.latitude;
+                    this.model.endLongitude = this.startPoint.longitude;
                 } else {
-                    this.model.endLatitude = this.endLatitude.get("value");
-                }
-                if (this.endLongitude.get("value") === "") {
-                    this.model.endLongitude = this.longitude.get("value");
-                } else {
-                    this.model.endLongitude = this.endLongitude.get("value");
+                    this.model.endLatitude = this.endPoint.latitude;
+                    this.model.endLongitude = this.endPoint.longitude;
                 }
 
                 this.model.description = this.description.get("value");
@@ -288,7 +292,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     this.model.editedDate = dateHandling.javaISOString(new Date());
                     this.store.put(this.model);
                 } else {
-                	this.model.isActive = true;
+                    this.model.isActive = true;
                     this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
                     console.log(this.store.put(this.model));
                     router.go("/marker/create/success");
@@ -299,9 +303,11 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
         remove: function() {
             if (!this._confirmDelete) {
                 this.deleteButton.set("label", "Confirm Delete");
+                this.deleteButton.set("style", "color: #dc6e65;");
                 this._confirmDelete = true;
             } else {
-            	this.deleteButton.set("label", "Delete");
+                this.deleteButton.set("label", "Delete");
+                this.deleteButton.set("style", "color: #063c6f;");
                 this._confirmDelete = false;
                 this.store.remove(this.model.id).then(function() {
                     router.go("/marker");
@@ -324,7 +330,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     markerDates.startDate = dateHandling.kubDate(marker.startDate);
                     markerDates.endDate = dateHandling.kubDate(marker.endDate);
 
-                    var infoTemplate = new InfoTemplate("${description}", markerInfoTemplate);
+                    var infoTemplate = new InfoTemplate("${location}", markerInfoTemplate);
                     var graphic = new Graphic(
                     new Point(marker.longitude, marker.latitude),
                     new SimpleMarkerSymbol(SimpleMarkerSymbol[symbols[symbol]], 10, null, color),

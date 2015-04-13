@@ -1,5 +1,30 @@
-.map-panel-body.map-panel-body {
+.map-panel-body {
     padding: 0;
     height: 516px;
     width: 100%;
+}
+
+.map-modal-body {
+	padding: 15;
+    height: 516px;
+    width: 100%;
+}
+
+.map-modal-button {
+	position: absolute; 
+	color: rgb(102, 102, 102);
+	background-color: #eee;
+	font-weight: 600;
+	height: 50px;
+	width: 100%;
+	left: 0;
+	bottom: 15px;
+	z-index: 400;
+}
+
+.pointPickerIcon {
+	display: inline-block !important;
+	font-size: 22px;
+	position: relative;
+	top: 5px;
 }

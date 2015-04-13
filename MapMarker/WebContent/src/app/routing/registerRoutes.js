@@ -278,7 +278,6 @@ function(config, lang, Observable, MarkerStore, CategoryStore, DirectionStore, S
         var titleName;
 
         var item;
-        var categoryItem;
         if (evt.params.id == "create") {
             titleName = "Create";
             getCategoryStore();
