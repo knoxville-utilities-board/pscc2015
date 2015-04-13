@@ -140,6 +140,11 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
 
             if (this.model.id) {
                 this.deleteButton.show();
+                if(this._confirmDelete) {
+                	this._confirmDelete = false;
+                	this.deleteButton.set("label", "Delete");
+                    this.deleteButton.set("style", "color: #063c6f;");
+                }
             } else {
                 this.deleteButton.hide();
                 this.createdDate.set("value", new Date());

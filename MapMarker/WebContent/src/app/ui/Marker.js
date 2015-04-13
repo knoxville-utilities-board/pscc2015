@@ -66,6 +66,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
 
         postCreate: function() {
             this.inherited(arguments);
+            
             var emptyValidate = function() {
                 if (this.get("value") === "") {
                     return "Required field";
@@ -94,7 +95,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
 
         onModelComplete: function(model) {
             console.log("model", model);
-
+                                    
             //Stores for dropdowns
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
             console.log("category store", categoryStore);
@@ -241,6 +242,11 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
 
             if (this.model.id) {
                 this.deleteButton.show();
+                if(this._confirmDelete) {
+                	this._confirmDelete = false;
+                	this.deleteButton.set("label", "Delete");
+                    this.deleteButton.set("style", "color: #063c6f;");
+                }
             } else {
                 this.deleteButton.hide();
                 this.createdDate.set("value", new Date());
