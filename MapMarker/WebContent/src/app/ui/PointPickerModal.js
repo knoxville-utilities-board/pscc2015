@@ -28,7 +28,8 @@ function(Color, declare, lang, bootstrapMap, _ModelApiMixin, Button, View, Graph
                 evt.preventDefault();
                 this.emit("set", {
                     bubble: true,
-                    point: this.mapPoint //sends esri point
+                    point: this.mapPoint, //sends esri point
+                    relatedTarget: this.relatedTarget
                 });
                 this.hide();
             }));
@@ -71,7 +72,8 @@ function(Color, declare, lang, bootstrapMap, _ModelApiMixin, Button, View, Graph
             this.map.addLayer(this.graphicsLayer);
         },
 
-        show: function() {
+        show: function(element) {
+        	this.relatedTarget = element;
             $(this.domNode).modal("show");
         },
 

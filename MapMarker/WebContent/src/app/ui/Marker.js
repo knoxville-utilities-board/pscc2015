@@ -34,11 +34,11 @@ define(["dojo/_base/declare",
 function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTemplateMixin, kubgisDefaults, kubgisUtils, Popup, bootstrapMap, GraphicsLayer, Graphic, Point, SimpleMarkerSymbol, InfoTemplate, router, _ModelApiMixin, Button, DateTimePicker, DropdownStoreList, Form, FormItem, TabContainer, TextArea, TextBox, View, DropdownListItem, PointPicker, dateHandling, markerInfoTemplate, template) {
 
     var symbols = {
-        Circle: "STYLE_CIRCLE",
-        Cross: "STYLE_CROSS",
-        Diamond: "STYLE_DIAMOND",
-        Square: "STYLE_SQUARE",
-        X: "STYLE_X"
+        circle: "STYLE_CIRCLE",
+        cross: "STYLE_CROSS",
+        diamond: "STYLE_DIAMOND",
+        square: "STYLE_SQUARE",
+        x: "STYLE_X"
     };
 
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
@@ -130,6 +130,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.form.clearValidation();
 
             //Text
+            this.title.set("value", this.model.title || "");
             this.description.set("value", this.model.description || "");
             this.street.set("value", this.model.street || "");
             this.city.set("value", this.model.city || "");
@@ -283,7 +284,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     this.model.endLatitude = this.endPoint.latitude;
                     this.model.endLongitude = this.endPoint.longitude;
                 }
-
+                
+                this.model.title = this.title.get("value");
                 this.model.description = this.description.get("value");
                 this.model.street = this.street.get("value");
                 this.model.city = this.city.get("value");
@@ -329,17 +331,17 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 var cat = categoryStore.get(marker.categoryId);
                 when(cat).then(lang.hitch(this, function(cat) {
                     var split = cat.symbology.split(",");
-                    var symbol = split[0];
+                    var symbol = split[0].toLowerCase();
                     var color = split[1];
 
                     var markerDates = lang.clone(marker);
                     markerDates.startDate = dateHandling.kubDate(marker.startDate);
                     markerDates.endDate = dateHandling.kubDate(marker.endDate);
 
-                    var infoTemplate = new InfoTemplate("${location}", markerInfoTemplate);
+                    var infoTemplate = new InfoTemplate("${title}", markerInfoTemplate);
                     var graphic = new Graphic(
                     new Point(marker.longitude, marker.latitude),
-                    new SimpleMarkerSymbol(SimpleMarkerSymbol[symbols[symbol]], 10, null, color),
+                    new SimpleMarkerSymbol(SimpleMarkerSymbol[symbols[symbol]], 12, null, color),
                     markerDates,
                     infoTemplate);
 

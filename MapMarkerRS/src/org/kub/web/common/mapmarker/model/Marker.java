@@ -36,6 +36,7 @@ public class Marker implements Serializable {
 	private Date startDate;
 	private Date updateDate;
 	private Date endDate;
+	private String title;
 	private String description;
 	private String location;
 	private String street;
@@ -128,7 +129,14 @@ public class Marker implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}   
+	}
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getDescription() {
 		return this.description;
 	}

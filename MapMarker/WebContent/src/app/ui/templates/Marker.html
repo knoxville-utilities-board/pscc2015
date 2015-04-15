@@ -25,6 +25,12 @@
 				<div class="modelCompleteShow" data-dojo-attach-point="tab">
 					<form class="panel-body" data-dojo-type="common/ui/Form"
 						data-dojo-attach-point="form">
+						
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Title'">
+							<div data-dojo-type="common/ui/TextBox"
+								data-dojo-attach-point="title"></div>
+						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Category'">
@@ -67,6 +73,18 @@
 							<div data-dojo-type="common/ui/TextBox"
 								data-dojo-attach-point="city"></div>
 						</div>
+												
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'Start Point'">
+							<div data-dojo-type="app/ui/PointPicker"
+								data-dojo-attach-point="startPoint"></div>
+						</div>
+
+						<div data-dojo-type="common/ui/FormItem"
+							data-dojo-props="label: 'End Point'">
+							<div data-dojo-type="app/ui/PointPicker"
+								data-dojo-attach-point="endPoint"></div>
+						</div>
 
 						<div data-dojo-type="common/ui/FormItem"
 							data-dojo-props="label: 'Street'">
@@ -90,18 +108,6 @@
 							data-dojo-props="label: 'Direction'">
 							<div data-dojo-type="common/ui/DropdownStoreList"
 								data-dojo-attach-point="direction"></div>
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'Start Point'">
-							<div data-dojo-type="app/ui/PointPicker"
-								data-dojo-attach-point="startPoint"></div>
-						</div>
-
-						<div data-dojo-type="common/ui/FormItem"
-							data-dojo-props="label: 'End Point'">
-							<div data-dojo-type="app/ui/PointPicker"
-								data-dojo-attach-point="endPoint"></div>
 						</div>
 
 						<div data-dojo-type="common/ui/FormItem"

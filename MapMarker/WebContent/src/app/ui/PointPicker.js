@@ -1,7 +1,6 @@
-define(["dojo/_base/Color",
-    "dojo/_base/declare",
+define(["dojo/_base/declare",
     "dojo/_base/lang",
-    "bootstrapmap/bootstrapmap",
+    "dojo/dom-construct",
     "common/ui/_ModelApiMixin",
     "common/ui/Button",
     "common/ui/View",
@@ -11,25 +10,28 @@ define(["dojo/_base/Color",
     "dijit/_WidgetsInTemplateMixin",
     "dojo/text!./templates/PointPicker.html"],
 
-function(Color, declare, lang, bootstrapMap, _ModelApiMixin, Button, View, Point, PointPickerModal, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
+function(declare, lang, domConstruct, _ModelApiMixin, Button, View, Point, PointPickerModal, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
 
+    var pointPickerModal = new PointPickerModal().placeAt(domConstruct.create("div", null, window.document.body));
+    pointPickerModal.startup();
+    
     return declare([View, _TemplatedMixin, _WidgetsInTemplateMixin, _ModelApiMixin], {
         templateString: template,
 
         postCreate: function() {
             this.inherited(arguments);
 
-            this.pointPicker = new PointPickerModal().placeAt(this.domNode);
+            this.on("click", function(evt) {
+                pointPickerModal.show(this);
+            });
 
-            $(this.domNode).on("click", lang.hitch(this, function() {
-                this.pointPicker.show();
-            }));
-
-            this.pointPicker.on("set", lang.hitch(this, function(evt) {
-                this.point = evt.point;
-                this.set("latitude", this.point.getLatitude().toFixed(6));
-                this.set("longitude", this.point.getLongitude().toFixed(6));
-                this.inputNode.value = this.get("latitude") + ', ' + this.get("longitude");
+            pointPickerModal.on("set", lang.hitch(this, function(evt) {
+            	if (this.domNode === evt.relatedTarget) {
+            		this.point = evt.point;
+                    this.set("latitude", this.point.getLatitude().toFixed(6));
+                    this.set("longitude", this.point.getLongitude().toFixed(6));
+                    this.inputNode.value = this.get("latitude") + ', ' + this.get("longitude");
+            	}
             }));
 
             this.inputNode.value = '';
