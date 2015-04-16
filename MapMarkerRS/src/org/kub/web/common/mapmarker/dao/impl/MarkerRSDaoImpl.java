@@ -164,7 +164,7 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 
 			// a default sort order
 			if (i == 0) {
-				queryString += " ORDER BY n.description";
+				queryString += " ORDER BY n.title";
 			}
 
 			Query query = em.createQuery(queryString);
