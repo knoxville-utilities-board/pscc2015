@@ -98,10 +98,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                                     
             //Stores for dropdowns
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
-            console.log("category store", categoryStore);
             this.category.setStore(categoryStore);
             this.category.itemRenderer = DropdownListItem;
-            console.log(categoryStore.get(1));
 
             var directionStore = lang.getObject("marker.stores.directions", false, app);
             this.direction.setStore(directionStore);
@@ -138,9 +136,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.endCrossStreet.set("value", this.model.endCrossStreet || "");
             this.location.set("value", this.model.location || "");
             this.specifyEnd.set("value", this.model.specifyEnd || "");
-            this.createdBy.set("value", this.model.createdBy || "");
-            this.editedBy.set("value", this.model.editedBy || "");
-
 
             //Dropdowns
             var label = this.chosenCategory.title || "Select One...";
@@ -219,8 +214,6 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.startDate.set("value", new Date(this.model.startDate) || "");
             this.updateDate.set("value", new Date(this.model.updateDate) || "");
             this.endDate.set("value", new Date(this.model.endDate) || "");
-            this.createdDate.set("value", new Date(this.model.createdDate));
-            this.editedDate.set("value", new Date(this.model.editedDate) || "");
 
             //Map
             this.startPoint.latitude = this.model.latitude;
@@ -235,11 +228,11 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.endPoint.set("value", "");
             }
 
-            //Disabled - these values are set automatically on saving
+            //Should be disabled & set with login info when app is deployed
+            this.createdBy.set("value", this.model.createdBy || "");
             this.createdBy.set("disabled", true);
-            this.createdDate.set("disabled", true);
-            this.editedBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
-            this.editedDate.set("disabled", true);
+            this.editedBy.set("value", this.model.editedBy || "");
+            this.editedBy.set("disabled", false); 
 
             if (this.model.id) {
                 this.deleteButton.show();
@@ -248,12 +241,19 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 	this.deleteButton.set("label", "Delete");
                     this.deleteButton.set("style", "color: #063c6f;");
                 }
+                $('#createDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.createdBy);
+                if (this.model.editedDate && this.model.editedBy != '') {
+                	$('#editDetails').text("Last modified on " + dateHandling.kubDate(this.model.editedDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.editedBy);
+                } else {
+                	$('#editDetails').text("");
+                }
             } else {
                 this.deleteButton.hide();
-                this.createdDate.set("value", new Date());
                 this.createdBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
                 this.editedBy.set("disabled", true);
-                this.editedDate.set("disabled", true);
+                $('#createDetails').text("");
+                $('#editDetails').text("");
+                
             }
 
             $(this.formTab).tab("show");
@@ -301,7 +301,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     this.store.put(this.model);
                 } else {
                     this.model.isActive = true;
-                    this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
+                    this.model.createdDate = dateHandling.javaISOString(new Date());
                     console.log(this.store.put(this.model));
                     router.go("/marker/create/success");
                 }

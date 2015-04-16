@@ -26,8 +26,14 @@ function(declare, lang, when, ListItem, dateHandling, SimpleMarkerSymbol, Simple
             var cat = categoryStore.get(this.item.categoryId);
             when(cat).then(lang.hitch(this, function(cat) {
                 var split = cat.symbology.split(",");
-                var symbol = split[0];
-                var color = split[1];
+                var symbol = 'Circle';
+                var color = '#000000';
+                if (split[0]) {
+                	symbol = split[0];
+                }
+                if (split[1]) {
+                	color = split[1];
+                }
                 if (symbol === "Diamond") {
                 	icon = '<span style="color:' + color + '">' + symbols[symbol] + '</span>';
                 } else {

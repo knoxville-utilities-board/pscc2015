@@ -97,9 +97,6 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             //Text
             this.title.set("value", this.model.title || "");
             this.description.set("value", this.model.description || "");
-            this.createdBy.set("value", this.model.createdBy || "");
-            this.editedBy.set("value", this.model.editedBy || "");
-
 
             //Dropdowns
             var symbol = "Circle";
@@ -127,16 +124,11 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
             //ColorPicker
             this.color.set("value", color);
 
-
-            //Dates
-            this.createdDate.set("value", new Date(this.model.createdDate));
-            this.editedDate.set("value", new Date(this.model.editedDate) || "");
-
-            //Disabled - these values are set automatically on saving
+            //Should be disabled & set with login info when app is deployed
+            this.createdBy.set("value", this.model.createdBy || "");
             this.createdBy.set("disabled", true);
-            this.createdDate.set("disabled", true);
-            this.editedBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
-            this.editedDate.set("disabled", true);
+            this.editedBy.set("value", this.model.editedBy || "");
+            this.editedBy.set("disabled", false); 
 
             if (this.model.id) {
                 this.deleteButton.show();
@@ -145,11 +137,18 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                 	this.deleteButton.set("label", "Delete");
                     this.deleteButton.set("style", "color: #063c6f;");
                 }
+                $('#catCreateDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.createdBy);
+                if (this.model.editedDate && this.model.editedBy != '') {
+                	$('#catEditDetails').text("Last modified on " + dateHandling.kubDate(this.model.editedDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.editedBy);
+                } else {
+                	$('#catEditDetails').text("");
+                }
             } else {
                 this.deleteButton.hide();
-                this.createdDate.set("value", new Date());
                 this.createdBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
                 this.editedBy.set("disabled", true);
+                $('#catCreateDetails').text("");
+                $('#catEditDetails').text("");
             }
 
         },
@@ -168,7 +167,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                     this.store.put(this.model);
                 } else {
                     this.model.isActive = true;
-                    this.model.createdDate = dateHandling.javaISOString(this.createdDate.get("value"));
+                    this.model.createdDate = dateHandling.javaISOString(new Date());
                     console.log(this.store.put(this.model));
                     router.go("/category/create/success");
                 }
