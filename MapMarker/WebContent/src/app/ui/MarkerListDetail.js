@@ -19,7 +19,6 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
             // Ed Broxson 3-29-15
             //  Added flags for sorting and filtering
             var direct = null;
-            var active = true;
             var category = "All";
 
             var store = this.store = lang.getObject("marker.stores.markers", false, app);
@@ -31,11 +30,6 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                 store: store,
                 select: "single",
                 hasWidgetContainer: true,
-                // Ed Broxson 3-29-15
-                //  Added query for sorting and filtering
-                query: {
-                    isActive: true
-                },
                 itemRenderer: MarkerListItem,
                 onSelect: function(evt) {
                     router.go("/marker/" + this.item.id);
@@ -66,8 +60,10 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                 list.clearList();
                 if (category != "All") {
                     list.setQuery({
-                        categoryId: category,
-                        isActive: active
+                        categoryId: category
+                        //Ed Broxson 4-18-15
+                    	// Removed isActive filter - default isActive filter is built into java side now
+                        // with value of 'true'
                     }, {
                         sort: [{
                             attribute: "createdDate",
@@ -76,10 +72,14 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                     });
                 } else {
                     list.setQuery({
-                        isActive: active
+                    	//Ed Broxson 4-18-15
+                        // Add isActive filter, with value 'all', to display both active and inactive markers
+                    	// or value 'false', to display only inactive markers
+                          isActive: "all"
+                    	
                     }, {
                         sort: [{
-                            attribute: "createdDate",
+                            attribute: "title",
                             descending: direct
                         }]
                     });
@@ -161,8 +161,11 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                 list.clearList();
                 if (category != "All") {
                     list.setQuery({
-                        categoryId: category,
-                        isActive: active
+                        categoryId: category
+	                    //Ed Broxson 4-18-15
+	                    // Removed isActive filter - default isActive filter is built into java side now
+                        // with value of 'true'
+                        
                     }, {
                         sort: [{
                             attribute: "createdDate",
@@ -170,11 +173,15 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                         }]
                     });
                 } else {
-                    list.setQuery({
-                        isActive: active
+                    list.setQuery({             	
+                    	//Ed Broxson 4-18-15
+                        // Add isActive filter, with value 'all', to display both active and inactive markers
+                    	// or value 'false', to display only inactive markers
+                          isActive: "all"
+                    	
                     }, {
                         sort: [{
-                            attribute: "createdDate",
+                            attribute: "title",
                             descending: direct
                         }]
                     });

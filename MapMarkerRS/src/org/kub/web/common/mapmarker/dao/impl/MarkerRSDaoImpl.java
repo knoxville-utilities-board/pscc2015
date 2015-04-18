@@ -65,42 +65,6 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 			em = MarkerRSEmf.createEntityManager();
 
 			// *** Ed Broxson
-			// *** This is the code I pulled to add the below block
-			// *** From JPA Tutorial Sort and Filters update 3-14-15
-			// *** StringUtils uses the import I commented above
-
-			// Query query = null;
-			// Query totalCountQuery = null;
-			//
-			// String categoryId = null;
-			// for(Filter filter : filterList) {
-			// if (filter.getKey().equals("categoryId")) {
-			// categoryId = filter.getValue().getCriteria();
-			// }
-			// }
-			//
-			// if (categoryId != null) {
-			// totalCountQuery = em.createNamedQuery("Marker.getCount");
-			// query = em.createNamedQuery("Marker.getList");
-			//
-			// long value = Long.parseLong(categoryId);
-			// query.setParameter("categoryId", value);
-			// totalCountQuery.setParameter("categoryId", value);
-			// } else {
-			// totalCountQuery = em.createNamedQuery("Marker.getCountAll");
-			// query = em.createNamedQuery("Marker.getListAll");
-			// }
-			//
-			// query.setFirstResult(start);
-			// query.setMaxResults(count);
-			//
-			// int totalSize = ((Number)
-			// totalCountQuery.getSingleResult()).intValue();
-			// modelList.setList(query.getResultList());
-			// modelList.setRange(new Range(start, modelList.getList().size(),
-			// totalSize));
-
-			// *** Ed Broxson
 			// *** This is the code I added
 			// *** From JPA Tutorial Sort and Filters update 3-14-15
 
@@ -108,9 +72,11 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 			// Added isActive parameter for sorting and filtering
 
 			// Create the dynamic query based on the input to the server
-			String queryString = "SELECT n FROM Marker n";
+			String queryString = "SELECT n FROM Marker n, Category c";
 			List<String> whereClauses = new ArrayList<String>();
 			Map<String, Object> parameters = new HashMap<String, Object>();
+			whereClauses.add("n.categoryId = c.id ");
+			whereClauses.add("c.isActive = true ");
 			boolean active = false;
 			for (Filter filter : filterList) {
 				String value = filter.getValue().getCriteria();
@@ -119,7 +85,7 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 					parameters.put("categoryId", value);
 				} else if (StringUtils.equals(filter.getKey(), "isActive")) {
 					if (!value.equalsIgnoreCase("all")) {
-						whereClauses.add("n.isActive = :isActive ");
+						whereClauses.add("n.isActive = :isActive ");	
 						parameters.put("isActive", Boolean.parseBoolean(value));
 					}
 					active = true;
@@ -127,7 +93,7 @@ public class MarkerRSDaoImpl implements MarkerRSDao {
 			}
 
 			if (!active) {
-				whereClauses.add("n.isActive = true");
+				whereClauses.add("n.isActive = true ");
 			}
 
 			// add the whereClauses to queryString

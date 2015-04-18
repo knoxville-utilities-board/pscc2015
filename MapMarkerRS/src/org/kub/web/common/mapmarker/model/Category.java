@@ -19,7 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Categories")
-//@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 @NamedQueries({
     @NamedQuery(name="Category.getListAll", query="SELECT n FROM Category n ORDER BY n.createdDate ASC"),
     @NamedQuery(name="Category.getCountAll", query="SELECT COUNT(n) FROM Category n")

@@ -18,7 +18,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Subtypes")
-//@NamedQuery(name="Subtype.findAll", query="SELECT s FROM Subtype s")
 @NamedQueries({
     @NamedQuery(name="Subtype.getListAll", query="SELECT n FROM Subtype n ORDER BY n.createdDate ASC"),
     @NamedQuery(name="Subtype.getCountAll", query="SELECT COUNT(n) FROM Subtype n")

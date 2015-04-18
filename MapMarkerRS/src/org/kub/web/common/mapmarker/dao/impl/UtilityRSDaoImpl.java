@@ -138,15 +138,15 @@ public class UtilityRSDaoImpl implements UtilityRSDao {
 					totalSize));
 		} catch (Exception e) {
 			throw new KUBGenericException(
-					"There was an error getting the categories",
-					"errorGettingCategories");
+					"There was an error getting the utilities",
+					"errorGettingUtilities");
 		} finally {
 			try {
 				em.close();
 			} catch (Exception e) {
 				throw new KUBGenericException(
-						"There was an error getting the categories",
-						"errorGettingCategories");
+						"There was an error getting the utilities",
+						"errorGettingUtilities");
 			}
 		}
 

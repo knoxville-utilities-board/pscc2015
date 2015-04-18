@@ -13,7 +13,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name="Severities")
-//@NamedQuery(name="Severity.findAll", query="SELECT s FROM Severity s")
 @NamedQueries({
     @NamedQuery(name="Severity.getListAll", query="SELECT n FROM Severity n ORDER BY n.createdDate ASC"),
     @NamedQuery(name="Severity.getCountAll", query="SELECT COUNT(n) FROM Severity n")

@@ -132,12 +132,12 @@ public class DirectionRSDaoImpl implements DirectionRSDao{
          			modelList.setRange(new Range(start, modelList.getList().size(),
          					totalSize));
         } catch (Exception e) {
-            throw new KUBGenericException("There was an error getting the categories", "errorGettingCategories");
+            throw new KUBGenericException("There was an error getting the directions", "errorGettingDirections");
         } finally {
             try {
                 em.close();
             } catch (Exception e) {
-                throw new KUBGenericException("There was an error getting the categories", "errorGettingCategories");
+                throw new KUBGenericException("There was an error getting the directions", "errorGettingDirections");
             }
         }
 

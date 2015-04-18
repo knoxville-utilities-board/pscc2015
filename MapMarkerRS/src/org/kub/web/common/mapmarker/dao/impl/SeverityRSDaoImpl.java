@@ -132,12 +132,12 @@ public class SeverityRSDaoImpl implements SeverityRSDao{
          			modelList.setRange(new Range(start, modelList.getList().size(),
          					totalSize));
         } catch (Exception e) {
-            throw new KUBGenericException("There was an error getting the categories", "errorGettingCategories");
+            throw new KUBGenericException("There was an error getting the severities", "errorGettingSeverities");
         } finally {
             try {
                 em.close();
             } catch (Exception e) {
-                throw new KUBGenericException("There was an error getting the categories", "errorGettingCategories");
+                throw new KUBGenericException("There was an error getting the severities", "errorGettingSeverities");
             }
         }
 

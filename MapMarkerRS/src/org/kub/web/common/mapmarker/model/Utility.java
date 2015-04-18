@@ -13,7 +13,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name="Utilities")
-//@NamedQuery(name="Utility.findAll", query="SELECT u FROM Utility u")
 @NamedQueries({
     @NamedQuery(name="Utility.getListAll", query="SELECT n FROM Utility n ORDER BY n.createdDate ASC"),
     @NamedQuery(name="Utility.getCountAll", query="SELECT COUNT(n) FROM Utility n")

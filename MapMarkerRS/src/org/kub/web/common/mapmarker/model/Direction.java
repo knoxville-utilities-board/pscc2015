@@ -13,7 +13,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name="Directions")
-//@NamedQuery(name="Direction.findAll", query="SELECT d FROM Direction d")
 @NamedQueries({
     @NamedQuery(name="Direction.getListAll", query="SELECT n FROM Direction n ORDER BY n.createdDate ASC"),
     @NamedQuery(name="Direction.getCountAll", query="SELECT COUNT(n) FROM Direction n")
