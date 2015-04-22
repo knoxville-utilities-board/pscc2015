@@ -40,18 +40,18 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                 data: [{
                     id: "Circle",
                     title: "Circle"
-                }, {
+                /*}, {		For some reason Esri's cross and X markers don't seem to display. They appear to be working properly, data looks fine... they just don't show.
                     id: "Cross",
-                    title: "Cross"
+                    title: "Cross"*/
                 }, {
                     id: "Diamond",
                     title: "Diamond"
                 }, {
                     id: "Square",
                     title: "Square"
-                }, {
+                /*}, {
                     id: "X",
-                    title: "X"
+                    title: "X"*/
                 }]
             });
             this.symbol.setStore(symbolStore);
@@ -77,18 +77,18 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                 data: [{
                     id: "Circle",
                     title: "Circle"
-                }, {
+                /*}, {
                     id: "Cross",
-                    title: "Cross"
+                    title: "Cross"*/
                 }, {
                     id: "Diamond",
                     title: "Diamond"
                 }, {
                     id: "Square",
                     title: "Square"
-                }, {
+                /*}, {
                     id: "X",
-                    title: "X"
+                    title: "X"*/
                 }]
             });
             this.symbol.setStore(symbolStore);

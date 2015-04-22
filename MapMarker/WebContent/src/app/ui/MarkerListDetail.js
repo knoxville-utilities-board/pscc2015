@@ -16,8 +16,6 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
         postCreate: function() {
             console.log("postCreate()");
 
-            // Ed Broxson 3-29-15
-            //  Added flags for sorting and filtering
             var direct = null;
             var category = "All";
 
@@ -44,8 +42,6 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                 });
             }));
 
-            // Ed Broxson 3-29-15
-            //  Added catStore and catDropdown for sorting and filtering
             var catStore = lang.getObject("marker.stores.categories", false, app);
             var catDropdown = new DropdownStoreList({
                 store: catStore,
@@ -75,11 +71,11 @@ function(declare, lang, router, Button, CheckBox, StoreList, ListDetailView, Dro
                     	//Ed Broxson 4-18-15
                         // Add isActive filter, with value 'all', to display both active and inactive markers
                     	// or value 'false', to display only inactive markers
-                          isActive: "all"
+                        //  isActive: "all"
                     	
                     }, {
                         sort: [{
-                            attribute: "title",
+                            attribute: "createdDate",
                             descending: direct
                         }]
                     });
@@ -129,9 +125,6 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
             list.addWidget(isActiveCheckbox);
 */
 
-            // Ed Broxson 3-29-15
-            //  Changed from queryButton and modified for sorting and filtering
-
             var createButton = this.createButton = new Button({
                 innerHTML: '<i class="buttonIcon fa fa-2x fa-plus"></i>',
                 "class": "pull-right btn-link userListWidget",
@@ -177,11 +170,11 @@ TODO: Implement reversal of soft-deletion, if we have time. This checkbox allows
                     	//Ed Broxson 4-18-15
                         // Add isActive filter, with value 'all', to display both active and inactive markers
                     	// or value 'false', to display only inactive markers
-                          isActive: "all"
+                        //  isActive: "all"
                     	
                     }, {
                         sort: [{
-                            attribute: "title",
+                            attribute: "createdDate",
                             descending: direct
                         }]
                     });

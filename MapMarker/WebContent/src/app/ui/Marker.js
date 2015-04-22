@@ -59,7 +59,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 },
                 basemap: "streets",
                 center: [-83.93, 35.97],
-                zoom: 13
+                zoom: 11
             });
             mapInputLarge.on("load", lang.hitch(this, this.onMapCompleteLarge));
         },
