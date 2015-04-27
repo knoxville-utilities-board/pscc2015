@@ -138,77 +138,71 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.specifyEnd.set("value", this.model.specifyEnd || "");
 
             //Dropdowns
-            var label = this.chosenCategory.title || "Select One...";
-            var value = this.chosenCategory.value;
             if (this.model.categoryId) {
                 var categoryModel = categoryStore.get(this.model.categoryId);
-                when(categoryModel).then(function(categoryModel) {
-                    label = categoryModel.title;
-                    value = categoryModel.id;
-                });
+                when(categoryModel).then(lang.hitch(this, function(categoryModel) {
+                    this.category.set("label", categoryModel.title);
+                    this.category.set("value", categoryModel.id);
+                }));
+            } else {
+            	this.category.set("label", this.chosenCategory.title || "Select One...");
+            	this.category.set("value", this.chosenCategory.value);
             }
-            this.category.set("label", label || 'Select One...');
-            this.category.set("value", value);
-
-            label = "Select One...";
-            value = null;
+            
             if (this.model.directionId) {
                 var directionModel = directionStore.get(this.model.directionId);
-                when(directionModel).then(function(directionModel) {
-                    label = directionModel.title;
-                    value = directionModel.id;
-                });
+                when(directionModel).then(lang.hitch(this, function(directionModel) {
+                    this.direction.set("label", directionModel.title);
+                    this.direction.set("value", directionModel.id);
+                }));
+            } else {
+	            this.direction.set("label", 'Select One...');
+	            this.direction.set("value", null);
             }
-            this.direction.set("label", label || 'Select One...');
-            this.direction.set("value", value);
 
-            label = "Select One...";
-            value = null;
             if (this.model.severityId) {
                 var severityModel = severityStore.get(this.model.severityId);
-                when(severityModel).then(function(severityModel) {
-                    label = severityModel.title;
-                    value = severityModel.id;
-                });
+                when(severityModel).then(lang.hitch(this, function(severityModel) {
+                    this.severity.set("label", severityModel.title);
+                    this.severity.set("value", severityModel.id);
+                }));
+            } else {
+                this.severity.set("label", 'Select One...');
+                this.severity.set("value", null);
             }
-            this.severity.set("label", label || 'Select One...');
-            this.severity.set("value", value);
 
-            label = "Select One...";
-            value = null;
             if (this.model.subtypeId) {
                 var subtypeModel = subtypeStore.get(this.model.subtypeId);
-                when(subtypeModel).then(function(subtypeModel) {
-                    label = subtypeModel.title;
-                    value = subtypeModel.id;
-                });
+                when(subtypeModel).then(lang.hitch(this, function(subtypeModel) {
+                    this.subtype.set("label", subtypeModel.title);
+                    this.subtype.set("value", subtypeModel.id);
+                }));
+            } else {
+                this.subtype.set("label", 'Select One...');
+                this.subtype.set("value", null);
             }
-            this.subtype.set("label", label || 'Select One...');
-            this.subtype.set("value", value);
 
-            label = "Select One...";
-            value = null;
             if (this.model.typeId) {
                 var typeModel = typeStore.get(this.model.typeId);
-                when(typeModel).then(function(typeModel) {
-                    label = typeModel.title;
-                    value = typeModel.id;
-                });
+                when(typeModel).then(lang.hitch(this, function(typeModel) {
+                    this.type.set("label", typeModel.title);
+                    this.type.set("value", typeModel.id);
+                }));
+            } else {
+                this.type.set("label", 'Select One...');
+                this.type.set("value", null);
             }
-            this.type.set("label", label || 'Select One...');
-            this.type.set("value", value);
 
-            label = "Select One...";
-            value = null;
             if (this.model.utilityId) {
                 var utilityModel = utilityStore.get(this.model.utilityId);
-                when(utilityModel).then(function(utilityModel) {
-                    label = utilityModel.title;
-                    value = utilityModel.id;
-                });
+                when(utilityModel).then(lang.hitch(this, function(utilityModel) {
+                    this.utility.set("label", utilityModel.title);
+                    this.utility.set("value", utilityModel.id);
+                }));
+            } else {
+                this.utility.set("label", 'Select One...');
+                this.utility.set("value", null);
             }
-            this.utility.set("label", label || 'Select One...');
-            this.utility.set("value", value);
 
             //Dates
             this.startDate.set("value", new Date(this.model.startDate) || "");
@@ -255,8 +249,21 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 $('#editDetails').text("");
                 
             }
+            
+            if (this.graphics) {
+                var graphic = this.graphics[model.id];
+                this.showGraphic(graphic);
+            }
 
-            $(this.formTab).tab("show");
+            //$(this.formTab).tab("show");
+        },
+        
+        showGraphic: function(graphic) {
+            this.mapLarge.infoWindow.setContent(graphic.getContent());
+            this.mapLarge.infoWindow.setTitle(graphic.getTitle());
+            this.mapLarge.centerAt(graphic.geometry).then(lang.hitch(this, function() {
+                this.mapLarge.infoWindow.show(graphic.geometry);
+            }));
         },
 
         save: function() {
@@ -327,6 +334,8 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.mapLargeGraphicsLayer.clear();
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
 
+            this.graphics = [];
+            
             markers.forEach(function(marker) {
                 var cat = categoryStore.get(marker.categoryId);
                 when(cat).then(lang.hitch(this, function(cat) {
@@ -346,6 +355,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     infoTemplate);
 
                     this.mapLargeGraphicsLayer.add(graphic);
+                    this.graphics[marker.id] = graphic;
                 }));
             }, this);
 
@@ -359,6 +369,12 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.mapLargeGraphicsLayer = new GraphicsLayer();
             this.mapLarge.addLayer(this.mapLargeGraphicsLayer);
             this.setMarkers(app.marker.markers);
+            
+            this.defer(function() {
+                var graphic = this.graphics[this.model.id];
+                this.showGraphic(graphic);
+            }, 250);
+            
             this.on("new-markers", lang.hitch(this, function(evt) {
                 this.setMarkers(evt.markers);
             }));
