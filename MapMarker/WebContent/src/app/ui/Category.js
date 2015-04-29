@@ -137,7 +137,7 @@ function(declare, lang, when, Memory, _TemplatedMixin, _WidgetsInTemplateMixin, 
                 	this.deleteButton.set("label", "Delete");
                     this.deleteButton.set("style", "color: #063c6f;");
                 }
-                $('#catCreateDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.createdBy);
+                $('#catCreateDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.createdDate) + " by " + this.model.createdBy);
                 if (this.model.editedDate && this.model.editedBy !== '') {
                 	$('#catEditDetails').text("Last modified on " + dateHandling.kubDate(this.model.editedDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.editedBy);
                 } else {

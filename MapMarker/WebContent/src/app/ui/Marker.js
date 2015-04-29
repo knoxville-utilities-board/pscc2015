@@ -243,7 +243,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                     this.deleteButton.set("style", "color: #063c6f;");
                 }
                 //Show audit info
-                $('#createDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.createdBy);
+                $('#createDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.createdDate) + " by " + this.model.createdBy);
                 if (this.model.editedDate && this.model.editedBy !== '') {
                 	$('#editDetails').text("Last modified on " + dateHandling.kubDate(this.model.editedDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.editedBy);
                 } else {
