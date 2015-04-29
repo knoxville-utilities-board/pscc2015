@@ -214,7 +214,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.startPoint.longitude = this.model.longitude;
             this.startPoint.set("value", (this.model.latitude) ? this.model.latitude + ", " + this.model.longitude : "");
 
-            if (this.model.latitude != this.model.endLatitude && this.model.longitude != this.model.endLongitude) {
+            if (this.model.latitude != this.model.endLatitude || this.model.longitude != this.model.endLongitude) {
                 this.endPoint.latitude = this.model.latitude;
                 this.endPoint.longitude = this.model.longitude;
                 this.endPoint.set("value", (this.model.endLatitude) ? this.model.endLatitude + ", " + this.model.endLongitude : "");
@@ -222,43 +222,45 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
                 this.endPoint.set("value", "");
             }
 
-            //Should be disabled & set with login info when app is deployed
+            //Should be removed & automatically set with login info when app is deployed
             this.createdBy.set("value", this.model.createdBy || "");
             this.createdBy.set("disabled", true);
             this.editedBy.set("value", this.model.editedBy || "");
             this.editedBy.set("disabled", false); 
 
+            //Handle differences between existing marker vs. new marker
             if (this.model.id) {
+            	//Set map infoWindow
+                if (this.graphics) {
+                    var graphic = this.graphics[model.id];
+                    this.showGraphic(graphic);
+                }
+                //Show delete button
                 this.deleteButton.show();
                 if(this._confirmDelete) {
                 	this._confirmDelete = false;
                 	this.deleteButton.set("label", "Delete");
                     this.deleteButton.set("style", "color: #063c6f;");
                 }
+                //Show audit info
                 $('#createDetails').text("Created on " + dateHandling.kubDate(this.model.createdDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.createdBy);
-                if (this.model.editedDate && this.model.editedBy != '') {
+                if (this.model.editedDate && this.model.editedBy !== '') {
                 	$('#editDetails').text("Last modified on " + dateHandling.kubDate(this.model.editedDate) + " at " + dateHandling.kubTime(this.model.editedDate) + " by " + this.model.editedBy);
                 } else {
                 	$('#editDetails').text("");
                 }
             } else {
+            	$(this.formTab).tab("show");
                 this.deleteButton.hide();
-                this.createdBy.set("disabled", false); //Should be disabled & set with login info when app is deployed
+                this.createdBy.set("disabled", false); //Should be removed & automatically set with login info when app is deployed
                 this.editedBy.set("disabled", true);
                 $('#createDetails').text("");
                 $('#editDetails').text("");
-                
             }
-            
-            if (this.graphics) {
-                var graphic = this.graphics[model.id];
-                this.showGraphic(graphic);
-            }
-
-            //$(this.formTab).tab("show");
         },
         
         showGraphic: function(graphic) {
+        	$(this.mapTab).tab("show");
             this.mapLarge.infoWindow.setContent(graphic.getContent());
             this.mapLarge.infoWindow.setTitle(graphic.getTitle());
             this.mapLarge.centerAt(graphic.geometry).then(lang.hitch(this, function() {
@@ -332,6 +334,7 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
 
         setMarkers: function(markers) {
             this.mapLargeGraphicsLayer.clear();
+            this.mapLarge.infoWindow.hide();
             var categoryStore = lang.getObject("marker.stores.categories", false, app);
 
             this.graphics = [];
@@ -370,10 +373,12 @@ function(declare, lang, on, when, domConstruct, _TemplatedMixin, _WidgetsInTempl
             this.mapLarge.addLayer(this.mapLargeGraphicsLayer);
             this.setMarkers(app.marker.markers);
             
-            this.defer(function() {
-                var graphic = this.graphics[this.model.id];
-                this.showGraphic(graphic);
-            }, 250);
+            if (this.model.id) {
+	            this.defer(function() {
+	                var graphic = this.graphics[this.model.id];
+	                this.showGraphic(graphic);
+	            }, 250);
+            }
             
             this.on("new-markers", lang.hitch(this, function(evt) {
                 this.setMarkers(evt.markers);

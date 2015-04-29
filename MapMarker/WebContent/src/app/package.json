@@ -2,7 +2,7 @@
 	"name": "app",
 	"version": "0.1.0",
 	"main": "main",
-	"description": "Marker Project",
+	"description": "MapMarker Project",
 	"dependencies": {
 		"dojo": "current"
 	},
